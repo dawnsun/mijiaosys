@@ -63,4 +63,16 @@ public class CipherUtil {
 			throw new RuntimeException("处理AES加密时发生异常。[clearText=" + clearText + "]", e);
 		}
 	}
+	
+	//jdbc:mysql://localhost:3306/mijiao
+	//root
+	//123456
+	
+	/*public static void main(String args[]){
+		System.out.println(encryptAes("jdbc:mysql://localhost:3306/mijiao"));
+		System.out.println(encryptAes("root"));
+		System.out.println(encryptAes("123456"));
+	}*/
+
+	
 }

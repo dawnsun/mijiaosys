@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Cainiao.com Inc.
+  ~ Copyright (c) 2013-2016 All Rights Reserved.
+  -->
+
+<configuration debug="false" scan="false">
+    <contextName>mijiaosys</contextName>
+
+    <appender name="mijiaosys-error"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/admin/mijiaosys/logs/mijiaosys-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/home/admin/mijiaosys/logs/mijiaosys-error.log.%d{yyyy-MM-dd}</FileNamePattern>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><![CDATA[%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %C{0}.%M\(%L\) | %m%n]]></pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="mijiaosys-default"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/admin/mijiaosys/logs/mijiaosys-default.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/home/admin/mijiaosys/logs/mijiaosys-default.log.%d{yyyy-MM-dd}</FileNamePattern>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><![CDATA[%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %C{0}.%M\(%L\) | %m%n]]></pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.mijiaokj.sys" level="DEBUG" additivity="false">
+        <appender-ref ref="mijiaosys-default"/>
+        <appender-ref ref="mijiaosys-error"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="mijiaosys-default"/>
+        <appender-ref ref="mijiaosys-error"/>
+    </root>
+
+</configuration>
