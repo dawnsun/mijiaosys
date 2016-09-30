@@ -53,12 +53,9 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			
 			 <!-- 对fat jar做autoconfig处理 -->
-            <!-- <plugin>
+            <plugin>
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>autoconfig-maven-plugin</artifactId>
                 <version>1.2</version>
@@ -71,7 +68,10 @@
                     </execution>
                 </executions>
             </plugin>
-
+		<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
@@ -81,7 +81,7 @@
                         <configuration>
                             <tasks>
                                 <unzip src="${project.build.directory}/${project.build.finalName}.${project.packaging}"
-                                       dest="${project.build.directory}/lcp"/>
+                                       dest="${project.build.directory}/mijiaosys"/>
                             </tasks>
                         </configuration>
                         <goals>
@@ -89,7 +89,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
 		</plugins>
 	</build>
 
