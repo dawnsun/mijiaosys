@@ -2,8 +2,7 @@ package com.mijiaokj.sys.domain;
 
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
-
+import com.google.common.base.Strings;
 import com.mijiaokj.sys.common.constants.BaseConstant;
 
 public class ReferenceObject extends BaseDomainObject {
@@ -23,10 +22,10 @@ public class ReferenceObject extends BaseDomainObject {
         if (gmtModified == null) {
             setGmtModified(now);
         }
-        if (StringUtils.isBlank(creator)) {
+        if (Strings.isNullOrEmpty(creator)) {
             setCreator(BaseConstant.SYS);
         }
-        if (StringUtils.isBlank(modifier)) {
+        if (Strings.isNullOrEmpty(modifier)) {
             setModifier(BaseConstant.SYS);
         }
         if (isDelete == null) {
@@ -35,7 +34,7 @@ public class ReferenceObject extends BaseDomainObject {
     }
 
     public void setDefaultValueForUpdate(){
-        if (StringUtils.isBlank(modifier)) {
+        if (Strings.isNullOrEmpty(modifier)) {
             setCreator(BaseConstant.SYS);
         }
         if (gmtModified == null) {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Common">
+    <sql id="CommonColumns">
+        gmt_create, gmt_modified, is_delete, creator, modifier
+    </sql>
+    <sql id="CommonProperties">
+        #{gmtCreate}, #{gmtModified}, #{isDelete}, #{creator}, #{modifier}
+    </sql>
+    <sql id="ForEachProperties">
+        #{item.gmtCreate}, #{item.gmtModified}, #{item.isDelete}, #{item.creator}, #{item.modifier}
+    </sql>
+    <sql id="CommonUpdate">
+        modifier = #{modifier,jdbcType=VARCHAR},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        is_delete = #{isDelete,jdbcType=INTEGER}
+    </sql>
+
+    <resultMap id="CommonResultMap" type="com.mijiaokj.sys.domain.ReferenceObject">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+            <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+            <result column="modifier" jdbcType="VARCHAR" property="modifier"/>
+            <result column="creator" jdbcType="VARCHAR" property="creator"/>
+            <result column="is_delete" jdbcType="BOOLEAN" property="isDelete"/>
+    </resultMap>
+</mapper>

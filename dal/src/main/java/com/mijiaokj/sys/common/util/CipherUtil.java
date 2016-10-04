@@ -65,11 +65,12 @@ public class CipherUtil {
 	}
 	
 	//jdbc:mysql://localhost:3306/mijiao
+	//jdbc:mysql://localhost:3306/mijiaosys?useUnicode=true&amp;characterEncoding=UTF-8
 	//root
 	//123456
 	
 	/*public static void main(String args[]){
-		System.out.println(encryptAes("jdbc:mysql://localhost:3306/mijiao"));
+		System.out.println(encryptAes("jdbc:mysql://localhost:3306/mijiaosys?useUnicode=true&amp;characterEncoding=UTF-8"));
 		System.out.println(encryptAes("root"));
 		System.out.println(encryptAes("123456"));
 	}*/

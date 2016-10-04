@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Cainiao.com Inc.
+  ~ Copyright (c) 2013-2016 All Rights Reserved.
+  -->
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="LcpService" type="com.cainiao.lcp.domain.LcpService"/>
+        <typeAlias alias="Bill" type="com.cainiao.lcp.domain.Bill"/>
+        <typeAlias alias="Buy" type="com.cainiao.lcp.domain.Buy"/>
+        <typeAlias alias="QtyUnit" type="com.cainiao.lcp.domain.QtyUnit"/>
+        <typeAlias alias="FeeItem" type="com.cainiao.lcp.domain.FeeItem"/>
+        <typeAlias alias="Order" type="com.cainiao.lcp.domain.Order"/>
+        <typeAlias alias="IncomeBatchQuantities" type="com.cainiao.lcp.domain.IncomeBatchQuantities"/>
+        <typeAlias alias="QuantityStatisticHour" type="com.cainiao.lcp.domain.QuantityStatisticHour"/>
+        <typeAlias alias="ServiceItem" type="com.cainiao.lcp.domain.ServiceItem"/>
+        <typeAlias alias="ServiceItemApi" type="com.cainiao.lcp.domain.ServiceItemApi"/>
+        <typeAlias alias="ServiceItemSaas" type="com.cainiao.lcp.domain.ServiceItemSaas"/>
+        <typeAlias alias="PayStatus" type="com.cainiao.lcp.domain.PayStatus"/>
+        <typeAlias alias="PermissionRequest" type="com.cainiao.lcp.domain.PermissionRequest"/>
+
+        <typeAlias alias="BuyCriteria" type="com.cainiao.lcp.repository.query.BuyCriteria"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.EnumTypeHandler"
+                     javaType="com.cainiao.lcp.domain.ServiceStatus"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumTypeHandler"
+                     javaType="com.cainiao.lcp.domain.FeePattern"/>
+    </typeHandlers>
+
+</configuration>

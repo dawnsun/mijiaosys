@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Cainiao.com Inc.
+  ~ Copyright (c) 2013-2016 All Rights Reserved.
+  -->
+
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 设置mysql驱动路径 -->
+    <classPathEntry location="mysql-connector-java-5.1.30.jar"/>
+    <!-- MyBatis3 -->
+    <context id="context1" targetRuntime="MyBatis3">
+        <!-- 除去时间信息 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!-- jdbc连接信息 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mijiaosys"
+                        userId="root" password="123456"/>
+        <!-- 生成对象 -->
+        <javaModelGenerator targetPackage="com.mijiaokj.sys.domain"
+                            targetProject="E:\\mijiaokeji_workSpace\\mijiaosys\\dal\\src\\main\\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="rootClass" value="com.mijiaokj.sys.domain.ReferenceObject"/>
+        </javaModelGenerator>
+        <!-- sqlMapper XML -->
+        <sqlMapGenerator targetPackage="config.dal.sqlmap"
+                         targetProject="E:\\mijiaokeji_workSpace\\mijiaosys\\dal\\src\\main\\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成用于查询的Example对象,接口bean -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.mijiaokj.sys.dal.repository.mapper"
+                             targetProject="E:\\mijiaokeji_workSpace\\mijiaosys\\dal\\src\\main\\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="rootInterface" value="com.mijiaokj.sys.dal.repository.mapper.BaseMapper"/>
+        </javaClientGenerator>
+        <!-- 数据库表 -->
+
+        <!-- 		<table schema="" tableName="lcp_buy" domainObjectName="LcpBuy"
+                    enableCountByExample="false" enableUpdateByExample="false"
+                    enableDeleteByExample="false" enableSelectByExample="false"
+                    selectByExampleQueryId="false">
+                </table>
+                <table schema="" tableName="lcp_order" domainObjectName="LcpOrder"
+                    enableCountByExample="false" enableUpdateByExample="false"
+                    enableDeleteByExample="false" enableSelectByExample="false"
+                    selectByExampleQueryId="false">
+                </table> -->
+        
+        <table schema="" tableName="SYS_USER" domainObjectName="SysUser"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.SysUserMapper">
+
+	<sql id="BaseColumns">
+		username,
+		password,
+		phone_number,
+		address,
+		avatar,
+		nickname,
+		qr_code,
+		sex,
+		birthday,
+		user_status
+	</sql>
+
+	<sql id="BaseProperties">
+		#{username},
+		#{password},
+		#{phoneNumber},
+		#{address},
+		#{avatar},
+		#{nickname},
+		#{qrCode},
+		#{sex},
+		#{birthday},
+		#{userStatus}
+	</sql>
+
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.SysUser">
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="avatar" jdbcType="VARCHAR" property="avatar" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="qr_code" jdbcType="VARCHAR" property="qrCode" />
+		<result column="sex" jdbcType="INTEGER" property="sex" />
+		<result column="birthday" jdbcType="VARCHAR" property="birthday" />
+		<result column="user_status" jdbcType="INTEGER" property="userStatus" />
+	</resultMap>
+
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select *
+		from sys_user
+		where id = #{id,jdbcType=BIGINT}
+		and is_delete = 0
+	</select>
+
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysUser">
+		insert into sys_user (
+		<include refid="BaseColumns" /> ,
+		<include refid="Common.CommonColumns" />
+		) values (
+		<include refid="BaseProperties" /> ,
+		<include refid="Common.CommonProperties" />
+		)
+	</insert>
+
+	<update id="update" parameterType="com.mijiaokj.sys.domain.SysUser">
+		update sys_user set
+		password = #{password,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		avatar = #{avatar,jdbcType=VARCHAR},
+		nickname = #{nickname,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=INTEGER},
+		birthday = #{birthday,jdbcType=VARCHAR},
+		user_status = #{userStatus,jdbcType=INTEGER}
+		<include refid="Common.CommonUpdate" />
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="delete" parameterType="java.lang.Long">
+		update sys_user
+		set is_delete = 1
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectPageByMap"
+		parameterType="com.mijiaokj.sys.dal.repository.query.SysUserCriteria"
+		resultMap="BaseResultMap">
+		select t1.*
+		from sys_user t1 ,(
+			select id from sys_user
+			WHERE is_delete=0
+			<if test="username != null">
+				and username = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="phoneNumber != null">
+				and phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="createTimeStart !=null ">
+				and gmt_create &gt;= #{createTimeStart}
+			</if>
+			<if test="createTimeEnd !=null ">
+				and gmt_create &lt;= #{createTimeEnd}
+			</if>
+			order by gmt_modified desc
+			limit #{startRow,jdbcType=INTEGER} ,
+			#{pageSize,jdbcType=INTEGER}
+		)t2
+		WHERE t1.id=t2.id
+	</select>
+
+	<select id="pageCountByMap"
+		parameterType="com.mijiaokj.sys.dal.repository.query.SysUserCriteria"
+		resultType="java.lang.Integer">
+		select count(1) as count
+		from sys_user WHERE is_delete=0
+		<if test="username != null">
+			and username = #{username,jdbcType=VARCHAR}
+		</if>
+		<if test="phoneNumber != null">
+			and phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
+		</if>
+		<if test="createTimeStart !=null ">
+			and gmt_create &gt;= #{createTimeStart}
+		</if>
+		<if test="createTimeEnd !=null ">
+			and gmt_create &lt;= #{createTimeEnd}
+		</if>
+	</select>
+</mapper>
