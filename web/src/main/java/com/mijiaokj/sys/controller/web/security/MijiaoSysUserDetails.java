@@ -71,4 +71,12 @@ public class MijiaoSysUserDetails  implements UserDetails {
 		return sysUser.getUsername();
 	}
 
+	public SysUser getSysUser() {
+		return sysUser;
+	}
+
+	public void setSysUser(SysUser sysUser) {
+		this.sysUser = sysUser;
+	}
+
 }
