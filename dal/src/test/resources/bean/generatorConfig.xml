@@ -51,7 +51,18 @@
                     selectByExampleQueryId="false">
                 </table> -->
         
-        <table schema="" tableName="SYS_USER" domainObjectName="SysUser"
+        <table schema="" tableName="SYS_ROLE" domainObjectName="SysRole"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="SYS_USER_ROLE" domainObjectName="SysUserRole"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

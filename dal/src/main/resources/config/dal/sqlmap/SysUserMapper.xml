@@ -48,6 +48,13 @@
 		and is_delete = 0
 	</select>
 
+	<select id="findByUsername" resultMap="BaseResultMap"  parameterType="java.lang.String">
+		select *
+			from sys_user
+			where username = #{username,jdbcType=VARCHAR}
+			and is_delete = 0
+	</select>
+	
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysUser">
 		insert into sys_user (
 		<include refid="BaseColumns" /> ,

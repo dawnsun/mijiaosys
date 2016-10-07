@@ -16,5 +16,12 @@ public interface SysUserService {
 	 * @return
 	 */
 	 public Result<Long> createSysUser(SysUser sysUser);
+	 
+	 /**
+	  * 通过用户名查找用户
+	  * @param userName
+	  * @return
+	  */
+	 public Result<SysUser> findByUsername(String userName);
 
 }

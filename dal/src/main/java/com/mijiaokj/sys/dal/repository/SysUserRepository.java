@@ -12,6 +12,10 @@ import com.mijiaokj.sys.domain.SysUser;
 public class SysUserRepository extends BaseRepository<SysUser> {
 	@Resource
     private SysUserMapper sysUserMapper;
+	
+	public SysUser findByUsername(String username){
+		return sysUserMapper.findByUsername(username);
+	}
 
 	@Override
 	protected BaseMapper<SysUser> getMapper() {
