@@ -51,7 +51,7 @@
                     selectByExampleQueryId="false">
                 </table> -->
         
-        <table schema="" tableName="SYS_ROLE" domainObjectName="SysRole"
+        <table schema="" tableName="SYS_ROLE_RELATION" domainObjectName="SysRoleRelation"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -62,7 +62,139 @@
                <ignoreColumn column="modifier" /> 
                <ignoreColumn column="is_delete" /> 
         </table>
-        <table schema="" tableName="SYS_USER_ROLE" domainObjectName="SysUserRole"
+        <table schema="" tableName="SYS_INFO" domainObjectName="SysInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="USER_SYS_RELATION" domainObjectName="UserSysRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="SYS_CONTROL_RELATION" domainObjectName="SysControlRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="SYS_CONTROL" domainObjectName="SysControl"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="ROLE_CONTROL_RELATION" domainObjectName="RoleControlRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="PAGE" domainObjectName="Page"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="METHED" domainObjectName="Methed"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="MENU" domainObjectName="Menu"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="FILE" domainObjectName="File"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="CONTROL_PAGE_RELATION" domainObjectName="ControlPageRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="CONTROL_MENU_RELATION" domainObjectName="ControlMenuRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+         <table schema="" tableName="CONTROL_MEHTED_RELATION" domainObjectName="ControlMehtedRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <ignoreColumn column="id" /> 
+               <ignoreColumn column="gmt_create" /> 
+               <ignoreColumn column="gmt_modified" /> 
+               <ignoreColumn column="creator" /> 
+               <ignoreColumn column="modifier" /> 
+               <ignoreColumn column="is_delete" /> 
+        </table>
+        <table schema="" tableName="CONTROL_FILE_RELATION" domainObjectName="ControlFileRelation"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
