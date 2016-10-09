@@ -8,6 +8,10 @@ import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.SysUserMapper;
 import com.mijiaokj.sys.domain.SysUser;
 
+/**
+ * @author Administrator
+ *
+ */
 @Repository
 public class SysUserRepository extends BaseRepository<SysUser> {
 	@Resource

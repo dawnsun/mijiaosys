@@ -6,9 +6,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 
+ * @ClassName: MijiaoErrorController
+ * @Description: TODO(错误跳转)
  * @author sunchenguang
- * @mail scg16@126.com
- * 错误跳转
+ * @eamil scg16@126.com
+ * @date 2016年10月9日
+ *
  */
 @Controller
 public class MijiaoErrorController implements ErrorController {

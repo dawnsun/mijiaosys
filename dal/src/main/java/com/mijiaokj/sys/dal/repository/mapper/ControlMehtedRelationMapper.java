@@ -1,7 +1,9 @@
 package com.mijiaokj.sys.dal.repository.mapper;
 
-import com.mijiaokj.sys.domain.ControlMehtedRelation;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.mijiaokj.sys.domain.ControlMehtedRelation;
+@Mapper
 public interface ControlMehtedRelationMapper extends BaseMapper<ControlMehtedRelation> {
 
 }

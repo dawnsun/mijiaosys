@@ -1,7 +1,9 @@
 package com.mijiaokj.sys.dal.repository.mapper;
 
-import com.mijiaokj.sys.domain.Page;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.mijiaokj.sys.domain.Page;
+@Mapper
 public interface PageMapper extends BaseMapper<Page> {
 
 }

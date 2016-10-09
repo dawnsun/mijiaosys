@@ -1,7 +1,9 @@
 package com.mijiaokj.sys.dal.repository.mapper;
 
-import com.mijiaokj.sys.domain.Methed;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.mijiaokj.sys.domain.Methed;
+@Mapper
 public interface MethedMapper extends BaseMapper<Methed> {
 
 }

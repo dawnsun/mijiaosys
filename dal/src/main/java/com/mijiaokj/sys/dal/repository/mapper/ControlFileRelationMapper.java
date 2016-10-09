@@ -1,7 +1,9 @@
 package com.mijiaokj.sys.dal.repository.mapper;
 
-import com.mijiaokj.sys.domain.ControlFileRelation;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.mijiaokj.sys.domain.ControlFileRelation;
+@Mapper
 public interface ControlFileRelationMapper extends BaseMapper<ControlFileRelation> {
 
 }
