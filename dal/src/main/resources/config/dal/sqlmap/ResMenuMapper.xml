@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.MenuMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ResMenuMapper">
 	<sql id="BaseColumns">
 		menu_name,
 		menu_url,
@@ -17,7 +17,7 @@
 		#{menuOrder}
 	</sql>
 
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.Menu">
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ResMenu">
 		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
 		<result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
 		<result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
@@ -27,13 +27,13 @@
 
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from menu
+		from res_menu
 		where id = #{id,jdbcType=BIGINT}
 		and is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.Menu">
-		insert into menu (
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResMenu">
+		insert into res_menu (
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -46,7 +46,7 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update menu
+		update res_menu
 		set is_delete = 1
 		where id = #{id,jdbcType=BIGINT}
 	</update>

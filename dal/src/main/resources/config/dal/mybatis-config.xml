@@ -20,10 +20,9 @@
 		<typeAlias alias="ControlMenuRelation" type="com.mijiaokj.sys.domain.ControlMenuRelation" />
 		<typeAlias alias="ControlPageRelation" type="com.mijiaokj.sys.domain.ControlPageRelation" />
 		<typeAlias alias="File" type="com.mijiaokj.sys.domain.File" />
-		<typeAlias alias="Menu" type="com.mijiaokj.sys.domain.Menu" />
+		<typeAlias alias="ResMenu" type="com.mijiaokj.sys.domain.ResMenu" />
 		<typeAlias alias="Methed" type="com.mijiaokj.sys.domain.Methed" />
 		<typeAlias alias="Page" type="com.mijiaokj.sys.domain.Page" />
-		<typeAlias alias="RoleControlRelation" type="com.mijiaokj.sys.domain.RoleControlRelation" />
 		<typeAlias alias="SysControl" type="com.mijiaokj.sys.domain.SysControl" />
 		<typeAlias alias="SysControlRelation" type="com.mijiaokj.sys.domain.SysControlRelation" />
 		<typeAlias alias="SysInfo" type="com.mijiaokj.sys.domain.SysInfo" />
