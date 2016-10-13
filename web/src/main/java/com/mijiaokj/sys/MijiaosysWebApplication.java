@@ -2,6 +2,7 @@ package com.mijiaokj.sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author sunchenguang
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 启动方法
  */
 @SpringBootApplication
+@EnableCaching
 public class MijiaosysWebApplication {
 
 	public static void main(String[] args) {
