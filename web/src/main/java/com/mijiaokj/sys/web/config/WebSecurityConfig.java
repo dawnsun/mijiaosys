@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.controller.web.config;
+package com.mijiaokj.sys.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.mijiaokj.sys.controller.web.security.MijiaoSysAuthenticationProvider;
-import com.mijiaokj.sys.controller.web.security.MijiaoSysUserDetailsService;
+import com.mijiaokj.sys.web.security.MijiaoSysAuthenticationProvider;
+import com.mijiaokj.sys.web.security.MijiaoSysUserDetailsService;
 
 /**
  * @author sunchenguang

@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.controller.web.config;
+package com.mijiaokj.sys.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

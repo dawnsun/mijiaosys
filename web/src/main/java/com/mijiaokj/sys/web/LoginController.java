@@ -1,11 +1,11 @@
-package com.mijiaokj.sys.controller.web;
+package com.mijiaokj.sys.web;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mijiaokj.sys.controller.web.security.MijiaoSysUserDetails;
+import com.mijiaokj.sys.web.security.MijiaoSysUserDetails;
 
 /**
  * 

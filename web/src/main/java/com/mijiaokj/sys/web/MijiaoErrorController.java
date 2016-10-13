@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.controller.web;
+package com.mijiaokj.sys.web;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;

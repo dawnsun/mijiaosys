@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.controller.web.security;
+package com.mijiaokj.sys.web.security;
 
 import java.util.Collection;
 import java.util.List;
