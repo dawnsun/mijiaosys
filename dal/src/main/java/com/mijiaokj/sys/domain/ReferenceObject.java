@@ -4,7 +4,15 @@ import java.util.Date;
 
 import com.google.common.base.Strings;
 import com.mijiaokj.sys.common.constants.BaseConstant;
-
+/**
+ * 
+ * @ClassName: ReferenceObject
+ * @Description: TODO 公共数据
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月14日
+ *
+ */
 public class ReferenceObject extends BaseDomainObject {
 	private Long id;
     private Date gmtCreate;

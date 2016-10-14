@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.SysControlMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleControlMapper">
 	<sql id="BaseColumns">
-		control_name,
-		control_type,
-		control_abstract
+		role_id,
+		control_url
 	</sql>
 
 	<sql id="BaseProperties">
-		#{controlName},
-		#{controlType},
-		#{controlAbstract}
+		#{roleId},
+		#{controlUrl}
 	</sql>
-
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.SysControl">
-		<result column="control_name" property="controlName" jdbcType="VARCHAR" />
-		<result column="control_type" property="controlType" jdbcType="VARCHAR" />
-		<result column="control_abstract" property="controlAbstract"
-			jdbcType="VARCHAR" />
+	
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleControl">
+		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+		<result column="control_url" property="controlUrl" jdbcType="VARCHAR" />
 	</resultMap>
-
+	
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from sys_control
+		from ROLE_CONTROL
 		where id = #{id,jdbcType=BIGINT}
-		and is_delete
-		= 0
+		and is_delete = 0
 	</select>
-
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysControl">
-		insert into sys_control (
+	
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControl">
+		insert into ROLE_CONTROL (
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -42,9 +37,8 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update sys_control
+		update ROLE_CONTROL
 		set is_delete = 1
 		where id = #{id,jdbcType=BIGINT}
 	</update>
-
 </mapper>

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.MethedMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ResMethedMapper">
 	<sql id="BaseColumns">
-		methed_code,
 		methed_name,
+		methed_icon,
 		methed_url
 	</sql>
 
 	<sql id="BaseProperties">
-		#{methedCode},
 		#{methedName},
+		#{methedIcon},
 		#{methedUrl}
 	</sql>
 
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.Methed">
-		<result column="methed_code" property="methedCode" jdbcType="VARCHAR" />
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ResMethed">
 		<result column="methed_name" property="methedName" jdbcType="VARCHAR" />
+		<result column="methed_icon" property="methedIcon" jdbcType="VARCHAR" />
 		<result column="methed_url" property="methedUrl" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from methed
+		from RES_METHED
 		where id = #{id,jdbcType=BIGINT}
 		and is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.Methed">
-		insert into methed (methed_code, methed_name, methed_url
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResMethed">
+		insert into RES_METHED (methed_code, methed_name, methed_url
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -40,7 +40,7 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update methed
+		update RES_METHED
 		set is_delete = 1
 		where id = #{id,jdbcType=BIGINT}
 	</update>

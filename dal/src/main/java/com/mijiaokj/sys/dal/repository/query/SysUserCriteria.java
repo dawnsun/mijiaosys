@@ -1,10 +1,17 @@
 package com.mijiaokj.sys.dal.repository.query;
 
 import java.sql.Date;
-
+/**
+ * 
+ * @ClassName: SysUserCriteria
+ * @Description: TODO 用户信息查询条件Criteria
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月14日
+ *
+ */
 public class SysUserCriteria extends BaseQueryCriteria {
 	private String username;
-	private String password;
 	private String phoneNumber;
 	private Boolean userStatus;
 	private Date createTimeStart;
@@ -14,12 +21,6 @@ public class SysUserCriteria extends BaseQueryCriteria {
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public Boolean getUserStatus() {
 		return userStatus;

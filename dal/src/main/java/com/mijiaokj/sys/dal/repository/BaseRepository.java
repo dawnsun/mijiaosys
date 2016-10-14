@@ -3,7 +3,15 @@ package com.mijiaokj.sys.dal.repository;
 import com.google.common.base.Preconditions;
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.domain.ReferenceObject;
-
+/**
+ * 
+ * @ClassName: BaseRepository
+ * @Description: TODO 基础操作
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
+ *
+ */
 public abstract class BaseRepository<T extends ReferenceObject> {
 	protected abstract BaseMapper<T> getMapper();
 

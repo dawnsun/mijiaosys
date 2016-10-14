@@ -5,24 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 类Page.java的实现描述：分页工具类 
+ * 
+ * @ClassName: Page
+ * @Description: TODO 分页工具类 
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
+ *
  */
-public class PageData<E> implements Serializable {
+public class Page<E> implements Serializable {
     
     private static final long serialVersionUID = 1043141558460231519L;
 
     public static final int DEFAULT_DB_PAGE_SIZE = 10;
 
-    public PageData(){
+    public Page(){
 
     }
 
-    public PageData(Integer pageIndex){
+    public Page(Integer pageIndex){
         this.pageIndex = pageIndex;
 
     }
 
-    public PageData(Integer start, Integer pageSize){
+    public Page(Integer start, Integer pageSize){
         this.start = start;
         this.pageSize = pageSize;
     }
@@ -64,7 +70,7 @@ public class PageData<E> implements Serializable {
      * @param pageIndex 页码
      * @param pageSize 每页大小
      */
-    public PageData(Integer pageIndex, Integer pageSize, List<E> list){
+    public Page(Integer pageIndex, Integer pageSize, List<E> list){
         if (list == null || list.size() == 0) {
             this.setDatas(new ArrayList<E>(0));
             this.setStart(0);
@@ -110,7 +116,7 @@ public class PageData<E> implements Serializable {
      * @param pageSize
      * @param recordCount
      */
-    public PageData(List<E> datas, Integer start, Integer pageSize, Integer recordCount){
+    public Page(List<E> datas, Integer start, Integer pageSize, Integer recordCount){
         super();
         if (pageSize == null || pageSize <= 0) {
             pageSize = 10;

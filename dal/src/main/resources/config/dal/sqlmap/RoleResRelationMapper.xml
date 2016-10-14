@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ControlMenuRelationMapper" >
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleResRelationMapper" >
   <sql id="BaseColumns">
 		menu_id,
-		control_id
+		role_id
 	</sql>
 
 	<sql id="BaseProperties">
 		#{menuId},
-		#{controlId}
+		#{roleId}
 	</sql>
   
-  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ControlMenuRelation" >
+  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleResRelation" >
     <result column="menu_id" property="menuId" jdbcType="BIGINT" />
-    <result column="control_id" property="controlId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
   </resultMap>
   
-  <insert id="insert" parameterType="com.mijiaokj.sys.domain.ControlMenuRelation" >
-    insert into control_menu_relation (
+  <insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleResRelation" >
+    insert into ROLE_RES_RELATION (
 		<include refid="BaseColumns" /> ,
 		<include refid="Common.CommonColumns" />
 	)
@@ -28,7 +28,7 @@
   </insert>
   
   <update id="delete" parameterType="java.lang.Long">
-	update control_menu_relation
+	update ROLE_RES_RELATION
 	set is_delete = 1
 	where id = #{id,jdbcType=BIGINT}
   </update>

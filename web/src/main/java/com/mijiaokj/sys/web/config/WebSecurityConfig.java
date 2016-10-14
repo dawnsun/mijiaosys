@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/sys/add", "/sys/edit", "/sys/view").hasAuthority("ADMIN");
-		http.authorizeRequests().antMatchers("/sys/view", "/sys/list").hasAuthority("USER");
-		http.authorizeRequests().antMatchers("/js/**", "/font-awesome/**", "/fonts/**", "/img/**", "/css/**")
+		http.authorizeRequests().antMatchers("/sys/view", "/sys/list","/swagger-ui.html").hasAuthority("USER");
+		http.authorizeRequests().antMatchers("/js/**", "/font-awesome/**", "/fonts/**", "/img/**", "/css/**","/webjars/**","/images/**")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
 				.defaultSuccessUrl("/index").permitAll().and().logout().permitAll();
 	}

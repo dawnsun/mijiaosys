@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
-import com.mijiaokj.sys.common.util.PageData;
+import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.SysUserRepository;
 import com.mijiaokj.sys.dal.repository.query.SysUserCriteria;
@@ -57,7 +57,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Result<PageData<SysUser>> querySysUserByCriteria(SysUserCriteria criteria) {
+	public Result<Page<SysUser>> querySysUserByCriteria(SysUserCriteria criteria) {
 		try {
 			Preconditions.checkNotNull(criteria, "criteria is null");
 			return Result.ofSuccess(sysUserRepository.executeQueryForPage(criteria));

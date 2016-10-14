@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ControlMehtedRelationMapper" >
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.MenuMehtedRelationMapper" >
 	<sql id="BaseColumns">
-		control_id,
+		menu_id,
 		methed_id
 	</sql>
 
 	<sql id="BaseProperties">
-		#{controlId},
+		#{menuId},
 		#{methedId}
 	</sql>
 	
-  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ControlMehtedRelation" >
-    <result column="control_id" property="controlId" jdbcType="BIGINT" />
+  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.MenuMehtedRelation" >
+    <result column="menu_id" property="menuId" jdbcType="BIGINT" />
     <result column="methed_id" property="methedId" jdbcType="BIGINT" />
   </resultMap>
   
-  <insert id="insert" parameterType="com.mijiaokj.sys.domain.ControlMehtedRelation" >
-    insert into control_mehted_relation (
+  <insert id="insert" parameterType="com.mijiaokj.sys.domain.MenuMehtedRelation" >
+    insert into MENU_MEHTED_RELATION (
 		<include refid="BaseColumns" /> ,
 		<include refid="Common.CommonColumns" />
 	)
@@ -28,7 +28,7 @@
   </insert>
   
   <update id="delete" parameterType="java.lang.Long">
-	update control_mehted_relation
+	update MENU_MEHTED_RELATION
 	set is_delete = 1
 	where id = #{id,jdbcType=BIGINT}
   </update>

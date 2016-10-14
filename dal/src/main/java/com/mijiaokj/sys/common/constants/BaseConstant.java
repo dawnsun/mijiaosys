@@ -1,5 +1,13 @@
 package com.mijiaokj.sys.common.constants;
-
+/**
+ * 
+ * @ClassName: BaseConstant
+ * @Description: TODO 基础常量
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
+ *
+ */
 public class BaseConstant {
 	/**
 	 * 类LcpConstant.java的实现描述：逻辑删除字段

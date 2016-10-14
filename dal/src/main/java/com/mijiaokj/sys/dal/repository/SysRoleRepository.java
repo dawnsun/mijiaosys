@@ -7,7 +7,15 @@ import org.springframework.stereotype.Repository;
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.SysRoleMapper;
 import com.mijiaokj.sys.domain.SysRole;
-
+/**
+ * 
+ * @ClassName: SysRoleRepository
+ * @Description: TODO 系统角色操作
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
+ *
+ */
 @Repository
 public class SysRoleRepository extends BaseRepository<SysRole> {
 	@Resource

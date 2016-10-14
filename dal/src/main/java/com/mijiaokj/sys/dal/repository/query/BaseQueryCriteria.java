@@ -2,7 +2,15 @@ package com.mijiaokj.sys.dal.repository.query;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-
+/**
+ * 
+ * @ClassName: BaseQueryCriteria
+ * @Description: TODO 基础查询条件Criteria
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月14日
+ *
+ */
 public class BaseQueryCriteria {
 	/**
      * 默认每页为10条数据

@@ -1,6 +1,14 @@
 package com.mijiaokj.sys.common.util;
 
-
+/**
+ * 
+ * @ClassName: Result
+ * @Description: TODO 返回结果工具类 
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
+ *
+ */
 public class Result<T> {
 private boolean isSuccess = false;
     

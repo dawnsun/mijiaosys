@@ -14,12 +14,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mijiaokj.sys.common.util.CipherUtil;
 
-
 /**
- * mybatis数据源等的相关配置
+ * 
+ * @ClassName: MyBatisConfig
+ * @Description: TODO mybatis数据源等的相关配置
+ * @author sunchenguang
+ * @eamil scg16@126.com
+ * @date 2016年10月13日
  *
- * @author moyun
- * @version $Id: MyBatisConfig.java, v 0.1 2016-09-08 下午8:17 moyun Exp $$
  */
 @Configuration
 public class MyBatisConfig {

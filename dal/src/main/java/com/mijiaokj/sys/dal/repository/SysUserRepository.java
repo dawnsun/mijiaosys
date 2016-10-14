@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import com.mijiaokj.sys.common.util.PageData;
+import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.SysUserMapper;
 import com.mijiaokj.sys.dal.repository.query.SysUserCriteria;
@@ -34,10 +34,10 @@ public class SysUserRepository extends BaseRepository<SysUser> {
 		return sysUserMapper.findByUsername(username);
 	}
 
-	public PageData<SysUser> executeQueryForPage(SysUserCriteria criteria){
+	public Page<SysUser> executeQueryForPage(SysUserCriteria criteria){
 		List<SysUser> datas = sysUserMapper.selectPageByMap(criteria);
 		Integer count = sysUserMapper.pageCountByMap(criteria);
-		return new PageData<>(datas, criteria.getStartRow(), criteria.getPageSize(), count);
+		return new Page<>(datas, criteria.getStartRow(), criteria.getPageSize(), count);
 	}
 	
 	@Override

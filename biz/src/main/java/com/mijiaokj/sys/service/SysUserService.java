@@ -1,6 +1,6 @@
 package com.mijiaokj.sys.service;
 
-import com.mijiaokj.sys.common.util.PageData;
+import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.query.SysUserCriteria;
 import com.mijiaokj.sys.domain.SysUser;
@@ -37,6 +37,6 @@ public interface SysUserService {
 	 * @param option
 	 * @return
 	 */
-	public Result<PageData<SysUser>> querySysUserByCriteria(SysUserCriteria criteria);
+	public Result<Page<SysUser>> querySysUserByCriteria(SysUserCriteria criteria);
 
 }
