@@ -2,10 +2,10 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.File;
+import com.mijiaokj.sys.domain.SysFile;
 /**
  * 
- * @ClassName: FileMapper
+ * @ClassName: SysFileMapper
  * @Description: TODO 文件表映射
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.File;
  *
  */
 @Mapper
-public interface FileMapper extends BaseMapper<File> {
+public interface SysFileMapper extends BaseMapper<SysFile> {
 
 }

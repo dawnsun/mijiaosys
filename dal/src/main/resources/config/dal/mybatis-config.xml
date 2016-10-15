@@ -19,7 +19,7 @@
 		<typeAlias alias="MenuMehtedRelation" type="com.mijiaokj.sys.domain.MenuMehtedRelation" />
 		<typeAlias alias="RoleResRelation" type="com.mijiaokj.sys.domain.RoleResRelation" />
 		<typeAlias alias="RoleControl" type="com.mijiaokj.sys.domain.RoleControl" />
-		<typeAlias alias="File" type="com.mijiaokj.sys.domain.File" />
+		<typeAlias alias="SysFile" type="com.mijiaokj.sys.domain.SysFile" />
 		<typeAlias alias="ResMenu" type="com.mijiaokj.sys.domain.ResMenu" />
 		<typeAlias alias="ResMethed" type="com.mijiaokj.sys.domain.ResMethed" />
 		<typeAlias alias="SysInfo" type="com.mijiaokj.sys.domain.SysInfo" />

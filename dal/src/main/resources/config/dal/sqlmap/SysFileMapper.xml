@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.FileMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.SysFileMapper">
 
 	<sql id="BaseColumns">
 		file_name,
@@ -16,7 +16,7 @@
 		#{filePath}
 	</sql>
 	
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.File">
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.SysFile">
 		<result column="file_name" property="fileName" jdbcType="VARCHAR" />
 		<result column="file_suffix" property="fileSuffix" jdbcType="VARCHAR" />
 		<result column="file_size" property="fileSize" jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
 		and is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.File">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysFile">
 		insert into file (
 		<include refid="BaseColumns" />
 		,

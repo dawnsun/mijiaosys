@@ -27,7 +27,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Spring Boot 米椒科技 RESTful APIs")
                 .description("米椒科技")
-                .termsOfServiceUrl("http://localhost:8080/")
+                .termsOfServiceUrl("http://127.0.0.1:8099/")
                 .version("1.0")
                 .build();
     }
