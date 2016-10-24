@@ -1,15 +1,19 @@
 package com.mijiaokj.sys.web.controller.sysuser;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSON;
 import com.mijiaokj.sys.dal.repository.query.SysUserCriteria;
@@ -43,15 +47,25 @@ public class SysUserController {
 		return "edit";
 	}
 
-	@ApiOperation(value = "新增用户", notes = "根据SysUser对象创建用户")
-	@ApiImplicitParam(name = "user", value = "用户详细实体sysUser", required = true, dataType = "SysUser")
-	@RequestMapping(value = "/sys/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/sys/add", method = RequestMethod.GET)
 	@ResponseBody
-	public String add(@RequestBody SysUser sysUser) {
-		sysUserService.createSysUser(sysUser);
-		return "add";
+	public String add( @RequestBody SysUser sysUser) {
+		return "user/eidt";
 	}
 
+	@ApiOperation(value = "新增用户", notes = "根据SysUser对象创建用户")
+	@ApiImplicitParam(name = "user", value = "用户详细实体sysUser", required = true, dataType = "SysUser")
+	@RequestMapping(value = "/sys/form", method = RequestMethod.POST)  
+    public ModelAndView create(@Valid SysUser sysUser, BindingResult result,  
+            RedirectAttributes redirect) {  
+        if (result.hasErrors()) {  
+            return new ModelAndView("messages/form", "formErrors", result.getAllErrors());  
+        }  
+        sysUserService.createSysUser(sysUser);  
+        redirect.addFlashAttribute("globalMessage", "Successfully created a new message");  
+        return new ModelAndView("redirect:/{message.id}", "message.id", sysUser.getId());  
+    }  
+	
 	@ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
 	@ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
 	@RequestMapping(value = "/sys/view", method = RequestMethod.GET)
@@ -82,16 +96,16 @@ public class SysUserController {
 	@ResponseBody
 	public String getPageData(HttpServletRequest request){
 		SysUserCriteria criteria = new SysUserCriteria();
-		String start=request.getParameter("start");
-		if(StringUtils.isBlank(start)){
-			start="0";
+		String pageSize=request.getParameter("pageSize");
+		if(StringUtils.isBlank(pageSize)){
+			pageSize="10";
 		}
-		String limit=request.getParameter("limit");
-		if(StringUtils.isBlank(limit)){
-			limit="10";
+		String pageNumber=request.getParameter("pageNumber");
+		if(StringUtils.isBlank(pageNumber)){
+			pageNumber="0";
 		}
-		criteria.setPageSize(Integer.parseInt(limit));
-		criteria.setStartRow(Integer.parseInt(start));
-		return JSON.toJSONString(sysUserService.querySysUserByCriteria(criteria));
+		criteria.setPageSize(Integer.parseInt(pageSize));
+		criteria.setCurrentPage(Integer.parseInt(pageNumber));
+		return JSON.toJSONString(sysUserService.querySysUserByCriteria(criteria).getData().getDatas());
 	}
 }

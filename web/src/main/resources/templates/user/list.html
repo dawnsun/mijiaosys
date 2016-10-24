@@ -10,6 +10,7 @@
     <title>INSPINIA | Dashboard</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-table.css" rel="stylesheet"/>
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet"/>
 
     <!-- Morris -->
@@ -404,6 +405,25 @@
                     </div>
 
             </div>
+            <div class="row">
+            
+            <table data-toggle="table"
+       data-url="page.do"
+       data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-height="300">
+    <thead>
+    <tr>
+        <th data-field="username">Name</th>
+        <th data-field="nickname">Stars</th>
+        <th data-field="modifier">Forks</th>
+        <th data-field="gmtModified">Description</th>
+        <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">Action</th>
+    </tr>
+    </thead>
+</table>
+            </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content">
@@ -792,5 +812,46 @@
 
 	<!-- Index ready-->
     <script src="../js/index.js"></script>
+    <script src="../js/bootstrap-table.js"></script>
+    <script>
+    function actionFormatter(value, row, index) {
+		console.log(value, row.id, index);
+    
+    if("14370005"==row.id){
+   	 return [
+        '<a class="like" href="javascript:void(0)" title="Like">',
+          '<i class="glyphicon glyphicon-heart"></i>',
+          '</a>'
+        ].join('');
+    }else{
+     return ['<a class="like" href="javascript:void(0)" title="Like">',
+        '<i class="glyphicon glyphicon-heart"></i>',
+        '</a>',
+        '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+        '</a>',
+        '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+        '<i class="glyphicon glyphicon-remove"></i>',
+        '</a>'
+    ].join('');
+    }
+       
+}
+
+window.actionEvents = {
+    'click .like': function (e, value, row, index) {
+        alert('You click like icon, row: ' + JSON.stringify(row));
+        console.log(value, row, index);
+    },
+    'click .edit': function (e, value, row, index) {
+        alert('You click edit icon, row: ' + JSON.stringify(row));
+        console.log(value, row, index);
+    },
+    'click .remove': function (e, value, row, index) {
+        alert('You click remove icon, row: ' + JSON.stringify(row));
+        console.log(value, row, index);
+    }
+};
+    </script>
 </body>
 </html>
