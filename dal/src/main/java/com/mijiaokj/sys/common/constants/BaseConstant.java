@@ -9,11 +9,7 @@ package com.mijiaokj.sys.common.constants;
  *
  */
 public class BaseConstant {
-	/**
-	 * 类LcpConstant.java的实现描述：逻辑删除字段
-	 *
-	 * @author jinwen.zjw 2016年8月27日 上午11:49:17
-	 */
+
 	public interface isDelete {
 		/**
 		 * 删除 -1
