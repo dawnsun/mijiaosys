@@ -1,5 +1,10 @@
 package com.mijiaokj.sys.common.util;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.io.Serializable;
+
 /**
  * 
  * @ClassName: Result
@@ -9,124 +14,100 @@ package com.mijiaokj.sys.common.util;
  * @date 2016年10月13日
  *
  */
-public class Result<T> {
-private boolean isSuccess = false;
-    
+public class Result<T> implements Serializable {
+    private static final long serialVersionUID = -6621940073431236104L;
+    private boolean success;
+    private int total;
     private T data;
-    
-    private String errMsg;
-    
-    private String errCode;
-    
-    public Result(){
-        
+    private String successInfo;
+    private String successCode;
+    private int errorType;
+    private String errorCode;
+    private String errorMsg;
+
+    public Result() {
+
     }
-    
-    private Result(boolean isSuccess, T data, String errCode, String errMsg) {
-        this.isSuccess = isSuccess;
-        this.data = data;
-        this.errCode = errCode;
-        this.errMsg = errMsg;
-        
-    }
-    
-    /**
-     * 返回成功的实例 isSuccess为true,errorCode何errorMessage为null
-     * 
-     * @param result
-     * @return
-     */
-    public static <T> Result<T> ofSuccess(T result) {
-        return new Result<T>(true, result, null, null);
-    }
-    
-    /**
-     * 
-     * 产生失败的Result对象实例
-     * 
-     * @param errCode
-     * @param errMsg
-     * @return
-     */
-    public static <T> Result<T> ofFail(String errCode, String errMsg) {
-        return new Result<T>(false, null, errCode, errMsg);
-    }
-    
-    /**
-     * 返回失败的实例
-     * 
-     * @param errMsg
-     * @return
-     */
-    public static <T> Result<T> ofFail(String errMsg) {
-        return new Result<T>(false, null, null, errMsg);
-    }
-    
-    /**
-     * @return the isSuccess
-     */
     public boolean isSuccess() {
-        return isSuccess;
+        return this.success;
     }
-    
-    /**
-     * @param isSuccess the isSuccess to set
-     */
-    public void setSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
-    
-    /**
-     * @return the errMsg
-     */
-    public String getErrMsg() {
-        return errMsg;
+
+    public int getTotal() {
+        return this.total;
     }
-    
-    /**
-     * @param errMsg the errMsg to set
-     */
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
+
+    public void setTotal(int total) {
+        this.total = total;
     }
-    
-    /**
-     * @return the errCode
-     */
-    public String getErrCode() {
-        return errCode;
-    }
-    
-    /**
-     * @param errCode the errCode to set
-     */
-    public void setErrCode(String errCode) {
-        this.errCode = errCode;
-    }
-    
+
     public T getData() {
-        return data;
+        return this.data;
     }
-    
+
     public void setData(T data) {
         this.data = data;
     }
 
-    @Override
+    public String getSuccessInfo() {
+        return this.successInfo;
+    }
+
+    public void setSuccessInfo(String successInfo) {
+        this.successInfo = successInfo;
+    }
+
+    public String getSuccessCode() {
+        return this.successCode;
+    }
+
+    public void setSuccessCode(String successCode) {
+        this.successCode = successCode;
+    }
+
+    public int getErrorType() {
+        return this.errorType;
+    }
+
+    public void setErrorType(int errorType) {
+        this.errorType = errorType;
+    }
+
+    public String getErrorCode() {
+        return this.errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMsg() {
+        return this.errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("{\"meta\":");
-        builder.append("{\"isSuccess\":\"");
-        builder.append(isSuccess);
-        builder.append("\", \"errMsg\":\"");
-        builder.append(errMsg);
-        builder.append("\", \"errCode\":\"");
-        builder.append(errCode);
-        builder.append("\"}");
-        builder.append(", \"data\":");
-        builder.append(data);
-        builder.append("}");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    public Result(boolean success) {
+        this.success = success;
+    }
+
+    public void copyErrorResult(Result result) {
+        if(result != null) {
+            this.setSuccess(result.isSuccess());
+            this.setErrorCode(result.getErrorCode());
+            this.setErrorMsg(result.getErrorMsg());
+            this.setErrorType(result.getErrorType());
+            this.setTotal(result.getTotal());
+        }
     }
 
 }
