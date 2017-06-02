@@ -28,6 +28,51 @@ public class Result<T> implements Serializable {
     public Result() {
 
     }
+
+    public Result(boolean success, int total, T data, String successInfo, String successCode, int errorType, String errorCode, String errorMsg) {
+        this.success = success;
+        this.total = total;
+        this.data = data;
+        this.successInfo = successInfo;
+        this.successCode = successCode;
+        this.errorType = errorType;
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+    /**
+     * 返回成功的实例 isSuccess为true,errorCode何errorMessage为null
+     *
+     * @param result
+     * @return
+     */
+    public static <T> Result<T> ofSuccess(T result) {
+        return new Result<T>(true,0, result, null, null, 0, null, null);
+    }
+
+    /**
+     * 失败返回
+     * @param errorType
+     * @param errorCode
+     * @param errorMsg
+     * @param <T>
+     * @return
+     */
+    public static <T> Result<T> ofFail(int errorType, String errorCode, String errorMsg) {
+        return new Result<T>(false, 0,null,null, null, errorType , errorCode, errorMsg);
+    }
+
+    /**
+     * 返回失败的实例
+     *
+     * @param errorMsg
+     * @return
+     */
+    public static <T> Result<T> ofFail(String errorMsg) {
+        return new Result<T>(false, 0,null,null, null, 0 , null, errorMsg);
+    }
+
+
     public boolean isSuccess() {
         return this.success;
     }
