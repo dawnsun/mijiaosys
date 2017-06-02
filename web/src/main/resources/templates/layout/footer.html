@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+</head>
+<body>
+<div class="footer" th:fragment="footer" >
+    <div class="pull-right">
+        10GB of <strong>250GB</strong> Free.
+    </div>
+    <div>
+        <strong>Copyright</strong> Example Company &copy; 2014-2015
+    </div>
+</div>
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Flot -->
+<script src="../js/plugins/flot/jquery.flot.js"></script>
+<script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="../js/plugins/flot/jquery.flot.pie.js"></script>
+
+<!-- Peity -->
+<script src="../js/plugins/peity/jquery.peity.min.js"></script>
+<script src="../js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- GITTER -->
+<script src="../js/plugins/gritter/jquery.gritter.min.js"></script>
+
+<!-- EayPIE -->
+<script src="../js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="../js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="../js/demo/sparkline-demo.js"></script>
+
+<!-- ChartJS-->
+<script src="../js/plugins/chartJs/Chart.min.js"></script>
+
+<!-- Index ready-->
+<script src="../js/index.js"></script>
+<script src="../js/bootstrap-table.js"></script>
+<script>
+    function actionFormatter(value, row, index) {
+        console.log(value, row.id, index);
+
+        if("14370005"==row.id){
+            return [
+                '<a class="like" href="javascript:void(0)" title="Like">',
+                '<i class="glyphicon glyphicon-heart"></i>',
+                '</a>'
+            ].join('');
+        }else{
+            return ['<a class="like" href="javascript:void(0)" title="Like">',
+                '<i class="glyphicon glyphicon-heart"></i>',
+                '</a>',
+                '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>',
+                '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+                '<i class="glyphicon glyphicon-remove"></i>',
+                '</a>'
+            ].join('');
+        }
+
+    }
+
+    window.actionEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .edit': function (e, value, row, index) {
+            alert('You click edit icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .remove': function (e, value, row, index) {
+            alert('You click remove icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        }
+    };
+</script>
+</html>
