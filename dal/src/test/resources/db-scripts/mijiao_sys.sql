@@ -36,17 +36,17 @@ drop table if exists USER_SYS_RELATION;
 create table CONTROL_FILE_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   file_id              bigint(20) unsigned  not null comment 'ÎÄ¼şÖ÷¼ü',
-   control_id           bigint(20) unsigned  not null comment 'È¨ÏŞÖ÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   file_id              bigint(20) unsigned  not null comment 'æ–‡ä»¶ä¸»é”®',
+   control_id           bigint(20) unsigned  not null comment 'æƒé™ä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table CONTROL_FILE_RELATION comment 'È¨ÏŞÎÄ¼ş¹ØÏµ±í';
+alter table CONTROL_FILE_RELATION comment 'æƒé™æ–‡ä»¶å…³ç³»è¡¨';
 
 /*==============================================================*/
 /* Table: MENU_MEHTED_RELATION                                  */
@@ -54,17 +54,17 @@ alter table CONTROL_FILE_RELATION comment 'È¨ÏŞÎÄ¼ş¹ØÏµ±í';
 create table MENU_MEHTED_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   menu_id              bigint(20) unsigned  not null comment '²Ëµ¥Ö÷¼ü',
-   methed_id            bigint(20) unsigned  not null comment '²Ù×÷Ö÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   menu_id              bigint(20) unsigned  not null comment 'èœå•ä¸»é”®',
+   methed_id            bigint(20) unsigned  not null comment 'æ“ä½œä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table MENU_MEHTED_RELATION comment '²Ëµ¥²Ù×÷¹ØÏµ±í';
+alter table MENU_MEHTED_RELATION comment 'èœå•æ“ä½œå…³ç³»è¡¨';
 
 /*==============================================================*/
 /* Table: RES_MENU                                              */
@@ -72,20 +72,20 @@ alter table MENU_MEHTED_RELATION comment '²Ëµ¥²Ù×÷¹ØÏµ±í';
 create table RES_MENU
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   menu_name            varchar(64) not null comment '²Ëµ¥Ãû³Æ',
-   menu_url             varchar(128) not null comment '²Ëµ¥URL',
-   menu_icon            varchar(32) not null comment '²Ëµ¥Í¼±ê',
-   parent_id            bigint(20) unsigned  not null comment '¸¸²Ëµ¥ID',
-   menu_order           int(10) not null comment '²Ëµ¥ÅÅĞò',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   menu_name            varchar(64) not null comment 'èœå•åç§°',
+   menu_url             varchar(128) not null comment 'èœå•URL',
+   menu_icon            varchar(32) not null comment 'èœå•å›¾æ ‡',
+   parent_id            bigint(20) unsigned  not null comment 'çˆ¶èœå•ID',
+   menu_order           int(10) not null comment 'èœå•æ’åº',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table RES_MENU comment '×ÊÔ´²Ëµ¥±í';
+alter table RES_MENU comment 'èµ„æºèœå•è¡¨';
 
 /*==============================================================*/
 /* Table: RES_METHED                                            */
@@ -93,18 +93,18 @@ alter table RES_MENU comment '×ÊÔ´²Ëµ¥±í';
 create table RES_METHED
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   methed_name          varchar(64) not null comment '²Ù×÷Ãû³Æ',
-   methed_icon          varchar(32) comment '²Ù×÷Í¼±ê',
-   methed_url           varchar(128) not null comment 'À¹½ØURLÇ°×º',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   methed_name          varchar(64) not null comment 'æ“ä½œåç§°',
+   methed_icon          varchar(32) comment 'æ“ä½œå›¾æ ‡',
+   methed_url           varchar(128) not null comment 'æ‹¦æˆªURLå‰ç¼€',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table RES_METHED comment '×ÊÔ´²Ù×÷±í';
+alter table RES_METHED comment 'èµ„æºæ“ä½œè¡¨';
 
 /*==============================================================*/
 /* Table: ROLE_CONTROL                                          */
@@ -112,17 +112,17 @@ alter table RES_METHED comment '×ÊÔ´²Ù×÷±í';
 create table ROLE_CONTROL
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   role_id              bigint(20) unsigned  not null comment '½ÇÉ«Ö÷¼ü',
-   control_url          varchar(4000) not null comment 'È¨ÏŞURL',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   role_id              bigint(20) unsigned  not null comment 'è§’è‰²ä¸»é”®',
+   control_url          varchar(4000) not null comment 'æƒé™URL',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table ROLE_CONTROL comment '½ÇÉ«È¨ÏŞ±í';
+alter table ROLE_CONTROL comment 'è§’è‰²æƒé™è¡¨';
 
 /*==============================================================*/
 /* Table: ROLE_RES_RELATION                                     */
@@ -130,17 +130,17 @@ alter table ROLE_CONTROL comment '½ÇÉ«È¨ÏŞ±í';
 create table ROLE_RES_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   menu_id              bigint(20) unsigned  not null comment '²Ëµ¥Ö÷¼ü',
-   role_id              bigint(20) unsigned  not null comment '½ÇÉ«Ö÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   menu_id              bigint(20) unsigned  not null comment 'èœå•ä¸»é”®',
+   role_id              bigint(20) unsigned  not null comment 'è§’è‰²ä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table ROLE_RES_RELATION comment '½ÇÉ«×ÊÔ´¹ØÏµ±í';
+alter table ROLE_RES_RELATION comment 'è§’è‰²èµ„æºå…³ç³»è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_FILE                                              */
@@ -148,39 +148,39 @@ alter table ROLE_RES_RELATION comment '½ÇÉ«×ÊÔ´¹ØÏµ±í';
 create table SYS_FILE
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   file_name            varchar(64) not null comment 'ÎÄ¼şÃû³Æ',
-   file_suffix          varchar(16) not null comment 'ÎÄ¼şºó×º',
-   file_size            varchar(32) not null comment 'ÎÄ¼ş´óĞ¡',
-   file_path            varchar(128) not null comment 'ÎÄ¼şÂ·¾¶',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   file_name            varchar(64) not null comment 'æ–‡ä»¶åç§°',
+   file_suffix          varchar(16) not null comment 'æ–‡ä»¶åç¼€',
+   file_size            varchar(32) not null comment 'æ–‡ä»¶å¤§å°',
+   file_path            varchar(128) not null comment 'æ–‡ä»¶è·¯å¾„',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_FILE comment 'ÎÄ¼ş±í';
+alter table SYS_FILE comment 'æ–‡ä»¶è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_INFO                                              */
 /*==============================================================*/
 create table SYS_INFO
 (
-   id                   bigint(20) unsigned  not null auto_increment comment 'Ö÷¼ü',
-   cn_name              varchar(64) not null comment 'ÏµÍ³ÖĞÎÄÃû³Æ',
-   en_name              varchar(128) comment 'ÏµÍ³Ó¢ÎÄÃû³Æ',
-   secret_key           varchar(32) not null comment 'ÏµÍ³ÃØÔ¿',
-   sys_status           tinyint(1) not null comment 'ÏµÍ³×´Ì¬ 1-Õı³£ 0-Ëø¶¨',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   id                   bigint(20) unsigned  not null auto_increment comment 'ä¸»é”®',
+   cn_name              varchar(64) not null comment 'ç³»ç»Ÿä¸­æ–‡åç§°',
+   en_name              varchar(128) comment 'ç³»ç»Ÿè‹±æ–‡åç§°',
+   secret_key           varchar(32) not null comment 'ç³»ç»Ÿç§˜é’¥',
+   sys_status           tinyint(1) not null comment 'ç³»ç»ŸçŠ¶æ€ 1-æ­£å¸¸ 0-é”å®š',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_INFO comment 'ÏµÍ³ĞÅÏ¢±í';
+alter table SYS_INFO comment 'ç³»ç»Ÿä¿¡æ¯è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_ROLE                                              */
@@ -188,17 +188,17 @@ alter table SYS_INFO comment 'ÏµÍ³ĞÅÏ¢±í';
 create table SYS_ROLE
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   role_name            varchar(64) not null comment '½ÇÉ«Ãû³Æ',
-   role_abstract        varchar(128) comment '½ÇÉ«ÃèÊö',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   role_name            varchar(64) not null comment 'è§’è‰²åç§°',
+   role_abstract        varchar(128) comment 'è§’è‰²æè¿°',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_ROLE comment 'ÏµÍ³½ÇÉ«±í';
+alter table SYS_ROLE comment 'ç³»ç»Ÿè§’è‰²è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_ROLE_RELATION                                     */
@@ -206,17 +206,17 @@ alter table SYS_ROLE comment 'ÏµÍ³½ÇÉ«±í';
 create table SYS_ROLE_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   sys_id               bigint(20) unsigned  not null comment 'ÏµÍ³Ö÷¼ü',
-   role_id              bigint(20) unsigned  not null comment '½ÇÉ«Ö÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   sys_id               bigint(20) unsigned  not null comment 'ç³»ç»Ÿä¸»é”®',
+   role_id              bigint(20) unsigned  not null comment 'è§’è‰²ä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_ROLE_RELATION comment 'ÏµÍ³½ÇÉ«¹ØÏµ±í';
+alter table SYS_ROLE_RELATION comment 'ç³»ç»Ÿè§’è‰²å…³ç³»è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_USER                                              */
@@ -224,25 +224,25 @@ alter table SYS_ROLE_RELATION comment 'ÏµÍ³½ÇÉ«¹ØÏµ±í';
 create table SYS_USER
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   username             varchar(32) not null comment 'ÓÃ»§Ãû',
-   password             varchar(32) not null comment 'ÃÜÂë',
-   phone_number         varchar(16) not null comment 'ÊÖ»úºÅÂë',
-   address              varchar(128) comment 'µØÖ·',
-   avatar               varchar(32) comment 'Í·Ïñ',
-   nickname             varchar(32) comment 'êÇ³Æ',
-   qr_code              varchar(32) not null comment '¶şÎ¬ÂëÃûÆ¬',
-   sex                  tinyint(1) comment '0-Å® 1-ÄĞ',
-   birthday             varchar(9) comment 'ÉúÈÕ',
-   user_status          tinyint(1) not null comment 'ÓÃ»§×´Ì¬ 1-Õı³£ 0-Ëø¶¨',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   username             varchar(32) not null comment 'ç”¨æˆ·å',
+   password             varchar(32) not null comment 'å¯†ç ',
+   phone_number         varchar(16) not null comment 'æ‰‹æœºå·ç ',
+   address              varchar(128) comment 'åœ°å€',
+   avatar               varchar(32) comment 'å¤´åƒ',
+   nickname             varchar(32) comment 'æ˜µç§°',
+   qr_code              varchar(32) not null comment 'äºŒç»´ç åç‰‡',
+   sex                  tinyint(1) comment '0-å¥³ 1-ç”·',
+   birthday             varchar(9) comment 'ç”Ÿæ—¥',
+   user_status          tinyint(1) not null comment 'ç”¨æˆ·çŠ¶æ€ 1-æ­£å¸¸ 0-é”å®š',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_USER comment 'ÓÃ»§ĞÅÏ¢±í';
+alter table SYS_USER comment 'ç”¨æˆ·ä¿¡æ¯è¡¨';
 
 /*==============================================================*/
 /* Table: SYS_USER_ROLE_RELATION                                */
@@ -250,17 +250,17 @@ alter table SYS_USER comment 'ÓÃ»§ĞÅÏ¢±í';
 create table SYS_USER_ROLE_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   user_id              bigint(20) unsigned  not null comment 'ÓÃ»§Ö÷¼ü',
-   role_id              bigint(20) unsigned  not null comment '½ÇÉ«Ö÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   user_id              bigint(20) unsigned  not null comment 'ç”¨æˆ·ä¸»é”®',
+   role_id              bigint(20) unsigned  not null comment 'è§’è‰²ä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table SYS_USER_ROLE_RELATION comment 'ÓÃ»§½ÇÉ«¹ØÏµ±í';
+alter table SYS_USER_ROLE_RELATION comment 'ç”¨æˆ·è§’è‰²å…³ç³»è¡¨';
 
 /*==============================================================*/
 /* Table: USER_SYS_RELATION                                     */
@@ -268,15 +268,15 @@ alter table SYS_USER_ROLE_RELATION comment 'ÓÃ»§½ÇÉ«¹ØÏµ±í';
 create table USER_SYS_RELATION
 (
    id                   bigint(20) unsigned  not null auto_increment,
-   user_id              bigint(20) unsigned  not null comment 'ÓÃ»§Ö÷¼ü',
-   sys_id               bigint(20) unsigned  not null comment 'ÏµÍ³Ö÷¼ü',
-   gmt_create           datetime not null comment '´´½¨Ê±¼ä',
-   gmt_modified         datetime not null comment 'ĞŞ¸ÄÊ±¼ä',
-   creator              varchar(32) not null comment '´´½¨ÈË',
-   modifier             varchar(32) not null comment 'ĞŞ¸ÄÈË',
-   is_delete            tinyint(1) not null comment '0-ÓĞĞ§ 1-É¾³ı',
+   user_id              bigint(20) unsigned  not null comment 'ç”¨æˆ·ä¸»é”®',
+   sys_id               bigint(20) unsigned  not null comment 'ç³»ç»Ÿä¸»é”®',
+   gmt_create           datetime not null comment 'åˆ›å»ºæ—¶é—´',
+   gmt_modified         datetime not null comment 'ä¿®æ”¹æ—¶é—´',
+   creator              varchar(32) not null comment 'åˆ›å»ºäºº',
+   modifier             varchar(32) not null comment 'ä¿®æ”¹äºº',
+   is_delete            tinyint(1) not null DEFAULT '0' comment '0-æœ‰æ•ˆ 1-åˆ é™¤',
    primary key (id)
 );
 
-alter table USER_SYS_RELATION comment 'ÓÃ»§ÏµÍ³¹ØÏµ±í';
+alter table USER_SYS_RELATION comment 'ç”¨æˆ·ç³»ç»Ÿå…³ç³»è¡¨';
 
