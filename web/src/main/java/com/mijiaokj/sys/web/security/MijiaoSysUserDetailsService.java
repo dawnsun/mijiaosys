@@ -44,7 +44,10 @@ public class MijiaoSysUserDetailsService implements UserDetailsService {
 		} else {
 			try {
 				Result<List<SysRole>> resRoles = sysRoleService.getRoleByUserId(user.getId());
-				List<SysRole> roles = resRoles.getData();
+				List<SysRole> roles = null;
+				if(resRoles.isSuccess() && !resRoles.getData().isEmpty()){
+					roles = resRoles.getData();
+				}
 				return new MijiaoSysUserDetails(user, roles);
 			} catch (Exception e) {
 				throw new UsernameNotFoundException("user role select fail");
