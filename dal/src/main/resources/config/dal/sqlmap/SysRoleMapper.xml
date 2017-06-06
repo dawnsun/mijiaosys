@@ -25,7 +25,12 @@
 		is_delete
 		= 0
 	</select>
-
+	<select id="getAllRole" resultMap="BaseResultMap">
+		select *
+		from sys_role
+		where is_delete
+		= 0
+	</select>
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysRole">
 		insert into sys_role (
 		<include refid="BaseColumns" />

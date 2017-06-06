@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.SysRoleMapper;
 import com.mijiaokj.sys.domain.SysRole;
+
+import java.util.List;
+
 /**
  * 
  * @ClassName: SysRoleRepository
@@ -24,6 +27,10 @@ public class SysRoleRepository extends BaseRepository<SysRole> {
 	@Override
 	protected BaseMapper<SysRole> getMapper() {
 		return this.sysRoleMapper;
+	}
+
+	public List<SysRole> getAllRole(){
+		return sysRoleMapper.getAllRole();
 	}
 
 }

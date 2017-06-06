@@ -7,14 +7,14 @@
         gmt_create, gmt_modified, is_delete, creator, modifier
     </sql>
     <sql id="CommonProperties">
-        #{gmtCreate}, #{gmtModified}, #{isDelete}, #{creator}, #{modifier}
+        now(), now(), #{isDelete}, #{creator}, #{modifier}
     </sql>
     <sql id="ForEachProperties">
         #{item.gmtCreate}, #{item.gmtModified}, #{item.isDelete}, #{item.creator}, #{item.modifier}
     </sql>
     <sql id="CommonUpdate">
         modifier = #{modifier,jdbcType=VARCHAR},
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        gmt_modified=now(),
         is_delete = #{isDelete,jdbcType=INTEGER}
     </sql>
 

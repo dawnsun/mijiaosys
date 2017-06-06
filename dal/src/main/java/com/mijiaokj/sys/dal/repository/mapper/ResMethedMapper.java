@@ -3,6 +3,9 @@ package com.mijiaokj.sys.dal.repository.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mijiaokj.sys.domain.ResMethed;
+
+import java.util.List;
+
 /**
  * 
  * @ClassName: ResMethedMapper
@@ -14,5 +17,9 @@ import com.mijiaokj.sys.domain.ResMethed;
  */
 @Mapper
 public interface ResMethedMapper extends BaseMapper<ResMethed> {
-
+    /**
+     * 获取所有的系统资源
+     * @return
+     */
+    List<ResMethed> getAllResMethed();
 }

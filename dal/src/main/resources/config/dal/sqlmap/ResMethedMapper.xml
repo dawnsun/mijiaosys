@@ -26,6 +26,12 @@
 		and is_delete = 0
 	</select>
 
+	<select id="getAllResMethed" resultMap="BaseResultMap">
+		select *
+		from RES_METHED
+		where is_delete = 0
+	</select>
+
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResMethed">
 		insert into RES_METHED (methed_code, methed_name, methed_url
 		<include refid="BaseColumns" />
