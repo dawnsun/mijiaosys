@@ -14,4 +14,10 @@ public interface SysRoleService {
 	 */
 	public Result<List<SysRole>> getRoleByUserId(Long userId);
 
+	/**
+	 * 查询所有有效的定义角色
+	 * @return
+	 */
+	public Result<List<SysRole>> getAllRole();
+
 }
