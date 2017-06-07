@@ -2,11 +2,12 @@ package com.mijiaokj.sys.dal.repository;
 
 import javax.annotation.Resource;
 
+import com.mijiaokj.sys.dal.repository.mapper.UserRoleRelationMapper;
+import com.mijiaokj.sys.domain.UserRoleRelation;
 import org.springframework.stereotype.Repository;
 
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
-import com.mijiaokj.sys.dal.repository.mapper.SysUserRoleRelationMapper;
-import com.mijiaokj.sys.domain.SysUserRoleRelation;
+
 /**
  * 
  * @ClassName: SysUserRoleRepository
@@ -17,13 +18,13 @@ import com.mijiaokj.sys.domain.SysUserRoleRelation;
  *
  */
 @Repository
-public class SysUserRoleRepository extends BaseRepository<SysUserRoleRelation> {
+public class UserRoleRepository extends BaseRepository<UserRoleRelation> {
 
 	@Resource
-    private SysUserRoleRelationMapper sysUserRoleMapper;
+    private UserRoleRelationMapper sysUserRoleMapper;
 	
 	@Override
-	protected BaseMapper<SysUserRoleRelation> getMapper() {
+	protected BaseMapper<UserRoleRelation> getMapper() {
 		return this.sysUserRoleMapper;
 	}
 

@@ -2,10 +2,10 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.RoleResRelation;
+import com.mijiaokj.sys.domain.RoleMenuRelation;
 /**
  * 
- * @ClassName: RoleResRelationMapper
+ * @ClassName: RoleMenuRelationMapper
  * @Description: TODO 角色资源关系Mapper
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.RoleResRelation;
  *
  */
 @Mapper
-public interface RoleResRelationMapper extends BaseMapper<RoleResRelation> {
+public interface RoleMenuRelationMapper extends BaseMapper<RoleMenuRelation> {
 	
 }

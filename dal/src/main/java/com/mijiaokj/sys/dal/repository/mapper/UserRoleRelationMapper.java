@@ -2,10 +2,10 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.SysUserRoleRelation;
+import com.mijiaokj.sys.domain.UserRoleRelation;
 /**
  * 
- * @ClassName: SysUserRoleRelationMapper
+ * @ClassName: UserRoleRelationMapper
  * @Description: TODO 用户角色关系表Mapper
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.SysUserRoleRelation;
  *
  */
 @Mapper
-public interface SysUserRoleRelationMapper extends BaseMapper<SysUserRoleRelation> {
+public interface UserRoleRelationMapper extends BaseMapper<UserRoleRelation> {
 	
 }

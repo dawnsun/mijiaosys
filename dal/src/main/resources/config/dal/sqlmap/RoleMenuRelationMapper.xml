@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleResRelationMapper" >
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleMenuRelationMapper" >
   <sql id="BaseColumns">
 		menu_id,
 		role_id
@@ -11,13 +11,13 @@
 		#{roleId}
 	</sql>
   
-  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleResRelation" >
+  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleMenuRelation" >
     <result column="menu_id" property="menuId" jdbcType="BIGINT" />
     <result column="role_id" property="roleId" jdbcType="BIGINT" />
   </resultMap>
   
-  <insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleResRelation" >
-    insert into ROLE_RES_RELATION (
+  <insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleMenuRelation" >
+    insert into ROLE_MENU_RELATION (
 		<include refid="BaseColumns" /> ,
 		<include refid="Common.CommonColumns" />
 	)
@@ -28,7 +28,7 @@
   </insert>
   
   <update id="delete" parameterType="java.lang.Long">
-	update ROLE_RES_RELATION
+	update ROLE_MENU_RELATION
 	set is_delete = 1
 	where id = #{id,jdbcType=BIGINT}
   </update>

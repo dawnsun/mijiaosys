@@ -17,7 +17,7 @@
 		<typeAlias alias="SysUser" type="com.mijiaokj.sys.domain.SysUser" />
 		<typeAlias alias="ControlFileRelation" type="com.mijiaokj.sys.domain.ControlFileRelation" />
 		<typeAlias alias="MenuMehtedRelation" type="com.mijiaokj.sys.domain.MenuControlRelation" />
-		<typeAlias alias="RoleResRelation" type="com.mijiaokj.sys.domain.RoleResRelation" />
+		<typeAlias alias="RoleResRelation" type="com.mijiaokj.sys.domain.RoleMenuRelation" />
 		<typeAlias alias="RoleControl" type="com.mijiaokj.sys.domain.RoleControlRelation" />
 		<typeAlias alias="SysFile" type="com.mijiaokj.sys.domain.SysFile" />
 		<typeAlias alias="ResMenu" type="com.mijiaokj.sys.domain.SysMenu" />
@@ -25,7 +25,7 @@
 		<typeAlias alias="SysInfo" type="com.mijiaokj.sys.domain.SysInfo" />
 		<typeAlias alias="SysRole" type="com.mijiaokj.sys.domain.SysRole" />
 		<typeAlias alias="SysRoleRelation" type="com.mijiaokj.sys.domain.SysRoleRelation" />
-		<typeAlias alias="SysUserRoleRelation" type="com.mijiaokj.sys.domain.SysUserRoleRelation" />
+		<typeAlias alias="SysUserRoleRelation" type="com.mijiaokj.sys.domain.UserRoleRelation" />
 		<typeAlias alias="UserSysRelation" type="com.mijiaokj.sys.domain.UserSysRelation" />
 	</typeAliases>
 	

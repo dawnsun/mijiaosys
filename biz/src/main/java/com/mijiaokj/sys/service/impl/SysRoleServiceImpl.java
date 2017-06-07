@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.SysRoleRepository;
-import com.mijiaokj.sys.dal.repository.SysUserRoleRepository;
+import com.mijiaokj.sys.dal.repository.UserRoleRepository;
 import com.mijiaokj.sys.domain.SysRole;
 import com.mijiaokj.sys.service.SysRoleService;
 
@@ -21,7 +21,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleRepository sysRoleRepository;
 	
 	@Resource
-	private SysUserRoleRepository sysUserRoleRepository;
+	private UserRoleRepository sysUserRoleRepository;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Override

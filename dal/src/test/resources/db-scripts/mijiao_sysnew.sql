@@ -1,12 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/10/14 1:04:39                           */
+/* Created on:     2017/06/07 1:04:39                           */
 /*==============================================================*/
 
 
 drop table if exists CONTROL_FILE_RELATION;
 
-drop table if exists FILE;
+drop table if exists SYS_FILE;
 
 drop table if exists MENU_CONTROL_RELATION;
 
@@ -49,9 +49,9 @@ create table CONTROL_FILE_RELATION
 alter table CONTROL_FILE_RELATION comment '权限文件关系表';
 
 /*==============================================================*/
-/* Table: FILE                                                  */
+/* Table: SYS_FILE                                                  */
 /*==============================================================*/
-create table FILE
+create table SYS_FILE
 (
    id                   bigint(20) unsigned not null auto_increment,
    file_name            varchar(64) comment '文件名称',
@@ -66,7 +66,7 @@ create table FILE
    primary key (id)
 );
 
-alter table FILE comment '文件表';
+alter table SYS_FILE comment '文件表';
 
 /*==============================================================*/
 /* Table: MENU_CONTROL_RELATION                                  */

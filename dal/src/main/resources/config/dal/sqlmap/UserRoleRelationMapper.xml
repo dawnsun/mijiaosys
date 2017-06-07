@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.SysUserRoleRelationMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.UserRoleRelationMapper">
 	<sql id="BaseColumns">
 		user_id,
 		role_id
@@ -11,22 +11,22 @@
 		#{roleId}
 	</sql>
 
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.SysUserRoleRelation">
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.UserRoleRelation">
 		<result column="user_id" property="userId" jdbcType="BIGINT" />
 		<result column="role_id" property="roleId" jdbcType="BIGINT" />
 	</resultMap>
 
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from sys_user_role_relation
+		from USER_ROLE_RELATION
 		where id = #{id,jdbcType=BIGINT}
 		and
 		is_delete
 		= 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysUserRoleRelation">
-		insert into sys_user_role_relation (
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.UserRoleRelation">
+		insert into USER_ROLE_RELATION (
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -39,7 +39,7 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update sys_user_role_relation
+		update USER_ROLE_RELATION
 		set
 		is_delete =
 		1
