@@ -23,6 +23,7 @@ import java.io.IOException;
  */
 @Component
 public class AbstractSecurityInterceptorFilter extends AbstractSecurityInterceptor implements Filter {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -33,7 +34,6 @@ public class AbstractSecurityInterceptorFilter extends AbstractSecurityIntercept
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
 
     @PostConstruct
     public void init(){
@@ -46,7 +46,6 @@ public class AbstractSecurityInterceptorFilter extends AbstractSecurityIntercept
             throws IOException, ServletException {
         FilterInvocation fi = new FilterInvocation( request, response, chain );
         invoke(fi);
-
     }
 
     @Override

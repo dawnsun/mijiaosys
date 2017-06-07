@@ -5,6 +5,10 @@ import java.util.List;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.domain.SysRole;
 
+/**
+ * Created by sunchenguang on 2017/6/7.
+ * 角色服务接口
+ */
 public interface SysRoleService {
 	
 	/**

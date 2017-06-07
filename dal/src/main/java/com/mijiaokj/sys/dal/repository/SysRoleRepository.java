@@ -9,6 +9,7 @@ import com.mijiaokj.sys.dal.repository.mapper.SysRoleMapper;
 import com.mijiaokj.sys.domain.SysRole;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -33,4 +34,7 @@ public class SysRoleRepository extends BaseRepository<SysRole> {
 		return sysRoleMapper.getAllRole();
 	}
 
+	public List<SysRole> getRoleByIds(Map<String, Object> map){
+		return sysRoleMapper.getRoleByIds(map);
+	}
 }

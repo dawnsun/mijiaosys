@@ -25,6 +25,14 @@
 		is_delete
 		= 0
 	</select>
+	<select id="getRoleByIds" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select *
+		from sys_role
+		where id IN
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 	<select id="getAllRole" resultMap="BaseResultMap">
 		select *
 		from sys_role

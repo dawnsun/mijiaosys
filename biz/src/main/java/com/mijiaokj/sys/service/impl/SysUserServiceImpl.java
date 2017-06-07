@@ -26,9 +26,10 @@ import com.mijiaokj.sys.service.SysUserService;
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Resource
 	private SysUserRepository sysUserRepository;
-	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public Result<Long> createSysUser(SysUser sysUser) {
@@ -51,8 +52,8 @@ public class SysUserServiceImpl implements SysUserService {
 			Preconditions.checkNotNull(username, "userName is null");
 			return Result.ofSuccess(sysUserRepository.findByUsername(username));
 		} catch (Exception e) {
-			logger.error("createSysUser " + e);
-			return Result.ofFail("create sysUser fail:" + e.getMessage());
+			logger.error("findByUsername " + e);
+			return Result.ofFail("findByUsername fail:" + e.getMessage());
 		}
 	}
 

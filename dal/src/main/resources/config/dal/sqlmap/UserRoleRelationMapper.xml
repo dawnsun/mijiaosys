@@ -25,6 +25,15 @@
 		= 0
 	</select>
 
+	<select id="getUserRoleRelationByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select *
+		from USER_ROLE_RELATION
+		where user_id = #{userId,jdbcType=BIGINT}
+		and
+		is_delete
+		= 0
+	</select>
+
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.UserRoleRelation">
 		insert into USER_ROLE_RELATION (
 		<include refid="BaseColumns" />

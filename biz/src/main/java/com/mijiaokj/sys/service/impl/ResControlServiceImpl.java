@@ -10,23 +10,39 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sunchenguang on 2017/6/6.
+ * 权限资源操作服务实现类
  */
 @Service("resControlService")
 public class ResControlServiceImpl implements ResControlService {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Resource
-    private ResControlRepository resMethedRepository;
+    private ResControlRepository resControlRepository;
+
     @Override
     public Result<List<ResControl>> getAllResControl() {
         try {
-            List<ResControl> l = resMethedRepository.getAllResControl();
+            List<ResControl> l = resControlRepository.getAllResControl();
             return Result.ofSuccess(l);
         } catch (Exception e) {
-            logger.error("resMethedService " + e);
-            return Result.ofFail("getAllResMethed fail:" + e.getMessage());
+            logger.error("getAllResControl " + e);
+            return Result.ofFail("getAllResControl fail:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<List<ResControl>> getControlByIds(Map<String, Object> map){
+        try {
+            List<ResControl> l = resControlRepository.getControlByIds(map);
+            return Result.ofSuccess(l);
+        } catch (Exception e) {
+            logger.error("getControlByIds " + e);
+            return Result.ofFail("getControlByIds fail:" + e.getMessage());
         }
     }
 }

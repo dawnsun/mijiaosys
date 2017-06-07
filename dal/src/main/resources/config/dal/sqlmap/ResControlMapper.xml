@@ -32,6 +32,15 @@
 		where is_delete = 0
 	</select>
 
+	<select id="getControlByIds" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select *
+		from RES_CONTROL
+		where id IN
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResControl">
 		insert into RES_CONTROL (control_code, control_name, control_url
 		<include refid="BaseColumns" />

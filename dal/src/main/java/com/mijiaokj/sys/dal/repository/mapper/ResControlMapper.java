@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.mijiaokj.sys.domain.ResControl;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -22,4 +23,11 @@ public interface ResControlMapper extends BaseMapper<ResControl> {
      * @return
      */
     List<ResControl> getAllResControl();
+
+    /**
+     * 通过map中封装idIn查询资源
+     * @param map
+     * @return
+     */
+    List<ResControl> getControlByIds(Map<String, Object> map);
 }

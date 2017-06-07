@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * 
  * @ClassName: SysUserRoleRepository
@@ -18,14 +20,17 @@ import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
  *
  */
 @Repository
-public class UserRoleRepository extends BaseRepository<UserRoleRelation> {
+public class UserRoleRelationRepository extends BaseRepository<UserRoleRelation> {
 
 	@Resource
-    private UserRoleRelationMapper sysUserRoleMapper;
+    private UserRoleRelationMapper userRoleRelationMapper;
 	
 	@Override
 	protected BaseMapper<UserRoleRelation> getMapper() {
-		return this.sysUserRoleMapper;
+		return this.userRoleRelationMapper;
 	}
 
+	public List<UserRoleRelation> getUserRoleRelationByUserId(Long userId){
+		return userRoleRelationMapper.getUserRoleRelationByUserId(userId);
+	}
 }

@@ -22,7 +22,14 @@
 		where id = #{id,jdbcType=BIGINT}
 		and is_delete = 0
 	</select>
-	
+
+	<select id="getRoleControlRelationByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select *
+		from ROLE_CONTROL_RELATION
+		where role_id = #{roleId,jdbcType=BIGINT}
+		and is_delete = 0
+	</select>
+
 	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControlRelation">
 		insert into ROLE_CONTROL_RELATION (
 		<include refid="BaseColumns" />

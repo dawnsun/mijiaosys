@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @SpringBootApplication
 @EnableCaching
-@EnableAutoConfiguration(exclude = AbstractSecurityInterceptorFilter.class)
+//@EnableAutoConfiguration(exclude = AbstractSecurityInterceptorFilter.class)
 public class MijiaosysWebApplication {
 
 	public static void main(String[] args) {

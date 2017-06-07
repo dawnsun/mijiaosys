@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.mijiaokj.sys.domain.SysRole;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -18,4 +19,5 @@ import java.util.List;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 	List<SysRole> getAllRole();
+	List<SysRole> getRoleByIds(Map<String, Object> map);
 }

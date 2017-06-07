@@ -24,6 +24,7 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private MijiaoSysAuthenticationProvider mijiaoSysAuthenticationProvider;
 
@@ -39,10 +40,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(mijiaoSysAuthenticationProvider);
 	}
+
 	@Bean
 	public LoginSuccessHandler loginSuccessHandler(){
 		return new LoginSuccessHandler();
 	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -54,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")//指定登录页是”/login”
+                .defaultSuccessUrl("/index")
                 .permitAll()
 //                .successHandler(loginSuccessHandler()) //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
                 .and()

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sunchenguang on 2017/6/6.
@@ -23,5 +24,9 @@ public class ResControlRepository extends BaseRepository<ResControl> {
 
     public List<ResControl> getAllResControl(){
         return resControlMapper.getAllResControl();
+    }
+
+    public List<ResControl> getControlByIds(Map<String, Object> map){
+        return resControlMapper.getControlByIds(map);
     }
 }

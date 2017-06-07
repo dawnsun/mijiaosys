@@ -3,6 +3,9 @@ package com.mijiaokj.sys.dal.repository.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mijiaokj.sys.domain.RoleControlRelation;
+
+import java.util.List;
+
 /**
  * 
  * @ClassName: RoleControlRelationMapper
@@ -15,4 +18,10 @@ import com.mijiaokj.sys.domain.RoleControlRelation;
 @Mapper
 public interface RoleControlRelationMapper extends BaseMapper<RoleControlRelation> {
 
+    /**
+     * 通过角色id获取角色权限关系
+     * @param roleId
+     * @return
+     */
+    List<RoleControlRelation> getRoleControlRelationByRoleId(Long roleId);
 }

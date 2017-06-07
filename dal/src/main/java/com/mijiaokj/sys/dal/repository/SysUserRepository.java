@@ -29,7 +29,7 @@ public class SysUserRepository extends BaseRepository<SysUser> {
 	@Resource
     private SysUserMapper sysUserMapper;
 	
-	@Cacheable
+//	@Cacheable 暂时注释掉缓存 待测试
 	public SysUser findByUsername(String username){
 		return sysUserMapper.findByUsername(username);
 	}

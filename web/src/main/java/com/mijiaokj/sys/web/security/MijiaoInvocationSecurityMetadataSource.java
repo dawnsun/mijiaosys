@@ -1,9 +1,12 @@
 package com.mijiaokj.sys.web.security;
 
+import com.google.common.collect.Maps;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.domain.ResControl;
+import com.mijiaokj.sys.domain.RoleControlRelation;
 import com.mijiaokj.sys.domain.SysRole;
 import com.mijiaokj.sys.service.ResControlService;
+import com.mijiaokj.sys.service.RoleControlRelationService;
 import com.mijiaokj.sys.service.SysRoleService;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -22,11 +25,15 @@ import java.util.*;
  */
 @Service("mijiaoInvocationSecurityMetadataSource")
 public class MijiaoInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+
     @Resource(name = "sysRoleService")
     private SysRoleService sysRoleService;
 
     @Resource(name = "resControlService")
     private ResControlService resControlService;
+
+    @Resource(name = "roleControlRelationService")
+    private RoleControlRelationService roleControlRelationService;
 
     private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 
@@ -66,14 +73,22 @@ public class MijiaoInvocationSecurityMetadataSource implements FilterInvocationS
         //应当是资源为key， 权限为value。 资源通常为url， 权限就是那些以ROLE_为前缀的角色。 一个资源可以由多个权限来访问。
         resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
         Result<List<SysRole>> roleRes = sysRoleService.getAllRole();
-        //查询资源操作
-        Result<List<ResControl>> resRes = resControlService.getAllResControl();
 
         if(roleRes.isSuccess() && !roleRes.getData().isEmpty()){
             for (SysRole role : roleRes.getData()){
                 ConfigAttribute ca = new SecurityConfig(role.getRoleName());
                 //通过角色id查询该角色下的所有资源
-
+                Result<List<RoleControlRelation>> roleControlRes =  roleControlRelationService.getRoleControlRelationByRoleId(role.getId());
+                Map<String, Object> map = Maps.newHashMap();
+                if(roleControlRes.isSuccess() && !roleControlRes.getData().isEmpty()){
+                    Set<Long> controlIdIdSet = new HashSet<Long>();
+                    for(RoleControlRelation  roleControl : roleControlRes.getData()){
+                        controlIdIdSet.add(roleControl.getControlId());
+                    }
+                    map.put("ids",controlIdIdSet.toArray(new Long[controlIdIdSet.size()]));
+                }
+                //查询资源操作
+                Result<List<ResControl>> resRes = resControlService.getControlByIds(map);
                 if(resRes.isSuccess() && !resRes.getData().isEmpty()){
                     for (ResControl resMethed : resRes.getData()){
                         if (resourceMap.containsKey(resMethed.getControlUrl())) {

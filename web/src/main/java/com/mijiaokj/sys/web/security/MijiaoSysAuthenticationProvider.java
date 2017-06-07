@@ -21,6 +21,7 @@ import com.mijiaokj.sys.common.util.Md5Util;
  */
 @Component
 public class MijiaoSysAuthenticationProvider implements AuthenticationProvider {
+
 	@Autowired
 	private MijiaoSysUserDetailsService mijiaoSysUserDetailsService;
 
