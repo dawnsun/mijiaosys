@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleControlMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.RoleControlRelationMapper">
 	<sql id="BaseColumns">
 		role_id,
-		control_url
+		control_id
 	</sql>
 
 	<sql id="BaseProperties">
 		#{roleId},
-		#{controlUrl}
+		#{controlId}
 	</sql>
 	
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleControl">
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.RoleControlRelation">
 		<result column="role_id" property="roleId" jdbcType="BIGINT" />
-		<result column="control_url" property="controlUrl" jdbcType="VARCHAR" />
+		<result column="control_id" property="controlId" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from ROLE_CONTROL
+		from ROLE_CONTROL_RELATION
 		where id = #{id,jdbcType=BIGINT}
 		and is_delete = 0
 	</select>
 	
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControl">
-		insert into ROLE_CONTROL (
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControlRelation">
+		insert into ROLE_CONTROL_RELATION (
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -37,7 +37,7 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update ROLE_CONTROL
+		update ROLE_CONTROL_RELATION
 		set is_delete = 1
 		where id = #{id,jdbcType=BIGINT}
 	</update>

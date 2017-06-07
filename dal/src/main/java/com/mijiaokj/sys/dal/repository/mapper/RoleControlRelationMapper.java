@@ -2,10 +2,10 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.RoleControl;
+import com.mijiaokj.sys.domain.RoleControlRelation;
 /**
  * 
- * @ClassName: RoleControlMapper
+ * @ClassName: RoleControlRelationMapper
  * @Description: TODO 角色权限表Mapper
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.RoleControl;
  *
  */
 @Mapper
-public interface RoleControlMapper extends BaseMapper<RoleControl> {
+public interface RoleControlRelationMapper extends BaseMapper<RoleControlRelation> {
 
 }

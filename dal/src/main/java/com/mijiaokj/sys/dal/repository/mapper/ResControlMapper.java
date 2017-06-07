@@ -2,13 +2,13 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.ResMethed;
+import com.mijiaokj.sys.domain.ResControl;
 
 import java.util.List;
 
 /**
  * 
- * @ClassName: ResMethedMapper
+ * @ClassName: ResControlMapper
  * @Description: TODO 资源操作映射
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -16,10 +16,10 @@ import java.util.List;
  *
  */
 @Mapper
-public interface ResMethedMapper extends BaseMapper<ResMethed> {
+public interface ResControlMapper extends BaseMapper<ResControl> {
     /**
      * 获取所有的系统资源
      * @return
      */
-    List<ResMethed> getAllResMethed();
+    List<ResControl> getAllResControl();
 }

@@ -2,10 +2,10 @@ package com.mijiaokj.sys.dal.repository.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.ResMenu;
+import com.mijiaokj.sys.domain.SysMenu;
 /**
  * 
- * @ClassName: ResMenuMapper
+ * @ClassName: SysMenuMapper
  * @Description: TODO 资源菜单表关系映射
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.ResMenu;
  *
  */
 @Mapper
-public interface ResMenuMapper extends BaseMapper<ResMenu> {
+public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
 }

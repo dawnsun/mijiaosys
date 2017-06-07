@@ -1,9 +1,9 @@
 package com.mijiaokj.sys.web.security;
 
 import com.mijiaokj.sys.common.util.Result;
-import com.mijiaokj.sys.domain.ResMethed;
+import com.mijiaokj.sys.domain.ResControl;
 import com.mijiaokj.sys.domain.SysRole;
-import com.mijiaokj.sys.service.ResMethedService;
+import com.mijiaokj.sys.service.ResControlService;
 import com.mijiaokj.sys.service.SysRoleService;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -25,8 +25,8 @@ public class MijiaoInvocationSecurityMetadataSource implements FilterInvocationS
     @Resource(name = "sysRoleService")
     private SysRoleService sysRoleService;
 
-    @Resource(name = "resMethedService")
-    private ResMethedService resMethedService;
+    @Resource(name = "resControlService")
+    private ResControlService resControlService;
 
     private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 
@@ -67,7 +67,7 @@ public class MijiaoInvocationSecurityMetadataSource implements FilterInvocationS
         resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
         Result<List<SysRole>> roleRes = sysRoleService.getAllRole();
         //查询资源操作
-        Result<List<ResMethed>> resRes = resMethedService.getAllResMethed();
+        Result<List<ResControl>> resRes = resControlService.getAllResControl();
 
         if(roleRes.isSuccess() && !roleRes.getData().isEmpty()){
             for (SysRole role : roleRes.getData()){
@@ -75,16 +75,16 @@ public class MijiaoInvocationSecurityMetadataSource implements FilterInvocationS
                 //通过角色id查询该角色下的所有资源
 
                 if(resRes.isSuccess() && !resRes.getData().isEmpty()){
-                    for (ResMethed resMethed : resRes.getData()){
-                        if (resourceMap.containsKey(resMethed.getMethedUrl())) {
+                    for (ResControl resMethed : resRes.getData()){
+                        if (resourceMap.containsKey(resMethed.getControlUrl())) {
 
-                            Collection<ConfigAttribute> value = resourceMap.get(resMethed.getMethedUrl());
+                            Collection<ConfigAttribute> value = resourceMap.get(resMethed.getControlUrl());
                             value.add(ca);
-                            resourceMap.put(resMethed.getMethedUrl(), value);
+                            resourceMap.put(resMethed.getControlUrl(), value);
                         } else {
                             Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
                             atts.add(ca);
-                            resourceMap.put(resMethed.getMethedUrl(), atts);
+                            resourceMap.put(resMethed.getControlUrl(), atts);
                         }
                     }
                 }

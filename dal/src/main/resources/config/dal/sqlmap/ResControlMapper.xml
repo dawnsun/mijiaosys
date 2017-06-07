@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ResMethedMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.ResControlMapper">
 	<sql id="BaseColumns">
-		methed_name,
-		methed_icon,
-		methed_url
+		control_name,
+		control_icon,
+		control_url
 	</sql>
 
 	<sql id="BaseProperties">
-		#{methedName},
-		#{methedIcon},
-		#{methedUrl}
+		#{controlName},
+		#{controlIcon},
+		#{controlUrl}
 	</sql>
 
-	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ResMethed">
-		<result column="methed_name" property="methedName" jdbcType="VARCHAR" />
-		<result column="methed_icon" property="methedIcon" jdbcType="VARCHAR" />
-		<result column="methed_url" property="methedUrl" jdbcType="VARCHAR" />
+	<resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.ResControl">
+		<result column="control_name" property="controlName" jdbcType="VARCHAR" />
+		<result column="control_icon" property="controlIcon" jdbcType="VARCHAR" />
+		<result column="control_url" property="controlUrl" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select *
-		from RES_METHED
+		from RES_CONTROL
 		where id = #{id,jdbcType=BIGINT}
 		and is_delete = 0
 	</select>
 
-	<select id="getAllResMethed" resultMap="BaseResultMap">
+	<select id="getAllResControl" resultMap="BaseResultMap">
 		select *
-		from RES_METHED
+		from RES_CONTROL
 		where is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResMethed">
-		insert into RES_METHED (methed_code, methed_name, methed_url
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResControl">
+		insert into RES_CONTROL (control_code, control_name, control_url
 		<include refid="BaseColumns" />
 		,
 		<include refid="Common.CommonColumns" />
@@ -46,7 +46,7 @@
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
-		update RES_METHED
+		update RES_CONTROL
 		set is_delete = 1
 		where id = #{id,jdbcType=BIGINT}
 	</update>

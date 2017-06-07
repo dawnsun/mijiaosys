@@ -134,7 +134,7 @@ create table ROLE_CONTROL_RELATION
 (
    id                   bigint(20) unsigned not null,
    role_id              bigint(20) unsigned not null comment '角色主键',
-   control_id           bigint(20) unsigned not null comment '权限URL',
+   control_id           bigint(20) unsigned not null comment '权限主键',
    gmt_create           datetime not null comment '创建时间',
    gmt_modified         datetime not null comment '修改时间',
    creator              varchar(32) not null comment '创建人',

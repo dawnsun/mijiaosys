@@ -1,11 +1,11 @@
 package com.mijiaokj.sys.dal.repository.mapper;
 
+import com.mijiaokj.sys.domain.MenuControlRelation;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mijiaokj.sys.domain.MenuMehtedRelation;
 /**
  * 
- * @ClassName: MenuMehtedRelationMapper
+ * @ClassName: MenuControlRelationMapper
  * @Description: TODO 菜单操作关系映射
  * @author sunchenguang
  * @eamil scg16@126.com
@@ -13,6 +13,6 @@ import com.mijiaokj.sys.domain.MenuMehtedRelation;
  *
  */
 @Mapper
-public interface MenuMehtedRelationMapper extends BaseMapper<MenuMehtedRelation> {
+public interface MenuControlRelationMapper extends BaseMapper<MenuControlRelation> {
 
 }
