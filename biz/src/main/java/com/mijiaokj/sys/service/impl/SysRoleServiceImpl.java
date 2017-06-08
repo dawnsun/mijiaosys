@@ -64,4 +64,19 @@ public class SysRoleServiceImpl implements SysRoleService {
 			return Result.ofFail("getAllRole fail:" + e.getMessage());
 		}
 	}
+
+	@Override
+	public Result<Long> createRole(SysRole sysRole){
+		try {
+			Preconditions.checkNotNull(sysRole);
+			Preconditions.checkNotNull(sysRole.getRoleAbstract(), "RoleAbstract is null");
+			Preconditions.checkNotNull(sysRole.getRoleName(), "Password is null");
+			Preconditions.checkNotNull(sysRole.getCreator(), "creator is null");
+			Preconditions.checkNotNull(sysRole.getModifier(), "modifier is null");
+			return Result.ofSuccess(sysRoleRepository.insert(sysRole));
+		} catch (Exception e) {
+			logger.error("createRole " + e);
+			return Result.ofFail("createRole fail:" + e.getMessage());
+		}
+	}
 }

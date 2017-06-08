@@ -24,6 +24,20 @@ public interface SysUserService {
 	public Result<Long> createSysUser(SysUser sysUser);
 
 	/**
+	 * update
+	 * @param sysUser
+	 * @return
+	 */
+	public Result<Integer> updateSysUser(SysUser sysUser);
+
+	/**
+	 * 逻辑删除
+	 * @param id
+	 * @return
+	 */
+	public Result<Integer> delete(Long id);
+
+	/**
 	 * 通过用户名查找用户
 	 * 
 	 * @param userName
@@ -32,9 +46,17 @@ public interface SysUserService {
 	public Result<SysUser> findByUsername(String userName);
 
 	/**
+	 * 通过用户id查找用户
+	 *
+	 * @param id
+	 * @return
+	 */
+	public Result<SysUser> findById(Long id);
+
+	/**
 	 * 条件查询，分页查询
 	 * 
-	 * @param option
+	 * @param criteria
 	 * @return
 	 */
 	public Result<Page<SysUser>> querySysUserByCriteria(SysUserCriteria criteria);

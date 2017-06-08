@@ -23,7 +23,6 @@ public abstract class BaseRepository<T extends ReferenceObject> {
 	public Long insert(T domain) {
 		Preconditions.checkNotNull(domain, domain.getClass().getSimpleName() + " is null");
 		domain.setDefaultValue();
-
 		getMapper().insert(domain);
 		return domain.getId();
 	}
@@ -32,8 +31,14 @@ public abstract class BaseRepository<T extends ReferenceObject> {
 		return getMapper().getById(id);
 	}
 
-	public void delete(Long id) {
-		getMapper().delete(id);
+	public Integer delete(Long id) {
+		return getMapper().delete(id);
+	}
+
+	public Integer update(T domain){
+		Preconditions.checkNotNull(domain, domain.getClass().getSimpleName() + " is null");
+//		domain.setDefaultValue();
+		return getMapper().update(domain);
 	}
 
 	protected void checkIdNotNull(T domain) {

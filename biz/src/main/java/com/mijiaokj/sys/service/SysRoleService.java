@@ -24,4 +24,10 @@ public interface SysRoleService {
 	 */
 	public Result<List<SysRole>> getAllRole();
 
+    /**
+     * 创建角色
+     * @param sysRole
+     * @return
+     */
+	public Result<Long> createRole(SysRole sysRole);
 }

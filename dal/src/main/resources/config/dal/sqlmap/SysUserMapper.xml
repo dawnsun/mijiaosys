@@ -55,7 +55,7 @@
 			and is_delete = 0
 	</select>
 	
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysUser">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysUser" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_user (
 		<include refid="BaseColumns" /> ,
 		<include refid="Common.CommonColumns" />

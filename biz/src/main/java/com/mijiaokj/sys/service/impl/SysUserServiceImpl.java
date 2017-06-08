@@ -58,6 +58,17 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
+	public Result<SysUser> findById(Long id){
+		try {
+			Preconditions.checkNotNull(id, "id is null");
+			return Result.ofSuccess(sysUserRepository.getById(id));
+		} catch (Exception e) {
+			logger.error("findById " + e);
+			return Result.ofFail("findById fail:" + e.getMessage());
+		}
+	}
+
+	@Override
 	public Result<Page<SysUser>> querySysUserByCriteria(SysUserCriteria criteria) {
 		try {
 			Preconditions.checkNotNull(criteria, "criteria is null");
@@ -68,4 +79,35 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 	}
 
+	/**
+	 * update
+	 * @param sysUser
+	 * @return
+	 */
+	@Override
+	public Result<Integer> updateSysUser(SysUser sysUser){
+		try {
+			Preconditions.checkNotNull(sysUser, "sysUser is null");
+			return Result.ofSuccess(sysUserRepository.update(sysUser));
+		} catch (Exception e) {
+			logger.error("createService " + e);
+			return Result.ofFail("create sysUser fail:" + e.getMessage());
+		}
+	}
+
+	/**
+	 * 逻辑删除
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Result<Integer> delete(Long id){
+		try {
+			Preconditions.checkNotNull(id, "id is null");
+			return Result.ofSuccess(sysUserRepository.delete(id));
+		} catch (Exception e) {
+			logger.error("createService " + e);
+			return Result.ofFail("create sysUser fail:" + e.getMessage());
+		}
+	}
 }
