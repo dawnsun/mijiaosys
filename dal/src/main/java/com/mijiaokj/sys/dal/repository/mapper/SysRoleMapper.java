@@ -18,6 +18,16 @@ import java.util.Map;
  */
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
+	/**
+	 * 查询所有的角色
+	 * @return
+	 */
 	List<SysRole> getAllRole();
+
+	/**
+	 * 主键IN查询角色
+	 * @param map
+	 * @return
+	 */
 	List<SysRole> getRoleByIds(Map<String, Object> map);
 }
