@@ -52,9 +52,9 @@
 		values
 		<foreach collection="list" item="item" index="index" separator=",">
 		(
-		<include refid="BaseProperties" />
-		,
-		<include refid="Common.CommonProperties" />
+			#{item.roleId},
+			#{item.controlId},
+			now(), now(), #{item.isDelete}, #{item.creator}, #{item.modifier}
 		)
 		</foreach>
 	</insert>

@@ -17,5 +17,17 @@ import java.util.List;
  */
 @Mapper
 public interface UserRoleRelationMapper extends BaseMapper<UserRoleRelation> {
+    /**
+     * 通过用户主键查询用户所具有的角色
+     * @param userId
+     * @return
+     */
     List<UserRoleRelation> getUserRoleRelationByUserId(Long userId);
+
+    /**
+     * 批量插入关联关系
+     * @param userRoleRelationList
+     * @return
+     */
+    Long insertByBatch(List<UserRoleRelation> userRoleRelationList);
 }

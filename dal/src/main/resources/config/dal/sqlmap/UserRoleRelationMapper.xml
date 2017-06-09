@@ -34,7 +34,7 @@
 		= 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.UserRoleRelation">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.UserRoleRelation" useGeneratedKeys="true" keyProperty="id">
 		insert into USER_ROLE_RELATION (
 		<include refid="BaseColumns" />
 		,
@@ -45,6 +45,22 @@
 		,
 		<include refid="Common.CommonProperties" />
 		)
+	</insert>
+
+	<insert id="insertByBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into USER_ROLE_RELATION (
+		<include refid="BaseColumns" />
+		,
+		<include refid="Common.CommonColumns" />
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.userId},
+			#{item.roleId},
+			now(), now(), #{item.isDelete}, #{item.creator}, #{item.modifier}
+			)
+		</foreach>
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">
