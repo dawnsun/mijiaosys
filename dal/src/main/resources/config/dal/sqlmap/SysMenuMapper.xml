@@ -32,7 +32,23 @@
 		and is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysMenu">
+	<select id="getAllMenu" resultMap="BaseResultMap" >
+		select *
+		from sys_menu
+		where is_delete = 0
+	</select>
+
+	<select id="getMenuByIds" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select *
+		from sys_menu
+		where id IN
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and is_delete = 0
+	</select>
+
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysMenu" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_menu (
 		<include refid="BaseColumns" />
 		,

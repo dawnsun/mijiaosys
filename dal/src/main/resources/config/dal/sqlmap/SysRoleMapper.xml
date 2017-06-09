@@ -32,6 +32,7 @@
 		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
 			#{item}
 		</foreach>
+		and is_delete = 0
 	</select>
 	<select id="getAllRole" resultMap="BaseResultMap">
 		select *
