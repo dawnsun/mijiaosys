@@ -24,4 +24,8 @@ public class RoleControlRelationRepository extends BaseRepository<RoleControlRel
     public List<RoleControlRelation> getRoleControlRelationByRoleId(Long roleId){
         return roleControlRelationMapper.getRoleControlRelationByRoleId(roleId);
     }
+
+    public Long createRoleControlRelationByBatch(List<RoleControlRelation> roleControlRelationList) {
+        return roleControlRelationMapper.insertByBatch(roleControlRelationList);
+    }
 }

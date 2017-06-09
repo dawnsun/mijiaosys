@@ -16,4 +16,18 @@ public interface RoleControlRelationService {
      * @return
      */
     public Result<List<RoleControlRelation>> getRoleControlRelationByRoleId(Long roleId);
+
+    /**
+     * 批量插入关联关系
+     * @param roleControlRelationList
+     * @return
+     */
+    public Result<Long> createRoleControlRelationByBatch(List<RoleControlRelation> roleControlRelationList);
+
+    /**
+     * 删除关联关系
+     * @param id
+     * @return
+     */
+    public Result<Integer> deleteRoleControlRelation(Long id);
 }

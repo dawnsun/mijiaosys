@@ -23,4 +23,32 @@ public interface ResControlService {
      * @return
      */
     public Result<List<ResControl>> getControlByIds(Map<String, Object> map);
+
+    /**
+     * 创建权限资源
+     * @param resControl
+     * @return
+     */
+    public Result<Long> createResControl(ResControl resControl);
+
+    /**
+     * 更新权限资源
+     * @param resControl
+     * @return
+     */
+    public Result<Integer> updateResContorl(ResControl resControl);
+
+    /**
+     * 删除资源权限
+     * @param id
+     * @return
+     */
+    public Result<Integer> deleteResControl(Long id);
+
+    /**
+     * 通过主键查
+     * @param id
+     * @return
+     */
+    public  Result<ResControl> findResControlById(Long id);
 }

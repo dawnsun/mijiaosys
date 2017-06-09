@@ -39,7 +39,7 @@
 		where is_delete
 		= 0
 	</select>
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysRole">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.SysRole" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_role (
 		<include refid="BaseColumns" />
 		,

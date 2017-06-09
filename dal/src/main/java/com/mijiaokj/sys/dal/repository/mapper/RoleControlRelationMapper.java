@@ -24,4 +24,11 @@ public interface RoleControlRelationMapper extends BaseMapper<RoleControlRelatio
      * @return
      */
     List<RoleControlRelation> getRoleControlRelationByRoleId(Long roleId);
+
+    /**
+     * 批量插入关联关系
+     * @param roleControlRelationList
+     * @return
+     */
+    Long insertByBatch(List<RoleControlRelation> roleControlRelationList);
 }

@@ -30,7 +30,7 @@
 		and is_delete = 0
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControlRelation">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleControlRelation" useGeneratedKeys="true" keyProperty="id">
 		insert into ROLE_CONTROL_RELATION (
 		<include refid="BaseColumns" />
 		,
@@ -41,6 +41,22 @@
 		,
 		<include refid="Common.CommonProperties" />
 		)
+	</insert>
+
+	<insert id="insertByBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into ROLE_CONTROL_RELATION (
+		<include refid="BaseColumns" />
+		,
+		<include refid="Common.CommonColumns" />
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+		<include refid="BaseProperties" />
+		,
+		<include refid="Common.CommonProperties" />
+		)
+		</foreach>
 	</insert>
 
 	<update id="delete" parameterType="java.lang.Long">

@@ -41,7 +41,7 @@
 		</foreach>
 	</select>
 
-	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResControl">
+	<insert id="insert" parameterType="com.mijiaokj.sys.domain.ResControl" useGeneratedKeys="true" keyProperty="id">
 		insert into RES_CONTROL (control_code, control_name, control_url
 		<include refid="BaseColumns" />
 		,

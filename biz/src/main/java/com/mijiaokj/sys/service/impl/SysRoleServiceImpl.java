@@ -79,4 +79,41 @@ public class SysRoleServiceImpl implements SysRoleService {
 			return Result.ofFail("createRole fail:" + e.getMessage());
 		}
 	}
+
+	@Override
+	public Result<Integer> updateRole(SysRole sysRole) {
+		try {
+			Preconditions.checkNotNull(sysRole);
+			Preconditions.checkNotNull(sysRole.getRoleAbstract(), "RoleAbstract is null");
+			Preconditions.checkNotNull(sysRole.getRoleName(), "Password is null");
+			Preconditions.checkNotNull(sysRole.getCreator(), "creator is null");
+			Preconditions.checkNotNull(sysRole.getModifier(), "modifier is null");
+			return Result.ofSuccess(sysRoleRepository.update(sysRole));
+		} catch (Exception e) {
+			logger.error("updateRole " + e);
+			return Result.ofFail("updateRole fail:" + e.getMessage());
+		}
+	}
+
+	@Override
+	public Result<Integer> deleteRole(Long id) {
+		try {
+			Preconditions.checkNotNull(id, "id is null");
+			return Result.ofSuccess(sysRoleRepository.delete(id));
+		} catch (Exception e) {
+			logger.error("deleteRole " + e);
+			return Result.ofFail("deleteRole fail:" + e.getMessage());
+		}
+	}
+
+	@Override
+	public Result<SysRole> findSysRoleById(Long id) {
+		try {
+			Preconditions.checkNotNull(id, "id is null");
+			return Result.ofSuccess(sysRoleRepository.getById(id));
+		} catch (Exception e) {
+			logger.error("findSysRoleById " + e);
+			return Result.ofFail("findSysRoleById fail:" + e.getMessage());
+		}
+	}
 }

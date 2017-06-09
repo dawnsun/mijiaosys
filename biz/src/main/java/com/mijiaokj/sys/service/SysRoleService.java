@@ -30,4 +30,25 @@ public interface SysRoleService {
      * @return
      */
 	public Result<Long> createRole(SysRole sysRole);
+
+    /**
+     * 修改角色
+     * @param sysRole
+     * @return
+     */
+	public Result<Integer> updateRole(SysRole sysRole);
+
+    /**
+     * 删除角色
+     * @param id
+     * @return
+     */
+	public Result<Integer> deleteRole(Long id);
+
+    /**
+     * 通过主键查询
+     * @param id
+     * @return
+     */
+	public Result<SysRole> findSysRoleById(Long id);
 }

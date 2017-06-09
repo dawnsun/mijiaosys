@@ -1,5 +1,6 @@
 package com.mijiaokj.sys.service.impl;
 
+import com.google.common.base.Preconditions;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.RoleControlRelationRepository;
 import com.mijiaokj.sys.domain.RoleControlRelation;
@@ -30,6 +31,28 @@ public class RoleControlRelationServiceImpl implements RoleControlRelationServic
         } catch (Exception e) {
             logger.error("getRoleControlRelationByRoleId " + e);
             return Result.ofFail("getRoleControlRelationByRoleId fail:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<Long> createRoleControlRelationByBatch(List<RoleControlRelation> roleControlRelationList) {
+        try {
+            Preconditions.checkNotNull(roleControlRelationList);
+            return Result.ofSuccess(roleControlRelationRepository.createRoleControlRelationByBatch(roleControlRelationList));
+        } catch (Exception e) {
+            logger.error("createRoleControlRelationByBatch " + e);
+            return Result.ofFail("createRoleControlRelationByBatch fail:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<Integer> deleteRoleControlRelation(Long id) {
+        try {
+            Preconditions.checkNotNull(id, "id is null");
+            return Result.ofSuccess(roleControlRelationRepository.delete(id));
+        } catch (Exception e) {
+            logger.error("deleteRoleControlRelation " + e);
+            return Result.ofFail("deleteRoleControlRelation fail:" + e.getMessage());
         }
     }
 
