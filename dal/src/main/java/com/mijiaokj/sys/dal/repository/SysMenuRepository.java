@@ -34,7 +34,7 @@ public class SysMenuRepository extends BaseRepository<SysMenu> {
      * @param map
      * @return
      */
-    List<SysMenu> getMenuByIds(Map<String, Object> map){
+    public List<SysMenu> getMenuByIds(Map<String, Object> map){
         return sysMenuMapper.getMenuByIds(map);
     }
 }
