@@ -15,7 +15,14 @@
     <result column="menu_id" property="menuId" jdbcType="BIGINT" />
     <result column="role_id" property="roleId" jdbcType="BIGINT" />
   </resultMap>
-  
+
+  <select id="getRoleMenuRelationByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+	  select *
+	  from ROLE_MENU_RELATION
+	  where role_id = #{roleId,jdbcType=BIGINT}
+	  and is_delete = 0
+  </select>
+
   <insert id="insert" parameterType="com.mijiaokj.sys.domain.RoleMenuRelation" >
     insert into ROLE_MENU_RELATION (
 		<include refid="BaseColumns" /> ,
@@ -26,7 +33,23 @@
 		<include refid="Common.CommonProperties" />
 	)
   </insert>
-  
+
+	<insert id="insertByBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into ROLE_MENU_RELATION (
+		<include refid="BaseColumns" />
+		,
+		<include refid="Common.CommonColumns" />
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.menuId},
+			#{item.roleId},
+			now(), now(), #{item.isDelete}, #{item.creator}, #{item.modifier}
+			)
+		</foreach>
+	</insert>
+
   <update id="delete" parameterType="java.lang.Long">
 	update ROLE_MENU_RELATION
 	set is_delete = 1
