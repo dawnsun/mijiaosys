@@ -179,6 +179,10 @@ create table DAILY_OPERATION
 
 alter table DAILY_OPERATION comment '日常作物操作表';
 
+气象要素表
+Meteorological_factors
+温度 光照时间 相对湿度 土地id 风速 光合强度 呼吸强度 降水量
+
 
 
 
