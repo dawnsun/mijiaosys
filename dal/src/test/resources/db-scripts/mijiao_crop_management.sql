@@ -179,11 +179,72 @@ create table DAILY_OPERATION
 
 alter table DAILY_OPERATION comment '日常作物操作表';
 
-气象要素表
-Meteorological_factors
-温度 光照时间 相对湿度 土地id 风速 光合强度 呼吸强度 降水量
+
+/*==============================================================*/
+/* Table: METEOROLOGICAL_FACTORS                                    */
+/*==============================================================*/
+create table METEOROLOGICAL_FACTORS
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   land_id     bigint(20) unsigned not null comment '土地id',
+   temperature     varchar(64)  not null comment '温度',
+   illumination_time    varchar(64)  not null comment '光照时间',
+   relative_humidity    varchar(64)  not null  comment '相对湿度',
+   wind_speed      varchar(64)  not null comment '风速',
+   photosynthetic_intensity     varchar(64)   comment '光合强度',
+   respiration_intensity   varchar(64) comment '呼吸强度',
+   precipitation     varchar(1024)  comment '降水量',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table METEOROLOGICAL_FACTORS comment '气象要素表';
 
 
+/*==============================================================*/
+/* Table: PESTICIDE_SPRAYING                                    */
+/*==============================================================*/
+create table PESTICIDE_SPRAYING
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   pesticides_id     bigint(20) unsigned not null comment '农药id',
+   dilution_factor     varchar(64)  not null comment '稀释倍数',
+   pesticides_no    varchar(64)  not null comment '药剂数量',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table PESTICIDE_SPRAYING comment '农药喷洒表';
+
+/*==============================================================*/
+/* Table: PESTICIDES_CATEGORY                                              */
+/*==============================================================*/
+create table PESTICIDES_CATEGORY
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   pesticides_name            varchar(64) not null comment '农药类目名称',
+   pesticides_icon            varchar(32) not null comment '农药类目图标',
+   parent_id            bigint(20) unsigned not null comment '父农类目ID',
+   pesticides_order           int(10) not null comment '农药类目排序',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table PESTICIDES_CATEGORY comment '农药类目表';
+
+农药信息表
 
 
 作物产值表
