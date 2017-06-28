@@ -1,0 +1,47 @@
+/*==============================================================*/
+/* Table: MEMBER_USER                                              */
+/*==============================================================*/
+create table MEMBER_USER
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   member_name          varchar(32) not null comment '姓名',
+   member_password      varchar(32) not null comment '密码',
+   phone_number         varchar(16) not null comment '手机号码',
+   recommender_id       bigint(20) unsigned not null comment '推荐人主键',
+   member_type_id       bigint(20) unsigned not null comment '会员类型主键',
+   member_card_number   varchar(64) comment '会员卡号',
+   sex                  tinyint(1) comment '0-女 1-男',
+   birthday             varchar(9) comment '生日',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table MEMBER_USER comment '会员信息表';
+
+
+/*==============================================================*/
+/* Table: MEMBER_TYPE                                              */
+/*==============================================================*/
+create table MEMBER_TYPE
+(
+    id                   bigint(20) unsigned not null auto_increment,
+    type_name            varchar(64) not null comment '会员类型名称',
+    fee                  varchar(32) not null comment '会员费用（元）',
+    rate                 varchar(32) not null comment '费率（0.00）',
+    gmt_modified         datetime not null comment '修改时间',
+    creator              varchar(32) not null comment '创建人',
+    modifier             varchar(32) not null comment '修改人',
+    is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+    primary key (id)
+);
+alter table MEMBER_TYPE comment '会员类型表';
+
+提成规格表
+
+提成人数
+
+推荐收入表
