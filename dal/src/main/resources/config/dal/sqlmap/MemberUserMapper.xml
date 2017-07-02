@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapperMemberUserMapper">
+ <!-- create table MEMBER_USER
+  (
+  id                   bigint(20) unsigned not null auto_increment,
+  member_name          varchar(32) not null comment '姓名',
+  member_password      varchar(32) not null comment '密码',
+  phone_number         varchar(16) not null comment '手机号码',
+  recommender_id       bigint(20) unsigned not null comment '推荐人主键',
+  member_type_id       bigint(20) unsigned not null comment '会员类型主键',
+  member_card_number   varchar(64) comment '会员卡号',
+  sex                  tinyint(1) comment '0-女 1-男',
+  birthday             varchar(9) comment '生日',
+  gmt_create           datetime not null comment '创建时间',
+  gmt_modified         datetime not null comment '修改时间',
+  creator              varchar(32) not null comment '创建人',
+  modifier             varchar(32) not null comment '修改人',
+  is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+  primary key (id)
+  );
+
+  alter table MEMBER_USER comment '会员信息表';-->
+  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain..MemberUser">
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_password" jdbcType="VARCHAR" property="memberPassword" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="recommender_id" jdbcType="BIGINT" property="recommenderId" />
+    <result column="member_type_id" jdbcType="BIGINT" property="memberTypeId" />
+    <result column="member_card_number" jdbcType="VARCHAR" property="memberCardNumber" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+  </resultMap>
+
+  <sql id="BaseColumns">
+    member_name, member_password, phone_number, recommender_id, member_type_id, member_card_number,
+    sex, birthday
+  </sql>
+
+  <sql id="BaseProperties">
+    #{memberName},
+    #{memberPassword},
+    #{phoneNumber},
+    #{recommenderId},
+    #{memberTypeId},
+    #{memberCardNumber},
+    #{sex},
+    #{birthday}
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select *
+    from member_user
+    where id = #{id,jdbcType=BIGINT}
+    and is_delete = 0
+  </select>
+
+  <select id="findByUsername" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select *
+    from member_user
+    where username = #{username,jdbcType=VARCHAR}
+    and is_delete = 0
+  </select>
+
+  <select id="findByPhoneNumber" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select *
+    from member_user
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    and is_delete = 0
+  </select>
+
+
+  <insert id="insert" parameterType="com.mijiaokj.sys.domain.MemberUser" useGeneratedKeys="true" keyProperty="id">
+    insert into member_user (
+    <include refid="BaseColumns" /> ,
+    <include refid="Common.CommonColumns" />
+    ) values (
+    <include refid="BaseProperties" /> ,
+    <include refid="Common.CommonProperties" />
+    )
+  </insert>
+
+  <update id="update" parameterType="com.mijiaokj.sys.domain.MemberUser">
+    update member_user set
+    member_name = #{memberName,jdbcType=VARCHAR},
+    member_password = #{memberPassword,jdbcType=VARCHAR},
+    phone_number = #{phoneNumber,jdbcType=VARCHAR},
+    member_card_number = #{memberCardNumber,jdbcType=VARCHAR},
+    sex = #{sex,jdbcType=INTEGER},
+    birthday = #{birthday,jdbcType=VARCHAR}
+    <include refid="Common.CommonUpdate" />
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="delete" parameterType="java.lang.Long">
+    update member_user
+    set is_delete = 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectPageByMap"
+          parameterType="com.mijiaokj.sys.dal.repository.query.MemberUserCriteria"
+          resultMap="BaseResultMap">
+    select t1.*
+    from member_user t1 ,(
+    select id from member_user
+    WHERE is_delete=0
+    <if test="username != null">
+      and member_name = #{memberName,jdbcType=VARCHAR}
+    </if>
+    <if test="phoneNumber != null">
+      and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="memberCardNumber != null">
+      and member_card_number = #{memberCardNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeStart !=null ">
+      and gmt_create &gt;= #{createTimeStart}
+    </if>
+    <if test="createTimeEnd !=null ">
+      and gmt_create &lt;= #{createTimeEnd}
+    </if>
+    order by gmt_modified desc
+    limit #{startRow,jdbcType=INTEGER} ,
+    #{pageSize,jdbcType=INTEGER}
+    )t2
+    WHERE t1.id=t2.id
+  </select>
+
+  <select id="pageCountByMap"
+          parameterType="com.mijiaokj.sys.dal.repository.query.MemberUserCriteria"
+          resultType="java.lang.Integer">
+    select count(1) as count
+    from sys_user WHERE is_delete=0
+    <if test="username != null">
+      and member_name = #{memberName,jdbcType=VARCHAR}
+    </if>
+    <if test="phoneNumber != null">
+      and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="memberCardNumber != null">
+      and member_card_number = #{memberCardNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeStart !=null ">
+      and gmt_create &gt;= #{createTimeStart}
+    </if>
+    <if test="createTimeEnd !=null ">
+      and gmt_create &lt;= #{createTimeEnd}
+    </if>
+  </select>
+
+</mapper>

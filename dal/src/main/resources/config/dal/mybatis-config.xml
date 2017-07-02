@@ -27,6 +27,11 @@
 		<typeAlias alias="SysRoleRelation" type="com.mijiaokj.sys.domain.SysRoleRelation" />
 		<typeAlias alias="UserRoleRelation" type="com.mijiaokj.sys.domain.UserRoleRelation" />
 		<typeAlias alias="UserSysRelation" type="com.mijiaokj.sys.domain.UserSysRelation" />
+
+		<typeAlias alias="MemberType" type="com.mijiaokj.sys.domain.MemberType" />
+		<typeAlias alias="MemberUser" type="com.mijiaokj.sys.domain.MemberUser" />
+		<typeAlias alias="RecommenderIncome" type="com.mijiaokj.sys.domain.RecommenderIncome" />
+
 	</typeAliases>
 	
 </configuration>

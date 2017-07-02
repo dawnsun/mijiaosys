@@ -32,6 +32,7 @@ create table MEMBER_TYPE
     type_name            varchar(64) not null comment '会员类型名称',
     fee                  varchar(32) not null comment '会员费用（元）',
     rate                 varchar(32) not null comment '费率（0.00）',
+    gmt_create           datetime not null comment '创建时间',
     gmt_modified         datetime not null comment '修改时间',
     creator              varchar(32) not null comment '创建人',
     modifier             varchar(32) not null comment '修改人',
@@ -40,8 +41,23 @@ create table MEMBER_TYPE
 );
 alter table MEMBER_TYPE comment '会员类型表';
 
-提成规格表
 
-提成人数
-
-推荐收入表
+/*==============================================================*/
+/* Table: RECOMMENDER_INCOME                                    */
+/*==============================================================*/
+create table RECOMMENDER_INCOME
+(
+    id                   bigint(20) unsigned not null auto_increment,
+    recommender_id       bigint(20) unsigned not null comment '推荐人主键',
+    entrant_id       bigint(20) unsigned not null comment '加入人主键',
+    fee                  varchar(32) not null comment '推荐收入（元）',
+    withdrawals_type      tinyint(1) not null  DEFAULT '0' comment '提现状态 0 默认无提现 1 未提现 2 已提现',
+    gmt_withdrawals       datetime  comment '提现时间',
+    gmt_create           datetime not null comment '创建时间',
+    gmt_modified         datetime not null comment '修改时间',
+    creator              varchar(32) not null comment '创建人',
+    modifier             varchar(32) not null comment '修改人',
+    is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+    primary key (id)
+);
+alter table RECOMMENDER_INCOME comment '推荐收入表';

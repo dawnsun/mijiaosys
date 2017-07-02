@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.MemberTypeMapper">
+<!--  create table MEMBER_TYPE
+  (
+  id                   bigint(20) unsigned not null auto_increment,
+  type_name            varchar(64) not null comment '会员类型名称',
+  fee                  varchar(32) not null comment '会员费用（元）',
+  rate                 varchar(32) not null comment '费率（0.00）',
+  gmt_create           datetime not null comment '创建时间',
+  gmt_modified         datetime not null comment '修改时间',
+  creator              varchar(32) not null comment '创建人',
+  modifier             varchar(32) not null comment '修改人',
+  is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+  primary key (id)
+  );
+  alter table MEMBER_TYPE comment '会员类型表';-->
+  <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.MemberType">
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="fee" jdbcType="VARCHAR" property="fee" />
+    <result column="rate" jdbcType="VARCHAR" property="rate" />
+  </resultMap>
+
+  <sql id="BaseColumns">
+    type_name, fee, rate
+  </sql>
+
+  <sql id="BaseProperties">
+    #{typeName},
+    #{fee},
+    #{rate}
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select *
+    from member_type
+    where id = #{id,jdbcType=BIGINT}
+    and is_delete = 0
+  </select>
+
+
+
+  <insert id="insert" parameterType="com.mijiaokj.sys.domain.MemberType" useGeneratedKeys="true" keyProperty="id">
+    insert into member_type (
+    <include refid="BaseColumns" /> ,
+    <include refid="Common.CommonColumns" />
+    ) values (
+    <include refid="BaseProperties" /> ,
+    <include refid="Common.CommonProperties" />
+    )
+  </insert>
+
+  <update id="update" parameterType="com.mijiaokj.sys.domain.MemberType">
+    update member_type set
+    type_name = #{typeName,jdbcType=VARCHAR},
+    fee = #{fee,jdbcType=VARCHAR},
+    rate = #{rate,jdbcType=VARCHAR}
+    <include refid="Common.CommonUpdate" />
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="delete" parameterType="java.lang.Long">
+    update member_type
+    set is_delete = 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectPageByMap" resultMap="BaseResultMap">
+    select t1.*
+    from member_type t1 ,(
+    select id from member_type
+    WHERE is_delete=0
+    order by gmt_modified desc
+    limit #{startRow,jdbcType=INTEGER} ,
+    #{pageSize,jdbcType=INTEGER}
+    )t2
+    WHERE t1.id=t2.id
+  </select>
+
+  <select id="pageCountByMap" resultType="java.lang.Integer">
+    select count(1) as count
+    from member_type WHERE is_delete=0
+  </select>
+
+</mapper>
