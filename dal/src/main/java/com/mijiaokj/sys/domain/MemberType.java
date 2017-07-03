@@ -1,6 +1,6 @@
 package com.mijiaokj.sys.domain;
 
-public class MemberType extends BaseDomainObject{
+public class MemberType extends ReferenceObject{
 
     private String typeName;
 

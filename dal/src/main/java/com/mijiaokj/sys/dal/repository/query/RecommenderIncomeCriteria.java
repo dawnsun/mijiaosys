@@ -1,8 +1,11 @@
-package com.mijiaokj.sys.domain;
+package com.mijiaokj.sys.dal.repository.query;
 
 import java.util.Date;
 
-public class RecommenderIncome extends ReferenceObject {
+/**
+ * Created by wb-scg178938 on 2017/7/3.
+ */
+public class RecommenderIncomeCriteria extends BaseQueryCriteria {
 
     private Long recommenderId;
 
