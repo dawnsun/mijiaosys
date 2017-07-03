@@ -3,6 +3,8 @@ package com.mijiaokj.sys.service;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.domain.MemberType;
 
+import java.util.List;
+
 /**
  * Created by wb-scg178938 on 2017/7/3.
  */
@@ -39,10 +41,10 @@ public interface MemberTypeService {
     public Result<MemberType> findById(Long id);
 
     /**
-     * 条件查询，分页查询
+     * 查询所有会员类型
      *
-     * @param criteria
+     * @param
      * @return
-     *//*
-    public Result<Page<MemberType>> queryMemberTypeByCriteria(MemberTypeCriteria criteria);*/
+     */
+    public Result<List<MemberType>> queryMemberTypeAll();
 }
