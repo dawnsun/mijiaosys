@@ -22,4 +22,18 @@ public interface MemberUserMapper extends BaseMapper<MemberUser>{
      * @return
      */
     Integer pageCountByMap(MemberUserCriteria criteria);
+
+    /**
+     *
+     * @param memberName
+     * @return
+     */
+    MemberUser findByMemberUser(String memberName);
+
+    /**
+     *
+     * @param phoneNumber
+     * @return
+     */
+    MemberUser findByPhoneNumber(String phoneNumber);
 }

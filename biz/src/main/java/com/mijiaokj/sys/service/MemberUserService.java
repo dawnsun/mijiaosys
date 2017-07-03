@@ -55,4 +55,11 @@ public interface MemberUserService {
      */
     public Result<Page<MemberUser>> queryMemberUserByCriteria(MemberUserCriteria criteria);
 
+    /**
+     *
+     * @param phoneNumber
+     * @return
+     */
+    public Result<MemberUser> findByPhoneNumber(String phoneNumber);
+
 }

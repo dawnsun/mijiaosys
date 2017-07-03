@@ -33,33 +33,75 @@ public class MemberUserServiceImpl implements MemberUserService {
             Preconditions.checkNotNull(memberUser.getModifier(), "modifier is null");
             return Result.ofSuccess(memberUserRepository.insert(memberUser));
         } catch (Exception e) {
-            logger.error("createMemberUser " + e);
+            logger.error("MemberUserService createMemberUser " + e);
             return Result.ofFail("create memberUser fail:" + e.getMessage());
         }
     }
 
     @Override
     public Result<Integer> updateMemberUser(MemberUser memberUser) {
-        return null;
+        try {
+            Preconditions.checkNotNull(memberUser, "memberUser is null");
+            return Result.ofSuccess(memberUserRepository.update(memberUser));
+        } catch (Exception e) {
+            logger.error("MemberUserService updateMemberUser " + e);
+            return Result.ofFail("update memberUser fail:" + e.getMessage());
+        }
     }
 
     @Override
     public Result<Integer> delete(Long id) {
-        return null;
+        try {
+            Preconditions.checkNotNull(id, "id is null");
+            return Result.ofSuccess(memberUserRepository.delete(id));
+        } catch (Exception e) {
+            logger.error("MemberUserService delete " + e);
+            return Result.ofFail("delete memberUser fail:" + e.getMessage());
+        }
     }
 
     @Override
     public Result<MemberUser> findByMemberUser(String memberName) {
-        return null;
+        try {
+            Preconditions.checkNotNull(memberName, "memberName is null");
+            return Result.ofSuccess(memberUserRepository.findByMemberUser(memberName));
+        } catch (Exception e) {
+            logger.error("MemberUserService findByMemberUser " + e);
+            return Result.ofFail("findByUsername fail:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<MemberUser> findByPhoneNumber(String phoneNumber) {
+        try {
+            Preconditions.checkNotNull(phoneNumber, "phoneNumber is null");
+            return Result.ofSuccess(memberUserRepository.findByPhoneNumber(phoneNumber));
+        } catch (Exception e) {
+            logger.error("MemberUserService findByMemberUser " + e);
+            return Result.ofFail("findByUsername fail:" + e.getMessage());
+        }
     }
 
     @Override
     public Result<MemberUser> findById(Long id) {
-        return null;
+        try {
+            Preconditions.checkNotNull(id, "id is null");
+            return Result.ofSuccess(memberUserRepository.getById(id));
+        } catch (Exception e) {
+            logger.error("MemberUserService findById " + e);
+            return Result.ofFail("findById fail:" + e.getMessage());
+        }
     }
 
     @Override
     public Result<Page<MemberUser>> queryMemberUserByCriteria(MemberUserCriteria criteria) {
-        return null;
+        try {
+            Preconditions.checkNotNull(criteria, "criteria is null");
+            return Result.ofSuccess(memberUserRepository.executeQueryForPage(criteria));
+        } catch (Exception e) {
+            logger.error("createService queryMemberUserByCriteria " + e);
+            return Result.ofFail("create sysUser fail:" + e.getMessage());
+        }
     }
+
 }

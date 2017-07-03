@@ -55,10 +55,10 @@
     and is_delete = 0
   </select>
 
-  <select id="findByUsername" resultMap="BaseResultMap"  parameterType="java.lang.String">
+  <select id="findByMemberUser" resultMap="BaseResultMap"  parameterType="java.lang.String">
     select *
     from member_user
-    where username = #{username,jdbcType=VARCHAR}
+    where member_name = #{memberName,jdbcType=VARCHAR}
     and is_delete = 0
   </select>
 

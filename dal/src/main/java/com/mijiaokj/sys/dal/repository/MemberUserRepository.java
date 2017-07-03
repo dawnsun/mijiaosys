@@ -31,4 +31,11 @@ public class MemberUserRepository extends BaseRepository<MemberUser> {
         return new Page<>(datas, criteria.getStartRow(), criteria.getPageSize(), count);
     }
 
+    public MemberUser findByMemberUser(String memberName){
+        return memberUserMapper.findByMemberUser(memberName);
+    }
+
+    public MemberUser findByPhoneNumber(String phoneNumber){
+        return memberUserMapper.findByPhoneNumber(phoneNumber);
+    }
 }
