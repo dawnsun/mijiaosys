@@ -2,10 +2,12 @@ package com.mijiaokj.sys.web;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mijiaokj.sys.web.security.MijiaoSysUserDetails;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 
@@ -40,7 +42,7 @@ public class LoginController {
 	 * @return String    返回类型
 	 * @throws
 	 */
-	@RequestMapping("/index")
+	@RequestMapping(value="/index")
 	public String index(ModelMap map){
 		MijiaoSysUserDetails userDetails = (MijiaoSysUserDetails) SecurityContextHolder.getContext()
 			    .getAuthentication()
@@ -48,7 +50,14 @@ public class LoginController {
 		map.addAttribute("username",userDetails.getSysUser().getNickname());  
 		return "index";
 	}
-	
+	@RequestMapping(value="/home",method= RequestMethod.GET)
+	public String home(ModelMap map) {
+		MijiaoSysUserDetails userDetails = (MijiaoSysUserDetails) SecurityContextHolder.getContext()
+				.getAuthentication()
+				.getPrincipal();
+		map.addAttribute("username",userDetails.getSysUser().getNickname());
+		return "home";
+	}
 	/**
 	 * 
 	 * @Title: login
