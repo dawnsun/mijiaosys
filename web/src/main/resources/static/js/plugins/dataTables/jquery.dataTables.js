@@ -526,7 +526,7 @@
 		// element is contained without forcing scrolling
 		browser.bScrollOversize = test[0].offsetWidth === 100;
 	
-		// In rtl text layout, some browsers (most, but not all) will place the
+		// In rtl text fragments, some browsers (most, but not all) will place the
 		// scrollbar on the left, rather than the right.
 		browser.bScrollbarLeft = test.offset().left !== 1;
 	
@@ -1821,8 +1821,8 @@
 	
 	/**
 	 * Draw the header (or footer) element based on the column visibility states. The
-	 * methodology here is to use the layout array from _fnDetectHeader, modified for
-	 * the instantaneous column visibility, to construct the new layout. The grid is
+	 * methodology here is to use the fragments array from _fnDetectHeader, modified for
+	 * the instantaneous column visibility, to construct the new fragments. The grid is
 	 * traversed over cell at a time in a rows x columns grid fashion, although each
 	 * cell insert can cover multiple elements in the grid - which is tracks using the
 	 * aApplied array. Cell inserts in the grid will only occur where there isn't
@@ -1850,7 +1850,7 @@
 			bIncludeHidden = false;
 		}
 	
-		/* Make a copy of the master layout array, but without the visible columns in it */
+		/* Make a copy of the master fragments array, but without the visible columns in it */
 		for ( i=0, iLen=aoSource.length ; i<iLen ; i++ )
 		{
 			aoLocal[i] = aoSource[i].slice();
@@ -2257,10 +2257,10 @@
 	
 	/**
 	 * Use the DOM source to create up an array of header cells. The idea here is to
-	 * create a layout grid (array) of rows x columns, which contains a reference
+	 * create a fragments grid (array) of rows x columns, which contains a reference
 	 * to the cell that that point in the grid (regardless of col/rowspan), such that
 	 * any column / row could be removed and the new grid constructed
-	 *  @param array {object} aLayout Array to store the calculated layout in
+	 *  @param array {object} aLayout Array to store the calculated fragments in
 	 *  @param {node} nThead The header/footer element for the table
 	 *  @memberof DataTable#oApi
 	 */
@@ -2280,13 +2280,13 @@
 	
 		aLayout.splice( 0, aLayout.length );
 	
-		/* We know how many rows there are in the layout - so prep it */
+		/* We know how many rows there are in the fragments - so prep it */
 		for ( i=0, iLen=nTrs.length ; i<iLen ; i++ )
 		{
 			aLayout.push( [] );
 		}
 	
-		/* Calculate a layout array */
+		/* Calculate a fragments array */
 		for ( i=0, iLen=nTrs.length ; i<iLen ; i++ )
 		{
 			nTr = nTrs[i];
@@ -2312,7 +2312,7 @@
 					/* Cache calculation for unique columns */
 					bUnique = iColspan === 1 ? true : false;
 	
-					/* If there is col / rowspan, copy the information into the layout grid */
+					/* If there is col / rowspan, copy the information into the fragments grid */
 					for ( l=0 ; l<iColspan ; l++ )
 					{
 						for ( k=0 ; k<iRowspan ; k++ )
@@ -2334,8 +2334,8 @@
 	/**
 	 * Get an array of unique th elements, one for each column
 	 *  @param {object} oSettings dataTables settings object
-	 *  @param {node} nHeader automatically detect the layout from this node - optional
-	 *  @param {array} aLayout thead/tfoot layout from _fnDetectHeader - optional
+	 *  @param {node} nHeader automatically detect the fragments from this node - optional
+	 *  @param {array} aLayout thead/tfoot fragments from _fnDetectHeader - optional
 	 *  @returns array {node} aReturn list of unique th's
 	 *  @memberof DataTable#oApi
 	 */
@@ -6224,7 +6224,7 @@
 			
 				if ( oInit.sDom === defaults.sDom && defaults.sDom === "lfrtip" )
 				{
-					/* Set the DOM to use a layout suitable for jQuery UI's theming */
+					/* Set the DOM to use a fragments suitable for jQuery UI's theming */
 					oSettings.sDom = '<"H"lfr>t<"F"ip>';
 				}
 			
@@ -10110,7 +10110,7 @@
 	
 		/**
 		 * When vertical (y) scrolling is enabled, DataTables will force the height of
-		 * the table's viewport to the given height at all times (useful for layout).
+		 * the table's viewport to the given height at all times (useful for fragments).
 		 * However, this can look odd when filtering data down to a small data set,
 		 * and the footer is left "floating" further down. This parameter (when
 		 * enabled) will cause DataTables to collapse the table's viewport down when
@@ -11561,7 +11561,7 @@
 	
 		/**
 		 * Enable horizontal scrolling. When a table is too wide to fit into a
-		 * certain layout, or you have a large number of columns in the table, you
+		 * certain fragments, or you have a large number of columns in the table, you
 		 * can enable x-scrolling to show the table in a viewport, which can be
 		 * scrolled. This property can be `true` which will allow the table to
 		 * scroll horizontally when needed, or any CSS unit, or a number (in which
@@ -12759,7 +12759,7 @@
 	
 			/**
 			 * Determine if the vertical scrollbar is on the right or left of the
-			 * scrolling container - needed for rtl language layout, although not
+			 * scrolling container - needed for rtl language fragments, although not
 			 * all browsers move the scrollbar (Safari).
 			 *  @type boolean
 			 *  @default false

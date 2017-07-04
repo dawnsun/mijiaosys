@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,9 @@ import com.mijiaokj.sys.service.SysUserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
+
 /**
  * 
  * @ClassName: LoginController
@@ -107,5 +111,10 @@ public class SysUserController {
 		criteria.setPageSize(Integer.parseInt(pageSize));
 		criteria.setCurrentPage(Integer.parseInt(pageNumber));
 		return JSON.toJSONString(sysUserService.querySysUserByCriteria(criteria).getData().getDatas());
+	}
+
+	@RequestMapping(value="/home",method=RequestMethod.GET)
+	public String home(Model model) {
+		return "home";
 	}
 }

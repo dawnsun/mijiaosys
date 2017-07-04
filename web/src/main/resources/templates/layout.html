@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="htmlhead">
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
+   	<link rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{../font-awesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{../css/plugins/morris/morris-0.4.3.min.css}"/>
+    <link rel="stylesheet" th:href="@{../js/plugins/gritter/jquery.gritter.css}"/>
+  	<link rel="stylesheet" th:href="@{../css/animate.css}" />
+    <link rel="stylesheet" th:href="@{../css/style.css}" />
+
+  </head>
+
+<!--  <body clafragmentsyout-fixed">
+    <div th:fragment="navbar"  class="wrapper"  role="navigation">
+		<div th:replace="fragments/header :: header">Header</div>
+		<div th:replace="fragments/left :: left">left</div>
+		<div th:replace="fragments/sidebar :: sidebar">sidebar</div>
+		<fragmentsyout:fragment="content" id="content" ></div>
+		<div th:replace="fragments/footer :: footer">footer</div>
+    </div>
+	<div th:replace="fragments/alert :: alert">alert</div>
+	-->
+<body>
+<div id="wrapper">
+    <nav th:replace="fragments/menus :: menus">LEFT MENU</nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav th:replace="fragments/header :: header">HEADER</nav>
+        </div>
+        <div class="row border-bottom white-bg dashboard-header">
+            <div layout:fragment="content" id="content" ></div>
+        </div>
+        <div class="row">
+            <div th:replace="fragments/footer :: footer">FOOTER</div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+    <!-- Mainly scripts -->
+    <script th:src="@{../js/jquery-2.1.1.js}"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="../js/plugins/flot/jquery.flot.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.pie.js"></script>
+
+    <!-- Peity -->
+    <script src="../js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- GITTER -->
+    <script src="../js/plugins/gritter/jquery.gritter.min.js"></script>
+
+    <!-- EayPIE -->
+    <script src="../js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+    <!-- Sparkline -->
+    <script src="../js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="../js/demo/sparkline-demo.js"></script>
+
+    <!-- ChartJS-->
+    <script src="../js/plugins/chartJs/Chart.min.js"></script>
+
+    <!-- Index ready-->
+<!--    <script src="../js/index.js"></script>-->
+    <script src="../js/bootstrap-table.js"></script>
+    <script>
+        function actionFormatter(value, row, index) {
+            console.log(value, row.id, index);
+
+            if("14370005"==row.id){
+                return [
+                    '<a class="like" href="javascript:void(0)" title="Like">',
+                    '<i class="glyphicon glyphicon-heart"></i>',
+                    '</a>'
+                ].join('');
+            }else{
+                return ['<a class="like" href="javascript:void(0)" title="Like">',
+                    '<i class="glyphicon glyphicon-heart"></i>',
+                    '</a>',
+                    '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                    '<i class="glyphicon glyphicon-edit"></i>',
+                    '</a>',
+                    '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+                    '<i class="glyphicon glyphicon-remove"></i>',
+                    '</a>'
+                ].join('');
+            }
+
+        }
+
+        window.actionEvents = {
+            'click .like': function (e, value, row, index) {
+                alert('You click like icon, row: ' + JSON.stringify(row));
+                console.log(value, row, index);
+            },
+            'click .edit': function (e, value, row, index) {
+                alert('You click edit icon, row: ' + JSON.stringify(row));
+                console.log(value, row, index);
+            },
+            'click .remove': function (e, value, row, index) {
+                alert('You click remove icon, row: ' + JSON.stringify(row));
+                console.log(value, row, index);
+            }
+        };
+    </script>
+</body>
+</html>
