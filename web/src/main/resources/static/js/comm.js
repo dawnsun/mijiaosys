@@ -1,6 +1,5 @@
 var mainActiveId='home';
-var firstUrl = null;//第一个页面
-var secondUrl = null;//第二个页面
+var loadUrl = null;
 
 function UrlSearch() {
     var name,value;
@@ -90,7 +89,7 @@ function goUrl(url,params) {
 		xmlhttp.onreadystatechange = handleServerResponse;
 		xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
 		xmlhttp.send(params);
-		with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://v3.jiathis.com/code_mini/jia.js?uid=2126448'];
+		with(document)0[(getElementsByTagName('head')[0]||body)];
 	}
 }
 
@@ -118,18 +117,10 @@ function fixUrl(url, params){
 	if(params != null){
 		url = url + "?" + params;
 	}
-	if(firstUrl == null){
-		firstUrl = url;
-	}else if(secondUrl == null){
-		secondUrl = url;
+	if(loadUrl == null){
+		loadUrl = url;
 	}else{
-		if(flag == 1){
-			firstUrl = url;
-			flag = 2;
-		}else{
-			secondUrl = url;
-			flag = 1;
-		}
+		loadUrl = url;
 	}
 }
 
