@@ -100,17 +100,17 @@ public class SysUserController {
 	@ResponseBody
 	public String getPageData(HttpServletRequest request){
 		SysUserCriteria criteria = new SysUserCriteria();
-		String pageSize=request.getParameter("pageSize");
+		String pageSize=request.getParameter("limit");
 		if(StringUtils.isBlank(pageSize)){
 			pageSize="10";
 		}
-		String pageNumber=request.getParameter("pageNumber");
+		String pageNumber=request.getParameter("page");
 		if(StringUtils.isBlank(pageNumber)){
 			pageNumber="0";
 		}
 		criteria.setPageSize(Integer.parseInt(pageSize));
 		criteria.setCurrentPage(Integer.parseInt(pageNumber));
-		return JSON.toJSONString(sysUserService.querySysUserByCriteria(criteria).getData().getDatas());
+		return JSON.toJSONString(sysUserService.querySysUserByCriteria(criteria).getData());
 	}
 
 
