@@ -1,5 +1,7 @@
 package com.mijiaokj.sys.dal.repository.query;
 
+import java.sql.Date;
+
 /**
  * Created by Administrator on 2017/7/2.
  */
@@ -11,6 +13,10 @@ public class MemberUserCriteria extends BaseQueryCriteria {
     private String memberCardNumber;
 
     private Long memberTypeId;
+
+    private Date createTimeStart;
+
+    private Date createTimeEnd;
 
     public String getMemberName() {
         return memberName;
@@ -42,5 +48,21 @@ public class MemberUserCriteria extends BaseQueryCriteria {
 
     public void setMemberTypeId(Long memberTypeId) {
         this.memberTypeId = memberTypeId;
+    }
+
+    public Date getCreateTimeStart() {
+        return createTimeStart;
+    }
+
+    public void setCreateTimeStart(Date createTimeStart) {
+        this.createTimeStart = createTimeStart;
+    }
+
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
     }
 }

@@ -79,7 +79,7 @@ public class SysUserController {
 	}
 
 	@ApiOperation(value = "获取用户列表", notes = "")
-	@RequestMapping(value = "/sys/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/sys/list", method = RequestMethod.POST)
 	public String list() {
 		return "user/list";
 	}
@@ -96,7 +96,7 @@ public class SysUserController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/sys/page.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/sys/page.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String getPageData(HttpServletRequest request){
 		SysUserCriteria criteria = new SysUserCriteria();

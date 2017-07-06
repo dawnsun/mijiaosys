@@ -5,34 +5,83 @@
 <body>
 <section>
 
-    <div class="middle-box text-center loginscreen  animated fadeInDown">
-        <div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Validation</h5>
+                    </div>
+                    <div class="ibox-content">
 
-            <p>Login in. To see it in action.</p>
-            <form class="m-t" role="form" th:action="@{/login}" method="post">
-                <div class="form-group">
-                    <input type="input" class="form-control" name="username" placeholder="Username" required=""/>
+                            <div class="form-group"><label>姓名</label> <input type="text" placeholder="Password" class="form-control" id="memberName" name="memberName"/></div>
+                            <div class="form-group"><label>手机号码</label> <input type="text" placeholder="Enter email" class="form-control" id="phoneNumber" name="phoneNumber"/></div>
+                            <div class="form-group"><label>推荐人</label> <input type="text" placeholder="Enter email" class="form-control" id="recommenderId" name="recommenderId"/></div>
+                            <div class="form-group"><label>会员类型</label> <input type="text" placeholder="Enter email" class="form-control" id="memberTypeId" name="memberTypeId"/></div>
+                            <div class="form-group"><label>会员卡号</label> <input type="text" placeholder="Enter email" class="form-control" id="memberCardNumber" name="memberCardNumber"/></div>
+                            <div class="form-group"><label>常用地址</label> <input type="text" placeholder="Enter email" class="form-control" id="address" name="address"/></div>
+                            <div>
+                                <button class="btn btn-sm btn-primary m-t-n-xs" onclick="ajax_submit();" id="bth-submit" ><strong>Submit</strong></button>
+                            </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-                </div>
-                <div th:if="${param.error}">
-				    用户名或密码错
-				</div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
-                <a href="#"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
-            </form>
-            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+            </div>
+
         </div>
-    </div>
 
-    <!-- Mainly scripts -->
-    <script src="../js/jquery-2.1.1.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
 </section>
+
+<script>
+    $(document).ready(function(){
+
+        $("#form").validate({
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 3
+                },
+                url: {
+                    required: true,
+                    url: true
+                },
+                number: {
+                    required: true,
+                    number: true
+                },
+                min: {
+                    required: true,
+                    minlength: 6
+                },
+                max: {
+                    required: true,
+                    maxlength: 4
+                }
+            }
+        });
+
+    });
+    function ajax_submit() {
+        var memberUser = {};
+        memberUser.memberName = $("#memberName").val();
+        memberUser.phoneNumber = $("#phoneNumber").val();
+        memberUser.recommenderId= $("#recommenderId").val();
+        memberUser.memberTypeId= $("#memberTypeId").val();
+        memberUser.memberCardNumber= $("#memberCardNumber").val();
+        $("#btn-submit").prop("disabled", true);
+        $.ajax({
+            url : "/member/form",
+            data : memberUser,
+            type : 'POST',
+            dataType : "json",
+            error : function(data) {
+                alert(data);
+            },
+            success : function(data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

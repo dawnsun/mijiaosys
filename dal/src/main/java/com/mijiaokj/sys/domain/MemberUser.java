@@ -18,6 +18,16 @@ public class MemberUser extends ReferenceObject{
 
     private String birthday;
 
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getMemberName() {
         return memberName;
     }

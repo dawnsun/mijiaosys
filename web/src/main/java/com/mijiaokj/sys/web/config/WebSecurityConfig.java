@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		http.csrf().disable()
                 .addFilterBefore(abstractSecurityInterceptorFilter, FilterSecurityInterceptor.class)//添加我们自定义的过滤器
                 .authorizeRequests()
                 .antMatchers("/js/**", "/font-awesome/**", "/fonts/**", "/img/**", "/css/**","/webjars/**","/images/**").permitAll()//访问："/js/**", "/font-awesome/**", "/fonts/**", "/img/**", "/css/**","/webjars/**","/images/**" 无需登录认证权限

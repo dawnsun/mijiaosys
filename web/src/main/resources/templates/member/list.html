@@ -12,7 +12,7 @@
                     <a>会员管理</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);"  onclick="locationUrl('/sys/list.html','memberList')" >会员列表</a>
+                    <a href="javascript:void(0);"  onclick="locationUrl('/member/list.html','memberList')" >会员列表</a>
                 </li>
             </ol>
         </div>
@@ -26,7 +26,11 @@
             <tr>
                 <th>编号</th>
                 <th>姓名</th>
-                <th>性别</th>
+                <th>会员类型</th>
+                <th>电话号码</th>
+                <th>地址</th>
+                <th>推荐人</th>
+                <th>创建时间</th>
             </tr>
             </thead>
         </table>
@@ -86,7 +90,7 @@
                 //ajax请求数据
                 $.ajax({
                     type: "POST",
-                    url: "/sys/page.do",
+                    url: "/member/page.do",
                     cache: false,  //禁用缓存
                     data: param,  //传入组装的参数
                     dataType: "json",
@@ -108,8 +112,12 @@
             //列表表头字段
             columns: [
                 { "data": "id" },
-                { "data": "username" },
-                { "data": "phoneNumber" }
+                { "data": "memberName" },
+                { "data": "memberTypeId" },
+                { "data": "phoneNumber" },
+                { "data": "memberCardNumber" },
+                { "data": "recommenderId" },
+                { "data": "gmtCreate" }
             ]
         });
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
