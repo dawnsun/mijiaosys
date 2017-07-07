@@ -6,6 +6,7 @@ import com.mijiaokj.sys.domain.MemberType;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wb-scg178938 on 2017/7/3.
@@ -17,5 +18,9 @@ public class MemberTypeRepository extends BaseRepository<MemberType>{
     @Override
     protected BaseMapper<MemberType> getMapper() {
         return memberTypeMapper;
+    }
+
+    public List<MemberType> queryMemberTypeAll() {
+        return memberTypeMapper.queryMemberTypeAll();
     }
 }

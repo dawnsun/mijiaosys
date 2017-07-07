@@ -38,6 +38,11 @@
     and is_delete = 0
   </select>
 
+  <select id="queryMemberTypeAll" resultMap="BaseResultMap" >
+    select *
+    from member_type
+    where is_delete = 0
+  </select>
 
 
   <insert id="insert" parameterType="com.mijiaokj.sys.domain.MemberType" useGeneratedKeys="true" keyProperty="id">

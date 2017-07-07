@@ -38,4 +38,8 @@ public class MemberUserRepository extends BaseRepository<MemberUser> {
     public MemberUser findByPhoneNumber(String phoneNumber){
         return memberUserMapper.findByPhoneNumber(phoneNumber);
     }
+
+    public List<MemberUser> getAvailableRecommender() {
+        return memberUserMapper.getAvailableRecommender();
+    }
 }

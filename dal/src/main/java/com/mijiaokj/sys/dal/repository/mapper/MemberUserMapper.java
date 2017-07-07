@@ -36,4 +36,6 @@ public interface MemberUserMapper extends BaseMapper<MemberUser>{
      * @return
      */
     MemberUser findByPhoneNumber(String phoneNumber);
+
+    List<MemberUser> getAvailableRecommender();
 }

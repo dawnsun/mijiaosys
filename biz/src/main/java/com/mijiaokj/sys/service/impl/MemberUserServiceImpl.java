@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wb-scg178938 on 2017/7/3.
@@ -76,6 +77,16 @@ public class MemberUserServiceImpl implements MemberUserService {
         try {
             Preconditions.checkNotNull(phoneNumber, "phoneNumber is null");
             return Result.ofSuccess(memberUserRepository.findByPhoneNumber(phoneNumber));
+        } catch (Exception e) {
+            logger.error("MemberUserService findByMemberUser " + e);
+            return Result.ofFail("findByUsername fail:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<List<MemberUser>> getAvailableRecommender() {
+        try {
+            return Result.ofSuccess(memberUserRepository.getAvailableRecommender());
         } catch (Exception e) {
             logger.error("MemberUserService findByMemberUser " + e);
             return Result.ofFail("findByUsername fail:" + e.getMessage());

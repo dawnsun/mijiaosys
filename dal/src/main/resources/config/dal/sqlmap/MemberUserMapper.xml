@@ -131,7 +131,7 @@
           parameterType="com.mijiaokj.sys.dal.repository.query.MemberUserCriteria"
           resultType="java.lang.Integer">
     select count(1) as count
-    from sys_user WHERE is_delete=0
+    from member_user WHERE is_delete=0
     <if test="memberName != null">
       and member_name = #{memberName,jdbcType=VARCHAR}
     </if>
@@ -148,5 +148,9 @@
       and gmt_create &lt;= #{createTimeEnd}
     </if>
   </select>
+
+    <select id="getAvailableRecommender" resultMap="BaseResultMap" >
+        select * from member_user where id  not in(select recommender_id from member_user group by recommender_id having count(*)=2 and recommender_id!=0) and is_delete=0
+    </select>
 
 </mapper>

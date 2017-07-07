@@ -5,6 +5,8 @@ import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.query.MemberUserCriteria;
 import com.mijiaokj.sys.domain.MemberUser;
 
+import java.util.List;
+
 /**
  * Created by wb-scg178938 on 2017/7/3.
  */
@@ -61,5 +63,11 @@ public interface MemberUserService {
      * @return
      */
     public Result<MemberUser> findByPhoneNumber(String phoneNumber);
+
+    /**
+     * 获取可用的推荐人用来选择
+     * @return
+     */
+    public Result<List<MemberUser>> getAvailableRecommender();
 
 }
