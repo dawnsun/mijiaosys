@@ -101,6 +101,9 @@ public class MemberUserController {
         MijiaoSysUserDetails userDetails = (MijiaoSysUserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
+        if(null==memberUser || memberUser.getMemberName().isEmpty() || memberUser.getPhoneNumber().isEmpty()){
+            memberUser = new MemberUser();
+        }
         memberUser.setCreator(userDetails.getSysUser().getId().toString());
         memberUser.setModifier(userDetails.getSysUser().getId().toString());
         memberUser.setMemberPassword(Md5Util.md5calc(memberUser.getPhoneNumber()));
