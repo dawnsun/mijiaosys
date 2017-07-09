@@ -12,6 +12,7 @@
   member_card_number   varchar(64) comment '会员卡号',
   sex                  tinyint(1) comment '0-女 1-男',
   birthday             varchar(9) comment '生日',
+  address             varchar(512) comment '地址',
   gmt_create           datetime not null comment '创建时间',
   gmt_modified         datetime not null comment '修改时间',
   creator              varchar(32) not null comment '创建人',
@@ -30,11 +31,13 @@
     <result column="member_card_number" jdbcType="VARCHAR" property="memberCardNumber" />
     <result column="sex" jdbcType="BIT" property="sex" />
     <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+     <result column="address" jdbcType="VARCHAR" property="address" />
+
   </resultMap>
 
   <sql id="BaseColumns">
     member_name, member_password, phone_number, recommender_id, member_type_id, member_card_number,
-    sex, birthday
+    sex, birthday, address
   </sql>
 
   <sql id="BaseProperties">
@@ -45,7 +48,8 @@
     #{memberTypeId},
     #{memberCardNumber},
     #{sex},
-    #{birthday}
+    #{birthday},
+    #{address}
   </sql>
 
   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -88,6 +92,7 @@
     member_card_number = #{memberCardNumber,jdbcType=VARCHAR},
     sex = #{sex,jdbcType=INTEGER},
     birthday = #{birthday,jdbcType=VARCHAR}
+      address = #{address,jdbcType=VARCHAR}
     <include refid="Common.CommonUpdate" />
     where id = #{id,jdbcType=BIGINT}
   </update>

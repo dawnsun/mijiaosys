@@ -30,7 +30,7 @@
             <input type="text" class="form-control" id="memberName" placeholder="请输入姓名"/>
         </div>
 
-        <button onclick="ajax_submit();" class="btn btn-default">查询</button>
+        <button onclick="queryTable();" class="btn btn-default">查询</button>
     </div>
     <div class="row-fluid">
 
@@ -54,10 +54,10 @@
 </body>
 <script>
     $(function () {
-        queryTable();
+        inintDataTable();
     });
-    function queryTable() {
 
+    function inintDataTable() {
         //提示信息
         var lang = {
             "sProcessing": "处理中...",
@@ -80,7 +80,6 @@
                 "sJump": "跳转"
             }
         };
-
         //初始化表格
         var table = $("#example").DataTable({
             language:lang,  //提示信息
@@ -90,6 +89,7 @@
             serverSide: true,  //启用服务器端分页
             searching: false,  //禁用原生搜索
             orderMulti: false,  //启用多列排序
+            bRetrieve:true,
             ordering: false,
 //            order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
             renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
@@ -98,49 +98,53 @@
                 "targets": 'nosort',  //列的样式名
                 "orderable": false    //包含上样式名‘nosort’的禁止排序
             }],
-            ajax: function (data, callback, settings) {
-                //封装请求参数
-                var param = {};
-                param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-                param.start = data.start;//开始的记录序号
-                param.page = (data.start / data.length);//当前页码
-                param.memberName = $("#memberName").val();
-                param.phoneNumber = $("#phoneNumber").val();
-                console.log(param);
-                //ajax请求数据
-                $.ajax({
-                    type: "POST",
-                    url: "/member/page.do",
-                    cache: false,  //禁用缓存
-                    data: param,  //传入组装的参数
-                    dataType: "json",
-                    success: function (result) {
-                        console.log(result);
-                        //封装返回数据
-                        var returnData = {};
-//                            returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
-                        returnData.recordsTotal = result.recordCount;//返回数据全部记录
-                        returnData.recordsFiltered = result.recordCount;//后台不实现过滤功能，每次查询均视作全部结果
-                        returnData.data = result.datas;//返回的数据列表
-                        //console.log(returnData);
-                        //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                        //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-                        callback(returnData);
-                    }
-                });
-            },
             //列表表头字段
             columns: [
                 { "data": "id" },
                 { "data": "memberName" },
                 { "data": "memberTypeId" },
                 { "data": "phoneNumber" },
-                { "data": "memberCardNumber" },
+                { "data": "address" },
                 { "data": "recommenderId" },
                 { "data": "gmtCreate" }
-            ]
+            ],
+            "sAjaxSource": "/member/page.do",//这个是请求的地址
+            "fnServerData": queryTable // 获取数据的处理函数
         });
-        //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
+    }
+
+    function queryTable(source, data, callback) {
+        //封装请求参数
+        var param = {};
+//        param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+//        param.start = data.start;//开始的记录序号
+//        param.page = (data.start / data.length);//当前页码
+        param.memberName = $("#memberName").val();
+        param.phoneNumber = $("#phoneNumber").val();
+        console.log(param);
+        $.ajax({
+            url : source,
+            data : param,
+            type : 'POST',
+            dataType : 'json',
+            async : false,
+            success : function(result) {
+                console.log(result);
+                //封装返回数据
+                var returnData = {};
+//                            returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                returnData.recordsTotal = result.recordCount;//返回数据全部记录
+                returnData.recordsFiltered = result.recordCount;//后台不实现过滤功能，每次查询均视作全部结果
+                returnData.data = result.datas;//返回的数据列表
+                //console.log(returnData);
+                //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                callback(returnData);
+            },
+            error : function(msg) {
+            }
+        });
+
     }
 </script>
 </html>

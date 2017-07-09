@@ -115,12 +115,20 @@ public class MemberUserController {
     public String getPageData(HttpServletRequest request){
         MemberUserCriteria criteria = new MemberUserCriteria();
         String pageSize=request.getParameter("limit");
+        String memberName =request.getParameter("memberName");
+        String phoneNumber = request.getParameter("phoneNumber");
         if(StringUtils.isBlank(pageSize)){
             pageSize="10";
         }
         String pageNumber=request.getParameter("page");
         if(StringUtils.isBlank(pageNumber)){
             pageNumber="0";
+        }
+        if(StringUtils.isNotEmpty(memberName)){
+            criteria.setMemberName(memberName);
+        }
+        if(StringUtils.isNotEmpty(phoneNumber)){
+            criteria.setPhoneNumber(phoneNumber);
         }
         criteria.setPageSize(Integer.parseInt(pageSize));
         criteria.setCurrentPage(Integer.parseInt(pageNumber));
