@@ -19,19 +19,7 @@ public class Page<E> implements Serializable {
 
     public static final int DEFAULT_DB_PAGE_SIZE = 10;
 
-    public Page(){
 
-    }
-
-    public Page(Integer pageIndex){
-        this.pageIndex = pageIndex;
-
-    }
-
-    public Page(Integer start, Integer pageSize){
-        this.start = start;
-        this.pageSize = pageSize;
-    }
 
     /**
      * 查询的开始记录数
@@ -56,23 +44,37 @@ public class Page<E> implements Serializable {
     /**
      * 记录总数
      */
-    private Integer recordCount = 0;
+    private Integer total = 0;
 
     /**
      * 数据内容
      */
-    private List<E> datas;
+    private List<E> rows;
+
+    public Page(){
+
+    }
+
+    public Page(Integer pageIndex){
+        this.pageIndex = pageIndex;
+
+    }
+
+    public Page(Integer start, Integer pageSize){
+        this.start = start;
+        this.pageSize = pageSize;
+    }
 
     /**
      * 内存分页
-     * 
+     *
      * @param list 包含所有记录的列表
      * @param pageIndex 页码
      * @param pageSize 每页大小
      */
     public Page(Integer pageIndex, Integer pageSize, List<E> list){
         if (list == null || list.size() == 0) {
-            this.setDatas(new ArrayList<E>(0));
+            this.setRows(new ArrayList<E>(0));
             this.setStart(0);
         } else {
             // 默认分页
@@ -98,19 +100,19 @@ public class Page<E> implements Serializable {
             this.setPageIndex(pageIndex);
             this.setPageSize(pageSize);
             this.setPageCount(pageCount);
-            this.setRecordCount(recordCount);
+            this.setTotal(recordCount);
             this.setStart(pageIndex * pageSize);
             List<E> subList = new ArrayList<E>(
                                                list.subList(pageIndex * pageSize,
                                                             (pageIndex + 1) * pageSize > recordCount ? recordCount : (pageIndex + 1)
                                                                                                                      * pageSize));
-            this.setDatas(subList);
+            this.setRows(subList);
         }
     }
 
     /**
      * 数据库分页
-     * 
+     *
      * @param datas
      * @param start
      * @param pageSize
@@ -132,8 +134,8 @@ public class Page<E> implements Serializable {
         this.pageIndex = start / pageSize;
         this.pageSize = pageSize;
         this.pageCount = pageCount;
-        this.recordCount = recordCount;
-        this.datas = datas;
+        this.total = recordCount;
+        this.rows = datas;
     }
 
     public static Integer getStartIndex(Integer currentPage, Integer pageSize) {
@@ -171,20 +173,20 @@ public class Page<E> implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Integer getRecordCount() {
-        return recordCount;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setRecordCount(Integer recordCount) {
-        this.recordCount = recordCount;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
-    public List<E> getDatas() {
-        return datas;
+    public List<E> getRows() {
+        return rows;
     }
 
-    public void setDatas(List<E> datas) {
-        this.datas = datas;
+    public void setRows(List<E> rows) {
+        this.rows = rows;
     }
 
     public Integer getPageCount() {
@@ -206,10 +208,10 @@ public class Page<E> implements Serializable {
         builder.append(pageSize);
         builder.append("\", \"pageCount\":\"");
         builder.append(pageCount);
-        builder.append("\", \"recordCount\":\"");
-        builder.append(recordCount);
-        builder.append("\", \"datas\":");
-        builder.append(datas);
+        builder.append("\", \"total\":\"");
+        builder.append(total);
+        builder.append("\", \"rows\":");
+        builder.append(rows);
         builder.append("}");
         return builder.toString();
     }

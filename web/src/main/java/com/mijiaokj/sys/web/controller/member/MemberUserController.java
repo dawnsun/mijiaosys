@@ -112,17 +112,13 @@ public class MemberUserController {
 
     @RequestMapping(value = "/member/page.do", method = RequestMethod.POST)
     @ResponseBody
-    public String getPageData(HttpServletRequest request){
+    public String getPageData(String pageSize, String pageNumber, String memberName, String phoneNumber ,HttpServletRequest request){
         MemberUserCriteria criteria = new MemberUserCriteria();
-        String pageSize=request.getParameter("limit");
-        String memberName =request.getParameter("memberName");
-        String phoneNumber = request.getParameter("phoneNumber");
         if(StringUtils.isBlank(pageSize)){
             pageSize="10";
         }
-        String pageNumber=request.getParameter("page");
         if(StringUtils.isBlank(pageNumber)){
-            pageNumber="0";
+            pageNumber="1";
         }
         if(StringUtils.isNotEmpty(memberName)){
             criteria.setMemberName(memberName);
@@ -131,7 +127,7 @@ public class MemberUserController {
             criteria.setPhoneNumber(phoneNumber);
         }
         criteria.setPageSize(Integer.parseInt(pageSize));
-        criteria.setCurrentPage(Integer.parseInt(pageNumber));
+        criteria.setCurrentPage(Integer.parseInt(pageNumber)-1);
         String res = JSON.toJSONString(memberUserService.queryMemberUserByCriteria(criteria).getData());
         return res;
     }
