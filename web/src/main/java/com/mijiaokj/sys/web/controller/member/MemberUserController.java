@@ -1,6 +1,7 @@
 package com.mijiaokj.sys.web.controller.member;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.mijiaokj.sys.common.util.Md5Util;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.query.MemberUserCriteria;
@@ -131,4 +132,19 @@ public class MemberUserController {
         String res = JSON.toJSONString(memberUserService.queryMemberUserByCriteria(criteria).getData());
         return res;
     }
+
+    @RequestMapping(value = "/member/phoneNumberValidator.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String phoneNumberValidator(String phoneNumber){
+        Result<MemberUser> res = memberUserService.findByPhoneNumber(phoneNumber);
+        JSONObject validObj = new JSONObject();
+        if(res.isSuccess() && null!=res.getData()){
+            validObj.put("valid",false);
+        }else{
+            validObj.put("valid",true);
+        }
+
+        return validObj.toJSONString();
+    }
+
 }

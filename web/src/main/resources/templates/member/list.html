@@ -126,7 +126,11 @@
                     title: '推荐人'
                 }, {
                     field: 'gmtCreate',
-                    title: '创建时间'
+                    title: '创建时间',
+                    formatter : function (value, row, index){
+                        return new Date(value).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                    },
+                    align : 'center'
                 }]
             });
         };

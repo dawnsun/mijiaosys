@@ -92,6 +92,12 @@
                         regexp: {
                             regexp: "^([0-9]{11})?$",
                             message: '手机号码格式错误'
+                        },
+                        remote:{
+                            url: '/member/phoneNumberValidator.do',//验证地址
+                            message: '手机号码已被注册',//提示消息
+                            delay :  2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                            type: 'POST'//请求方式
                         }
                     }
                 }, address: {
