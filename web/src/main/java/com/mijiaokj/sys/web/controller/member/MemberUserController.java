@@ -147,4 +147,12 @@ public class MemberUserController {
         return validObj.toJSONString();
     }
 
+    @RequestMapping(value = "/member/memberType.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String memberType(){
+        //会员类型
+        Result<List<MemberType>> memberTypeRes = memberTypeService.queryMemberTypeAll();
+        List<OptionVo> memberTypeVo = getMemberTypeVo(memberTypeRes);
+        return JSON.toJSONString(memberTypeVo);
+    }
 }

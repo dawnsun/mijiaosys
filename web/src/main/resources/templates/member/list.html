@@ -60,9 +60,16 @@
 </section>
 </body>
 <script>
-
+    var memberInfo ;
     $(function () {
-
+        $.ajax({
+            url:"/member/memberType.do",
+            dataType:"json",
+            method: 'POST',
+            success: function(data){
+                memberInfo = data;
+            }
+        });
         //1.初始化Table
         var oTable = new TableInit();
         oTable.Init();
@@ -114,17 +121,20 @@
                     title: '姓名'
                 }, {
                     field: 'memberTypeId',
-                    title: '会员类型'
+                    title: '会员类型',
+                    formatter: memberTypeSelect
+
                 }, {
                     field: 'phoneNumber',
                     title: '电话号码'
                 }, {
                     field: 'address',
                     title: '地址'
-                }, {
+                }, /*{
                     field: 'recommenderId',
                     title: '推荐人'
-                }, {
+                }, */
+                    {
                     field: 'gmtCreate',
                     title: '创建时间',
                     formatter : function (value, row, index){
@@ -167,5 +177,8 @@
         return oInit;
     };
 
+    function memberTypeSelect(value,row,index) {
+        return memberInfo.text+value;
+    }
 </script>
 </html>
