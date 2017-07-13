@@ -37,7 +37,6 @@
     #{entrantId},
     #{fee},
     #{withdrawalsType},
-    #{memberTypeId},
     #{gmtWithdrawals}
   </sql>
 

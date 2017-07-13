@@ -4,12 +4,15 @@ import com.google.common.base.Preconditions;
 import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.MemberUserRepository;
+import com.mijiaokj.sys.dal.repository.RecommenderIncomeRepository;
 import com.mijiaokj.sys.dal.repository.query.MemberUserCriteria;
 import com.mijiaokj.sys.domain.MemberUser;
+import com.mijiaokj.sys.domain.RecommenderIncome;
 import com.mijiaokj.sys.service.MemberUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,15 +27,27 @@ public class MemberUserServiceImpl implements MemberUserService {
 
     @Resource
     private MemberUserRepository memberUserRepository;
+    @Resource
+    private RecommenderIncomeRepository recommenderIncomeRepository;
 
     @Override
+    @Transactional
     public Result<Long> createMemberUser(MemberUser memberUser) {
         try {
             Preconditions.checkNotNull(memberUser);
             Preconditions.checkNotNull(memberUser.getPhoneNumber(), "PhoneNumber is null");
             Preconditions.checkNotNull(memberUser.getCreator(), "creator is null");
             Preconditions.checkNotNull(memberUser.getModifier(), "modifier is null");
-            return Result.ofSuccess(memberUserRepository.insert(memberUser));
+            Long id = memberUserRepository.insert(memberUser);
+            RecommenderIncome recommenderIncome = new RecommenderIncome();
+            recommenderIncome.setEntrantId(id);
+            recommenderIncome.setFee("");
+            recommenderIncome.setRecommenderId(memberUser.getRecommenderId());
+            recommenderIncome.setWithdrawalsType(1);
+            recommenderIncome.setCreator(memberUser.getCreator());
+            recommenderIncome.setModifier(memberUser.getModifier());
+            recommenderIncomeRepository.insert(recommenderIncome);
+            return Result.ofSuccess(id);
         } catch (Exception e) {
             logger.error("MemberUserService createMemberUser " + e);
             return Result.ofFail("create memberUser fail:" + e.getMessage());
