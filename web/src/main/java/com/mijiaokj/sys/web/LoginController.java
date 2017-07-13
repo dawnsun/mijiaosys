@@ -29,7 +29,7 @@ public class LoginController {
 	 * @return String    返回类型
 	 * @throws
 	 */
-	@RequestMapping(value = {"/","/login"})
+	@RequestMapping(value = {"/login"})
 	public String login(){
 		return "login";
 	}
@@ -50,7 +50,7 @@ public class LoginController {
 		map.addAttribute("username",userDetails.getSysUser().getNickname());  
 		return "index";
 	}
-	@RequestMapping(value="/home",method= RequestMethod.GET)
+	@RequestMapping(value="/",method= RequestMethod.GET)
 	public String home(ModelMap map) {
 		MijiaoSysUserDetails userDetails = (MijiaoSysUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication()
