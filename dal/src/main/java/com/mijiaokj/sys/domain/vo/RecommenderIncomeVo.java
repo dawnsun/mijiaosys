@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.web.vo;
+package com.mijiaokj.sys.domain.vo;
 
 import com.mijiaokj.sys.dal.repository.query.BaseQueryCriteria;
 

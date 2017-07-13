@@ -4,7 +4,7 @@ import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.web.vo.RecommenderIncomeVo;
+import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
 
 /**
  * Created by Administrator on 2017/7/13.

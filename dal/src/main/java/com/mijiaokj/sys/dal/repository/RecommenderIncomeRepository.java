@@ -5,7 +5,7 @@ import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.RecommenderIncomeMapper;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.web.vo.RecommenderIncomeVo;
+import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
