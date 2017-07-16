@@ -12,7 +12,7 @@
                     <a>会员管理</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);"  onclick="locationUrl('/member/list.html','memberList')" >会员列表</a>
+                    <a href="javascript:void(0);"  onclick="locationUrl('/member/list.html','memberList')" >推荐列表</a>
                 </li>
             </ol>
         </div>
@@ -27,13 +27,13 @@
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal">
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="phoneNumber">手机号码</label>
+                        <label class="control-label col-sm-1" for="recommenderName">推荐人姓名</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="phoneNumber"/>
+                            <input type="text" class="form-control" id="recommenderName"/>
                         </div>
-                        <label class="control-label col-sm-1" for="memberName">姓名</label>
+                        <label class="control-label col-sm-1" for="entrantName">被推荐人姓名</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="memberName"/>
+                            <input type="text" class="form-control" id="entrantName"/>
                         </div>
                         <div class="col-sm-4" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
@@ -54,22 +54,13 @@
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
             </button>
         </div>-->
-        <table id="tb_members"></table>
+        <table id="tb_recommender"></table>
     </div>
 
 </section>
 </body>
 <script>
-    var memberInfo ;
     $(function () {
-        $.ajax({
-            url:"/member/memberType.do",
-            dataType:"json",
-            method: 'POST',
-            success: function(data){
-                memberInfo = data;
-            }
-        });
         //1.初始化Table
         var oTable = new TableInit();
         oTable.Init();
@@ -85,9 +76,9 @@
         var oTableInit = new Object();
         //初始化Table
         oTableInit.Init = function () {
-            $('#tb_members').bootstrapTable({
+            $('#tb_recommender').bootstrapTable({
                 contentType: "application/x-www-form-urlencoded",//必须要有！！！！
-                url: '/member/page.do',         //请求后台的URL（*）
+                url: '/recommender/page.do',         //请求后台的URL（*）
                 method: 'POST',                      //请求方式（*）
                 toolbar: '#toolbar',                //工具按钮用哪个容器
                 striped: true,                      //是否显示行间隔色
@@ -117,19 +108,24 @@
                 columns: [{
                     checkbox: true
                 }, {
-                    field: 'memberName',
-                    title: '姓名'
+                    field: 'recommender',
+                    title: '推荐人'
+                },  {
+                    field: 'entrant',
+                    title: '被推荐人'
+                },{
+                    field: 'fee',
+                    title: '推荐收入',
                 }, {
-                    field: 'memberTypeId',
-                    title: '会员类型',
-                    formatter: memberTypeSelect
-
+                    field: 'withdrawals',
+                    title: '提现状态'
                 }, {
-                    field: 'phoneNumber',
-                    title: '电话号码'
-                }, {
-                    field: 'address',
-                    title: '地址'
+                    field: 'gmtWithdrawals',
+                    title: '提现时间',
+                    formatter : function (value, row, index){
+                        return new Date(value).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                    },
+                    align : 'center'
                 }, /*{
                     field: 'recommenderId',
                     title: '推荐人'
@@ -141,7 +137,13 @@
                         return new Date(value).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
                     },
                     align : 'center'
-                }]
+                },{
+                        field: 'id',
+                        title: '操作',
+                        events:operateEvents,
+                        formatter: operateFormatter,
+                        align : 'center'
+                    }]
             });
         };
 
@@ -150,8 +152,8 @@
             var temp = {
                 pageNumber: params.pageNumber,
                 pageSize: params.pageSize,
-                memberName:$("#memberName").val(),
-                phoneNumber:$("#phoneNumber").val()
+                recommenderName:$("#recommenderName").val(),
+                entrantName:$("#entrantName").val()
             };
             return temp;
         };
@@ -167,25 +169,42 @@
             $("#btn_query").click(function(){
                 var searchInfo={
                     pageNumber:1,
-                    memberName:$("#memberName").val(),
-                    phoneNumber:$("#phoneNumber").val()
+                    recommenderName:$("#recommenderName").val(),
+                    entrantName:$("#entrantName").val()
                 }
-                $('#tb_members').bootstrapTable('refreshOptions',searchInfo);
+                $('#tb_recommender').bootstrapTable('refreshOptions',searchInfo);
             });
         };
 
         return oInit;
     };
 
-    function memberTypeSelect(values,row,index) {
-        var textMember ="";
-       $.each(memberInfo, function (i, n) {
-            if(values==n.value){
-                textMember = n.text;
-                return;
-            }
-        });
-       return textMember;
+    function operateFormatter(value, row, index) {
+        if(row.withdrawals=='未提现'){
+            return [
+                '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">提现</button>'
+            ].join('');
+        }else{
+            return"";
+        }
+
     }
+    window.operateEvents = {
+        'click .RoleOfA': function (e, value, row, index) {
+            $.ajax({
+                url:"/recommender/withdrawals.do",
+                dataType:"json",
+                data: row,
+                method: 'POST',
+                success: function(data){
+                    if(data.success){
+                        $('#tb_recommender').bootstrapTable('refreshOptions',"");
+                    }else{
+                    }
+                }
+            });
+        }
+    }
+
 </script>
 </html>

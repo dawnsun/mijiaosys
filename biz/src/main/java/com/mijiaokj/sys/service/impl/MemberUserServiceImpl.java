@@ -1,11 +1,15 @@
 package com.mijiaokj.sys.service.impl;
 
 import com.google.common.base.Preconditions;
+import com.mijiaokj.sys.common.util.Money;
 import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
+import com.mijiaokj.sys.common.util.WithdrawalsEnum;
+import com.mijiaokj.sys.dal.repository.MemberTypeRepository;
 import com.mijiaokj.sys.dal.repository.MemberUserRepository;
 import com.mijiaokj.sys.dal.repository.RecommenderIncomeRepository;
 import com.mijiaokj.sys.dal.repository.query.MemberUserCriteria;
+import com.mijiaokj.sys.domain.MemberType;
 import com.mijiaokj.sys.domain.MemberUser;
 import com.mijiaokj.sys.domain.RecommenderIncome;
 import com.mijiaokj.sys.service.MemberUserService;
@@ -29,6 +33,8 @@ public class MemberUserServiceImpl implements MemberUserService {
     private MemberUserRepository memberUserRepository;
     @Resource
     private RecommenderIncomeRepository recommenderIncomeRepository;
+    @Resource
+    private MemberTypeRepository memberTypeRepository;
 
     @Override
     @Transactional
@@ -39,14 +45,17 @@ public class MemberUserServiceImpl implements MemberUserService {
             Preconditions.checkNotNull(memberUser.getCreator(), "creator is null");
             Preconditions.checkNotNull(memberUser.getModifier(), "modifier is null");
             Long id = memberUserRepository.insert(memberUser);
-            RecommenderIncome recommenderIncome = new RecommenderIncome();
-            recommenderIncome.setEntrantId(id);
-            recommenderIncome.setFee("");
-            recommenderIncome.setRecommenderId(memberUser.getRecommenderId());
-            recommenderIncome.setWithdrawalsType(1);
-            recommenderIncome.setCreator(memberUser.getCreator());
-            recommenderIncome.setModifier(memberUser.getModifier());
-            recommenderIncomeRepository.insert(recommenderIncome);
+            if(!memberUser.getRecommenderId().equals(0L)){
+                RecommenderIncome recommenderIncome = new RecommenderIncome();
+                recommenderIncome.setEntrantId(id);
+                recommenderIncome.setFee(getFee(memberUser.getMemberTypeId()));
+                recommenderIncome.setRecommenderId(memberUser.getRecommenderId());
+                recommenderIncome.setWithdrawalsType(WithdrawalsEnum.cashWithdrawal.getKey());
+                recommenderIncome.setCreator(memberUser.getCreator());
+                recommenderIncome.setModifier(memberUser.getModifier());
+                recommenderIncomeRepository.insert(recommenderIncome);
+            }
+
             return Result.ofSuccess(id);
         } catch (Exception e) {
             logger.error("MemberUserService createMemberUser " + e);
@@ -128,6 +137,13 @@ public class MemberUserServiceImpl implements MemberUserService {
             logger.error("createService queryMemberUserByCriteria " + e);
             return Result.ofFail("create sysUser fail:" + e.getMessage());
         }
+    }
+
+    public String getFee(Long id){
+        MemberType memberType = memberTypeRepository.getById(id);
+        double rate = Double.valueOf(memberType.getRate());
+        Money fee = new Money(memberType.getFee());
+        return fee.multiplyBy(rate).getAmount().toString();
     }
 
 }

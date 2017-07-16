@@ -60,7 +60,7 @@
   <update id="update" parameterType="com.mijiaokj.sys.domain.RecommenderIncome">
     update recommender_income set
     withdrawals_type = #{withdrawalsType,jdbcType=INTEGER},
-    gmt_withdrawals = #{gmtWithdrawals,jdbcType=TIMESTAMP}
+    gmt_withdrawals = #{gmtWithdrawals,jdbcType=TIMESTAMP},
     <include refid="Common.CommonUpdate" />
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -87,14 +87,14 @@
     <if test="entrantId != null">
       and entrant_id = #{entrantId,jdbcType=INTEGER}
     </if>
-    <if test="memberCardNumber != null">
+    <if test="withdrawalsType != null">
       and withdrawals_type = #{withdrawalsType,jdbcType=VARCHAR}
     </if>
-    <if test="createTimeStart !=null ">
-      and gmt_withdrawals &gt;= #{createTimeStart}
+    <if test="withdrawalsTimeStart !=null ">
+      and gmt_withdrawals &gt;= #{withdrawalsTimeStart}
     </if>
-    <if test="createTimeEnd !=null ">
-      and gmt_withdrawals &lt;= #{createTimeEnd}
+    <if test="withdrawalsTimeEnd !=null ">
+      and gmt_withdrawals &lt;= #{withdrawalsTimeEnd}
     </if>
     order by gmt_modified desc
     limit #{startRow,jdbcType=INTEGER} ,
@@ -117,14 +117,14 @@
     <if test="entrantId != null">
       and entrant_id = #{entrantId,jdbcType=INTEGER}
     </if>
-    <if test="memberCardNumber != null">
+    <if test="withdrawalsType != null">
       and withdrawals_type = #{withdrawalsType,jdbcType=VARCHAR}
     </if>
-    <if test="createTimeStart !=null ">
-      and gmt_withdrawals &gt;= #{createTimeStart}
+    <if test="withdrawalsTimeStart !=null ">
+      and gmt_withdrawals &gt;= #{withdrawalsTimeStart}
     </if>
-    <if test="createTimeEnd !=null ">
-      and gmt_withdrawals &lt;= #{createTimeEnd}
+    <if test="withdrawalsTimeEnd !=null ">
+      and gmt_withdrawals &lt;= #{withdrawalsTimeEnd}
     </if>
   </select>
 

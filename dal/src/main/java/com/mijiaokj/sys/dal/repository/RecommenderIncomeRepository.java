@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wb-scg178938 on 2017/7/3.
@@ -24,7 +26,16 @@ public class RecommenderIncomeRepository extends BaseRepository<RecommenderIncom
         return recommenderIncomeMapper;
     }
 
-    public Page<RecommenderIncomeVo> executeQueryForPage(RecommenderIncomeCriteria criteria){
+    public Map<String,Object> executeQueryForPage(RecommenderIncomeCriteria criteria){
+        Map<String,Object> pageMap = new HashMap<>();
+        List<RecommenderIncome> datas = recommenderIncomeMapper.selectPageByMap(criteria);
+        Integer count = recommenderIncomeMapper.pageCountByMap(criteria);
+        pageMap.put("datas",datas);
+        pageMap.put("count",count);
+        return pageMap;
+    }
+
+    /*public Page<RecommenderIncomeVo> executeQueryForPage(RecommenderIncomeCriteria criteria){
         List<RecommenderIncome> datas = recommenderIncomeMapper.selectPageByMap(criteria);
         Integer count = recommenderIncomeMapper.pageCountByMap(criteria);
         List<RecommenderIncomeVo> rows = new ArrayList<RecommenderIncomeVo>();
@@ -42,6 +53,6 @@ public class RecommenderIncomeRepository extends BaseRepository<RecommenderIncom
             }
         }
         return new Page<>(rows, criteria.getStartRow(), criteria.getPageSize(), count);
-    }
+    }*/
 
 }

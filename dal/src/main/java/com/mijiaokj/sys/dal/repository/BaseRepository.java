@@ -37,7 +37,7 @@ public abstract class BaseRepository<T extends ReferenceObject> {
 
 	public Integer update(T domain){
 		Preconditions.checkNotNull(domain, domain.getClass().getSimpleName() + " is null");
-//		domain.setDefaultValue();
+	//		domain.setDefaultValue();
 		return getMapper().update(domain);
 	}
 

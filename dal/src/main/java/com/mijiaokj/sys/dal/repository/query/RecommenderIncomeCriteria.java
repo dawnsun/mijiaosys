@@ -15,7 +15,13 @@ public class RecommenderIncomeCriteria extends BaseQueryCriteria {
 
     private Integer withdrawalsType;
 
-    private Date gmtWithdrawals;
+    private Date withdrawalsTimeStart;
+
+    private Date withdrawalsTimeEnd;
+
+    private Date createTimeStart;
+
+    private Date createTimeEnd;
 
     public Long getRecommenderId() {
         return recommenderId;
@@ -49,12 +55,35 @@ public class RecommenderIncomeCriteria extends BaseQueryCriteria {
         this.withdrawalsType = withdrawalsType;
     }
 
-    public Date getGmtWithdrawals() {
-        return gmtWithdrawals;
+    public Date getWithdrawalsTimeStart() {
+        return withdrawalsTimeStart;
     }
 
-    public void setGmtWithdrawals(Date gmtWithdrawals) {
-        this.gmtWithdrawals = gmtWithdrawals;
+    public void setWithdrawalsTimeStart(Date withdrawalsTimeStart) {
+        this.withdrawalsTimeStart = withdrawalsTimeStart;
     }
 
+    public Date getWithdrawalsTimeEnd() {
+        return withdrawalsTimeEnd;
+    }
+
+    public void setWithdrawalsTimeEnd(Date withdrawalsTimeEnd) {
+        this.withdrawalsTimeEnd = withdrawalsTimeEnd;
+    }
+
+    public Date getCreateTimeStart() {
+        return createTimeStart;
+    }
+
+    public void setCreateTimeStart(Date createTimeStart) {
+        this.createTimeStart = createTimeStart;
+    }
+
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
+    }
 }

@@ -2,8 +2,12 @@ package com.mijiaokj.sys.web.controller.member;
 
 import com.alibaba.fastjson.JSON;
 import com.mijiaokj.sys.common.util.Md5Util;
+import com.mijiaokj.sys.common.util.Result;
+import com.mijiaokj.sys.common.util.WithdrawalsEnum;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.MemberUser;
+import com.mijiaokj.sys.domain.RecommenderIncome;
+import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
 import com.mijiaokj.sys.service.MemberUserService;
 import com.mijiaokj.sys.service.RecommenderIncomeService;
 import com.mijiaokj.sys.web.security.MijiaoSysUserDetails;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/7/13.
@@ -38,7 +43,7 @@ public class RecommenderIncomeController {
 
     @RequestMapping(value = "/recommender/page.do", method = RequestMethod.POST)
     @ResponseBody
-    public String getPageData(String pageSize, String pageNumber, String withdrawalsType, String recommenderId ,HttpServletRequest request){
+    public String getPageData(String pageSize, String pageNumber, String withdrawalsType, String recommenderId, String recommenderName, String entrantName, HttpServletRequest request){
         RecommenderIncomeCriteria criteria = new RecommenderIncomeCriteria();
         if(StringUtils.isBlank(pageSize)){
             pageSize="10";
@@ -52,6 +57,22 @@ public class RecommenderIncomeController {
         if(StringUtils.isNotEmpty(recommenderId)){
             criteria.setRecommenderId(Long.valueOf(recommenderId));
         }
+        if(StringUtils.isNotEmpty(recommenderName)){
+            Result<MemberUser> resMemberUser = memberUserService.findByMemberUser(recommenderName);
+            if(resMemberUser.isSuccess() && null!=resMemberUser.getData()){
+                criteria.setRecommenderId(resMemberUser.getData().getId());
+            }else{
+                criteria.setRecommenderId(0L);
+            }
+        }
+        if(StringUtils.isNotEmpty(entrantName)){
+            Result<MemberUser> resMemberUser = memberUserService.findByMemberUser(entrantName);
+            if(resMemberUser.isSuccess() && null!=resMemberUser.getData()){
+                criteria.setEntrantId(resMemberUser.getData().getId());
+            }else{
+                criteria.setEntrantId(0L);
+            }
+        }
         criteria.setPageSize(Integer.parseInt(pageSize));
         criteria.setCurrentPage(Integer.parseInt(pageNumber)-1);
         String res = JSON.toJSONString(recommenderIncomeService.queryRecommenderIncomeByCriteria(criteria).getData());
@@ -59,20 +80,21 @@ public class RecommenderIncomeController {
     }
 
 
-    @RequestMapping(value = "/recommender/form", method = RequestMethod.POST)
+    @RequestMapping(value = "/recommender/withdrawals.do", method = RequestMethod.POST)
     @ResponseBody
-    public String create(@Valid MemberUser memberUser, BindingResult result,
-                         RedirectAttributes redirect) {
+    public String create(Long id) {
         MijiaoSysUserDetails userDetails = (MijiaoSysUserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-        if(null==memberUser || memberUser.getMemberName().isEmpty() || memberUser.getPhoneNumber().isEmpty()){
-            memberUser = new MemberUser();
+        RecommenderIncome recommenderIncome = new RecommenderIncome();
+        if(null!=id && id>0){
+            recommenderIncome.setId(id);
+            recommenderIncome.setWithdrawalsType(WithdrawalsEnum.cashInCash.getKey());
+            recommenderIncome.setGmtWithdrawals(new Date());
+            recommenderIncome.setModifier(userDetails.getSysUser().getId().toString());
+            recommenderIncome.setDelete(false);
         }
-        memberUser.setCreator(userDetails.getSysUser().getId().toString());
-        memberUser.setModifier(userDetails.getSysUser().getId().toString());
-        memberUser.setMemberPassword(Md5Util.md5calc(memberUser.getPhoneNumber()));
-        return JSON.toJSONString(memberUserService.createMemberUser(memberUser));
+        return JSON.toJSONString(recommenderIncomeService.updateRecommenderIncome(recommenderIncome));
     }
 
 }
