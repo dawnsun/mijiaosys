@@ -59,6 +59,8 @@
 
 </section>
 </body>
+<link href="/css/bootstrap-dialog.css" rel="stylesheet" type="text/css" />
+<script src="/js/bootstrap-dialog.js"></script>
 <script>
     $(function () {
         //1.初始化Table
@@ -191,18 +193,37 @@
     }
     window.operateEvents = {
         'click .RoleOfA': function (e, value, row, index) {
-            $.ajax({
-                url:"/recommender/withdrawals.do",
-                dataType:"json",
-                data: row,
-                method: 'POST',
-                success: function(data){
-                    if(data.success){
-                        $('#tb_recommender').bootstrapTable('refreshOptions',"");
-                    }else{
+            BootstrapDialog.show({
+                title:'提示',
+                size:BootstrapDialog.SIZE_SMALL,
+                message: '您确认要提现吗？',
+                buttons: [{
+                    label: '提现',
+                    cssClass: 'btn-primary',
+                    action: function(dialogItself){
+                        $.ajax({
+                            url:"/recommender/withdrawals.do",
+                            dataType:"json",
+                            data: row,
+                            method: 'POST',
+                            success: function(data){
+                                if(data.success){
+                                    dialogItself.close();
+                                    $('#tb_recommender').bootstrapTable('refreshOptions',"");
+                                }else{
+                                    dialogItself.close();
+                                }
+                            }
+                        });
                     }
-                }
+                },{
+                    label: '取消',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
             });
+
         }
     }
 
