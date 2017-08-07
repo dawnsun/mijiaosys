@@ -1,13 +1,11 @@
 package com.mijiaokj.sys.web.controller.member;
 
 import com.alibaba.fastjson.JSON;
-import com.mijiaokj.sys.common.util.Md5Util;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.common.util.WithdrawalsEnum;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.MemberUser;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
 import com.mijiaokj.sys.service.MemberUserService;
 import com.mijiaokj.sys.service.RecommenderIncomeService;
 import com.mijiaokj.sys.web.security.MijiaoSysUserDetails;
@@ -15,14 +13,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Date;
 
 /**
