@@ -9,7 +9,7 @@ import com.mijiaokj.sys.dal.repository.RecommenderIncomeRepository;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.MemberUser;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
+import com.mijiaokj.sys.domain.dto.RecommenderIncomeDTO;
 import com.mijiaokj.sys.service.RecommenderIncomeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class RecommenderIncomeServiceImpl implements RecommenderIncomeService {
     @Resource
     private MemberUserRepository memberUserRepository;
     @Override
-    public Result<Page<RecommenderIncomeVo>> queryRecommenderIncomeByCriteria(RecommenderIncomeCriteria criteria) {
+    public Result<Page<RecommenderIncomeDTO>> queryRecommenderIncomeByCriteria(RecommenderIncomeCriteria criteria) {
         try {
             Preconditions.checkNotNull(criteria, "criteria is null");
             Map<String,Object> pageMap = recommenderIncomeRepository.executeQueryForPage(criteria);
@@ -67,24 +66,24 @@ public class RecommenderIncomeServiceImpl implements RecommenderIncomeService {
         }
     }*/
 
-    public Page<RecommenderIncomeVo> assembleForPage(Map<String,Object> pageMap,RecommenderIncomeCriteria criteria){
+    public Page<RecommenderIncomeDTO> assembleForPage(Map<String,Object> pageMap, RecommenderIncomeCriteria criteria){
         Integer count = 0;
-        List<RecommenderIncomeVo> rows = new ArrayList<RecommenderIncomeVo>();
+        List<RecommenderIncomeDTO> rows = new ArrayList<RecommenderIncomeDTO>();
         if(null!=pageMap && !pageMap.isEmpty()){
             Object countObj = pageMap.get("count");
             count = Integer.parseInt(countObj.toString());
             Object datasObj = pageMap.get("datas");
             List<RecommenderIncome> recommenderIncomeList = (List<RecommenderIncome>)datasObj;
             for (RecommenderIncome recommenderIncome : recommenderIncomeList){
-                RecommenderIncomeVo recommenderIncomeVo = new RecommenderIncomeVo();
-                recommenderIncomeVo.setEntrant(getMemberName(recommenderIncome.getEntrantId()));
-                recommenderIncomeVo.setFee(recommenderIncome.getFee());
-                recommenderIncomeVo.setGmtWithdrawals(recommenderIncome.getGmtWithdrawals());
-                recommenderIncomeVo.setId(recommenderIncome.getId());
-                recommenderIncomeVo.setGmtCreate(recommenderIncome.getGmtCreate());
-                recommenderIncomeVo.setRecommender(getMemberName(recommenderIncome.getRecommenderId()));
-                recommenderIncomeVo.setWithdrawals( WithdrawalsEnum.getWithdrawals(recommenderIncome.getWithdrawalsType()));
-                rows.add(recommenderIncomeVo);
+                RecommenderIncomeDTO recommenderIncomeDTO = new RecommenderIncomeDTO();
+                recommenderIncomeDTO.setEntrant(getMemberName(recommenderIncome.getEntrantId()));
+                recommenderIncomeDTO.setFee(recommenderIncome.getFee());
+                recommenderIncomeDTO.setGmtWithdrawals(recommenderIncome.getGmtWithdrawals());
+                recommenderIncomeDTO.setId(recommenderIncome.getId());
+                recommenderIncomeDTO.setGmtCreate(recommenderIncome.getGmtCreate());
+                recommenderIncomeDTO.setRecommender(getMemberName(recommenderIncome.getRecommenderId()));
+                recommenderIncomeDTO.setWithdrawals( WithdrawalsEnum.getWithdrawals(recommenderIncome.getWithdrawalsType()));
+                rows.add(recommenderIncomeDTO);
             }
         }
         return new Page<>(rows, criteria.getStartRow(), criteria.getPageSize(), count);

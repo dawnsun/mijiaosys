@@ -4,7 +4,7 @@ import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
+import com.mijiaokj.sys.domain.dto.RecommenderIncomeDTO;
 
 /**
  * Created by Administrator on 2017/7/13.
@@ -17,7 +17,7 @@ public interface RecommenderIncomeService {
      * @param criteria
      * @return
      */
-    public Result<Page<RecommenderIncomeVo>> queryRecommenderIncomeByCriteria(RecommenderIncomeCriteria criteria);
+    public Result<Page<RecommenderIncomeDTO>> queryRecommenderIncomeByCriteria(RecommenderIncomeCriteria criteria);
 
     /**
      * update
