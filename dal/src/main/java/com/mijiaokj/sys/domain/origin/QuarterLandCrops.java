@@ -16,7 +16,7 @@ import com.mijiaokj.sys.domain.ReferenceObject;
  * crops_id     bigint(20) unsigned not null comment '作物id',
  * crops_no           varchar(16) comment '作物数量',
  */
-public class quarterLandCrops extends ReferenceObject {
+public class QuarterLandCrops extends ReferenceObject {
     private String year;
     private String quarter;
     private Long landId;

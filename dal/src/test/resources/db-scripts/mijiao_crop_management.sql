@@ -74,7 +74,7 @@ create table LAND_QUALITY
    over_elements        varchar(16)  comment '超标元素',
    missing_elements     varchar(16)  comment '缺失元素',
    ph                varchar(2)  comment '酸碱度',
-   testing_id              varchar(128)  comment '检测机构id',
+   testing_id       bigint(20) unsigned not null   comment '检测机构id',
    gmt_testing           datetime not null comment '监测时间',
    testing_file                 varchar(16)  comment '检测附件',
    land_img                 varchar(16)  comment '当前土地照片附件id多张用逗号隔开',
@@ -114,7 +114,7 @@ alter table QUARTER_LAND_CROPS comment '季度土地作物表';
 /*==============================================================*/
 /* Table: PHENOLOGICAL_PHASE                                    */
 /*==============================================================*/
-create table QUARTER_LAND_CROPS
+create table PHENOLOGICAL_PHASE
 (
    id                   bigint(20) unsigned not null auto_increment,
    phenological_name              varchar(256) comment '物候名称',
@@ -244,7 +244,7 @@ create table PESTICIDES_CATEGORY
 
 alter table PESTICIDES_CATEGORY comment '农药类目表';
 
-农药信息表
+农药基础信息表
 
 
 作物产值表
