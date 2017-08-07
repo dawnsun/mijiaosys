@@ -1,15 +1,12 @@
 package com.mijiaokj.sys.dal.repository;
 
-import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.dal.repository.mapper.BaseMapper;
 import com.mijiaokj.sys.dal.repository.mapper.RecommenderIncomeMapper;
 import com.mijiaokj.sys.dal.repository.query.RecommenderIncomeCriteria;
 import com.mijiaokj.sys.domain.RecommenderIncome;
-import com.mijiaokj.sys.domain.vo.RecommenderIncomeVo;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +32,13 @@ public class RecommenderIncomeRepository extends BaseRepository<RecommenderIncom
         return pageMap;
     }
 
-    /*public Page<RecommenderIncomeVo> executeQueryForPage(RecommenderIncomeCriteria criteria){
+    /*public Page<RecommenderIncomeDTO> executeQueryForPage(RecommenderIncomeCriteria criteria){
         List<RecommenderIncome> datas = recommenderIncomeMapper.selectPageByMap(criteria);
         Integer count = recommenderIncomeMapper.pageCountByMap(criteria);
-        List<RecommenderIncomeVo> rows = new ArrayList<RecommenderIncomeVo>();
+        List<RecommenderIncomeDTO> rows = new ArrayList<RecommenderIncomeDTO>();
         if(null!=datas && !datas.isEmpty()){
             for (RecommenderIncome recommenderIncome : datas){
-                RecommenderIncomeVo recommenderIncomeVo = new RecommenderIncomeVo();
+                RecommenderIncomeDTO recommenderIncomeVo = new RecommenderIncomeDTO();
                 recommenderIncomeVo.setEntrant(recommenderIncome.getEntrantId().toString());
                 recommenderIncomeVo.setFee(recommenderIncome.getFee());
                 recommenderIncomeVo.setGmtWithdrawals(recommenderIncome.getGmtWithdrawals());
