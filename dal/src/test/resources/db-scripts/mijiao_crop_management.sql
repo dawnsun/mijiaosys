@@ -244,6 +244,7 @@ create table PESTICIDES_CATEGORY
 
 alter table PESTICIDES_CATEGORY comment '农药类目表';
 
+
 农药基础信息表
 
 
