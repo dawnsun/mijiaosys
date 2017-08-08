@@ -232,7 +232,7 @@ create table PESTICIDES_CATEGORY
    id                   bigint(20) unsigned not null auto_increment,
    pesticides_name            varchar(64) not null comment '农药类目名称',
    pesticides_icon            varchar(32) not null comment '农药类目图标',
-   parent_id            bigint(20) unsigned not null comment '父农类目ID',
+   parent_id            bigint(20) unsigned not null comment '父农药类目ID',
    pesticides_order           int(10) not null comment '农药类目排序',
    gmt_create           datetime not null comment '创建时间',
    gmt_modified         datetime not null comment '修改时间',
@@ -244,9 +244,30 @@ create table PESTICIDES_CATEGORY
 
 alter table PESTICIDES_CATEGORY comment '农药类目表';
 
+/*==============================================================*/
+/* Table: PESTS_CATEGORY                                              */
+/*==============================================================*/
+create table PESTS_CATEGORY
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   pests_name            varchar(64) not null comment '病虫害类目名称',
+   pests_icon            varchar(32) not null comment '病虫害类目图标',
+   parent_id            bigint(20) unsigned not null comment '父病虫害类目ID',
+   pests_order           int(10) not null comment '病虫害类目排序',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
 
+alter table PESTS_CATEGORY comment '病虫害类目表';
+
+品牌： 中保（ZhB）
+商品名称：中保苦参碱商品编号：3503662商品毛重：130.00g商品产地：中国大陆剂型：水剂毒性：生物农药适用作物：
 农药基础信息表
-
+## 药品名称 是否国产 农药登记证 农药生成许可证 产品标准号 厂商  商品产地  中国大陆剂型 规格（净重或净容量） 毒性 适用作物  适用病源 使用说明
 
 作物产值表
 
