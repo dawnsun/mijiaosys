@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.CropsMapper">
+    <!--  create table CROPS
+        (
+           id                   bigint(20) unsigned not null auto_increment,
+           crops_name            varchar(64) not null comment '农作物名称',
+           crops_icon            varchar(32) not null comment '农作物图标',
+           parent_id            bigint(20) unsigned not null comment '父农作物ID',
+           crops_order           int(10) not null comment '农作物排序',
+           gmt_create           datetime not null comment '创建时间',
+           gmt_modified         datetime not null comment '修改时间',
+           creator              varchar(32) not null comment '创建人',
+           modifier             varchar(32) not null comment '修改人',
+           is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+           primary key (id)
+        );
+
+        alter table CROPS comment '农作物表';-->
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.Crops">
+        <result column="crops_name" jdbcType="VARCHAR" property="cropsName" />
+        <result column="crops_icon" jdbcType="VARCHAR" property="cropsIcon" />
+        <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <result column="crops_order" jdbcType="INTEGER" property="cropsOrder" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        crops_name, crops_icon, parent_id, crops_order
+    </sql>
+
+    <sql id="BaseProperties">
+        #{cropsName},
+        #{cropsIcon},
+        #{parentId},
+        #{cropsOrder}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from crops
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="queryCropsByParent" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from crops
+        where is_delete = 0 and parent_id = #{id,parentId=BIGINT}
+    </select>
+
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.Crops" useGeneratedKeys="true" keyProperty="id">
+        insert into crops (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.Crops">
+        update crops set
+        crops_name = #{cropsName,jdbcType=VARCHAR},
+        crops_icon = #{cropsIcon,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=BIGINT},
+        crops_order = #{cropsOrder,jdbcType=INTEGER}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update crops
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from crops t1 ,(
+        select id from crops
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from crops WHERE is_delete=0
+    </select>
+
+</mapper>

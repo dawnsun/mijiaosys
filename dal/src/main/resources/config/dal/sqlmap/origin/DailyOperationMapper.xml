@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.DailyOperationMapper">
+    <!--  create table DAILY_OPERATION
+        (
+           id                   bigint(20) unsigned not null auto_increment,
+           land_id     bigint(20) unsigned not null comment '土地id',
+           crops_id     bigint(20) unsigned not null comment '作物id',
+           user_id     bigint(20) unsigned not null  comment '管理者id',
+           operation_id     bigint(20) unsigned not null comment '操作id',
+           is_pests     tinyint(1) not null DEFAULT '0' comment '是否发现病虫害 0-无 1-有',INTEGER
+           operation_photo    varchar(1024) comment '操作照片',
+           pests_remarks     varchar(1024)  comment '病虫害备注',
+           operation_remarks     varchar(1024)  comment '操作备注',
+           extended           varchar(2000)  comment '扩展字段，key-velue存储扩展操作（农药，施肥等重点操作）',
+           gmt_create           datetime not null comment '创建时间',
+           gmt_modified         datetime not null comment '修改时间',
+           creator              varchar(32) not null comment '创建人',
+           modifier             varchar(32) not null comment '修改人',
+           is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+           primary key (id)
+        );
+
+        alter table DAILY_OPERATION comment '日常作物操作表';-->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.DailyOperation">
+        <result column="land_id" jdbcType="BIGINT" property="landId" />
+        <result column="crops_id" jdbcType="BIGINT" property="cropsId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="operation_id" jdbcType="BIGINT" property="operationId" />
+        <result column="is_pests" jdbcType="INTEGER" property="isPests" />
+        <result column="operation_photo" jdbcType="VARCHAR" property="operationPhoto" />
+        <result column="pests_remarks" jdbcType="VARCHAR" property="pestsRemarks" />
+        <result column="operation_remarks" jdbcType="VARCHAR" property="operationRemarks" />
+        <result column="extended" jdbcType="VARCHAR" property="extended" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        land_id, crops_id, user_id, operation_id, is_pests, operation_photo, pests_remarks, operation_remarks, extended
+    </sql>
+
+    <sql id="BaseProperties">
+        #{landId},
+        #{cropsId},
+        #{userId},
+        #{operationId},
+        #{isPests},
+        #{operationPhoto},
+        #{pestsRemarks},
+        #{operationRemarks},
+        #{extended}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from daily_operation
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="queryCropsOperationByCropsid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from daily_operation
+        where is_delete = 0 and crops_id = #{id,cropsId=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.DailyOperation" useGeneratedKeys="true" keyProperty="id">
+        insert into daily_operation (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.DailyOperation">
+        update daily_operation set
+        land_id = #{landId,jdbcType=BIGINT},
+        crops_id = #{cropsId,jdbcType=BIGINT},
+        operation_id = #{operationId,jdbcType=BIGINT},
+        is_pests = #{isPests,jdbcType=INTEGER},
+        operation_photo = #{operationPhoto,jdbcType=VARCHAR},
+        pests_remarks = #{extended,jdbcType=VARCHAR},
+        operation_remarks = #{operationRemarks,jdbcType=VARCHAR},
+        extended = #{extended,jdbcType=VARCHAR}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update daily_operation
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from daily_operation t1 ,(
+        select id from daily_operation
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from daily_operation WHERE is_delete=0
+    </select>
+
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.CropsOperationMapper">
+    <!--  create table CROPS_OPERATION
+        (
+           id                   bigint(20) unsigned not null auto_increment,
+           operation_name              varchar(256) comment '操作名称',
+           crops_id     bigint(20) unsigned not null comment '作物id',
+           is_main_operation     tinyint(1) not null DEFAULT '0' comment '是否重点操作 0-否 1-是',
+           main_option_table      varchar(256)  comment '重点操作关联表名（农药喷洒，施肥）',
+           operation_order           int(10) not null comment '操作排序',
+           gmt_create           datetime not null comment '创建时间',
+           gmt_modified         datetime not null comment '修改时间',
+           creator              varchar(32) not null comment '创建人',
+           modifier             varchar(32) not null comment '修改人',
+           is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+           primary key (id)
+        );
+
+        alter table CROPS_OPERATION comment '作物操作配置表';-->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.CropsOperation">
+        <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
+        <result column="crops_id" jdbcType="BIGINT" property="cropsId" />
+        <result column="is_main_operation" jdbcType="BIT" property="isMainOperation" />
+        <result column="main_option_table" jdbcType="VARCHAR" property="mainOptionTable" />
+        <result column="operation_order" jdbcType="INTEGER" property="operationOrder" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        operation_name, crops_id, is_main_operation, main_option_table, operation_order
+    </sql>
+
+    <sql id="BaseProperties">
+        #{operationName},
+        #{cropsId},
+        #{isMainOperation},
+        #{mainOptionTable},
+        #{operationOrder}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from crops_operation
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="queryCropsOperationByCropsid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from crops_operation
+        where is_delete = 0 and crops_id = #{id,cropsId=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.CropsOperation" useGeneratedKeys="true" keyProperty="id">
+        insert into crops_operation (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.CropsOperation">
+        update crops_operation set
+        operation_name = #{operationName,jdbcType=VARCHAR},
+        crops_id = #{cropsId,jdbcType=BIGINT},
+        isMainOperation = #{isMainOperation,jdbcType=BIT},
+        main_option_table = #{mainOptionTable,jdbcType=VARCHAR},
+        operation_order = #{operationOrder,jdbcType=INTEGER}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update crops_operation
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from crops_operation t1 ,(
+        select id from crops_operation
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from crops_operation WHERE is_delete=0
+    </select>
+
+</mapper>
