@@ -42,10 +42,10 @@
         and is_delete = 0
     </select>
 
-    <select id="queryCropsByParent" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryCropsByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
         from crops
-        where is_delete = 0 and parent_id = #{id,parentId=BIGINT}
+        where is_delete = 0 and parent_id = #{parentId,jdbcType=BIGINT}
     </select>
 
 

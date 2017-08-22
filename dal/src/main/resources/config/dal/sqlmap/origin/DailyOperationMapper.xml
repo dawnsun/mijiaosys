@@ -58,10 +58,10 @@
         and is_delete = 0
     </select>
 
-    <select id="queryCropsOperationByCropsid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryCropsOperationByCropsId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
         from daily_operation
-        where is_delete = 0 and crops_id = #{id,cropsId=BIGINT}
+        where is_delete = 0 and crops_id = #{cropsId,jdbcType=BIGINT}
     </select>
 
     <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.DailyOperation" useGeneratedKeys="true" keyProperty="id">
