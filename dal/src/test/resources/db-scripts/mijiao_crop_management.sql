@@ -8,12 +8,14 @@
 create table LAND_RES
 (
    id                   bigint(20) unsigned not null auto_increment,
+   user_id     bigint(20) unsigned not null  comment '管理者id',
    longitude            varchar(16)  comment '经度',
    latitude             varchar(16)  comment '纬度',
    altitude             varchar(16)  comment '海拔',
    alias                varchar(32)  comment '土地别名',
    address              varchar(128)  comment '土地详细地址',
    size                 varchar(16)  comment '面积大小',
+   land_img                 varchar(16)  comment '当前土地照片附件id多张用逗号隔开',
    gmt_create           datetime not null comment '创建时间',
    gmt_modified         datetime not null comment '修改时间',
    creator              varchar(32) not null comment '创建人',

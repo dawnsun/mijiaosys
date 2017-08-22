@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.LandQualityMapper">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.MeteorologicalFactorsMapper">
     <!--  land_id              bigint(20) unsigned not null comment '土地资源主键',
    over_elements        varchar(16)  comment '超标元素',
    missing_elements     varchar(16)  comment '缺失元素',
@@ -11,7 +11,7 @@
    land_img                 varchar(16)  comment '当前土地照片附件id多张用逗号隔开',
    alter table LAND_QUALITY comment '土地质量监测表'; -->
 
-    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.LandQuality">
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.MeteorologicalFactors">
         <result column="land_id" jdbcType="BIGINT" property="landId" />
         <result column="over_elements" jdbcType="VARCHAR" property="overElements" />
         <result column="missing_elements" jdbcType="VARCHAR" property="missingElements" />
