@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.PesticidesCategoryMapper">
+    <!--  create table PESTICIDES_CATEGORY
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   pesticides_name            varchar(64) not null comment '农药类目名称',
+   pesticides_icon            varchar(32) not null comment '农药类目图标',
+   parent_id            bigint(20) unsigned not null comment '父农药类目ID',
+   pesticides_order           int(10) not null comment '农药类目排序',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table PESTICIDES_CATEGORY comment '农药类目表';-->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.PesticidesCategory">
+        <result column="pesticides_name" jdbcType="VARCHAR" property="pesticidesName" />
+        <result column="pesticides_icon" jdbcType="VARCHAR" property="pesticidesIcon" />
+        <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <result column="pesticides_order" jdbcType="INTEGER" property="pesticidesOrder" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        pesticides_name, pesticides_icon, parent_id, pesticides_order
+    </sql>
+
+    <sql id="BaseProperties">
+        #{pesticidesName},
+        #{pesticidesIcon},
+        #{parentId},
+        #{pesticidesOrder}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from pesticides_category
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="queryPesticidesCategoryByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from pesticides_category
+        where is_delete = 0 and parent_id = #{parentId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.PesticidesCategory" useGeneratedKeys="true" keyProperty="id">
+        insert into pesticides_category (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.PesticidesCategory">
+        update pesticides_category set
+        land_id = #{landId,jdbcType=BIGINT},
+        over_elements = #{overElements,jdbcType=VARCHAR},
+        missing_elements = #{missingElements,jdbcType=VARCHAR},
+        ph  = #{ph,jdbcType=VARCHAR},
+        testing_id = #{testingId,jdbcType=BIGINT},
+        gmt_testing = #{gmtTesting,jdbcType=TIMESTAMP},
+        testing_file = #{testingFile,jdbcType=VARCHAR},
+        land_img = #{landImg,jdbcType=VARCHAR}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update pesticides_category
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from pesticides_category t1 ,(
+        select id from pesticides_category
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from pesticides_category WHERE is_delete=0
+    </select>
+
+</mapper>
