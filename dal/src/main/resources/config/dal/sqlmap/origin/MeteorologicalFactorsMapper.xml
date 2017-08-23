@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.MeteorologicalFactorsMapper">
-    <!--  land_id              bigint(20) unsigned not null comment '土地资源主键',
-   over_elements        varchar(16)  comment '超标元素',
-   missing_elements     varchar(16)  comment '缺失元素',
-   ph                varchar(2)  comment '酸碱度',
-   testing_id       bigint(20) unsigned not null   comment '检测机构id',
-   gmt_testing           datetime not null comment '监测时间',
-   testing_file                 varchar(16)  comment '检测附件',
-   land_img                 varchar(16)  comment '当前土地照片附件id多张用逗号隔开',
-   alter table LAND_QUALITY comment '土地质量监测表'; -->
+    <!--  create table METEOROLOGICAL_FACTORS
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   land_id     bigint(20) unsigned not null comment '土地id',
+   temperature     varchar(64)  not null comment '温度',
+   illumination_time    varchar(64)  not null comment '光照时间',
+   relative_humidity    varchar(64)  not null  comment '相对湿度',
+   wind_speed      varchar(64)  not null comment '风速',
+   photosynthetic_intensity     varchar(64)   comment '光合强度',
+   respiration_intensity   varchar(64) comment '呼吸强度',
+   precipitation     varchar(1024)  comment '降水量',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table METEOROLOGICAL_FACTORS comment '气象要素表';-->
 
     <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.MeteorologicalFactors">
         <result column="land_id" jdbcType="BIGINT" property="landId" />
-        <result column="over_elements" jdbcType="VARCHAR" property="overElements" />
-        <result column="missing_elements" jdbcType="VARCHAR" property="missingElements" />
-        <result column="ph" jdbcType="VARCHAR" property="ph" />
-        <result column="testing_id" jdbcType="BIGINT" property="testingId" />
-        <result column="gmt_testing" jdbcType="TIMESTAMP" property="gmtTesting" />
-        <result column="testing_file" jdbcType="VARCHAR" property="testingFile" />
-        <result column="land_img" jdbcType="VARCHAR" property="landImg" />
+        <result column="temperature" jdbcType="VARCHAR" property="temperature" />
+        <result column="illumination_time" jdbcType="VARCHAR" property="illuminationTime" />
+        <result column="relative_humidity" jdbcType="VARCHAR" property="relativeHumidity" />
+        <result column="wind_speed" jdbcType="VARCHAR" property="windSpeed" />
+        <result column="photosynthetic_intensity" jdbcType="VARCHAR" property="photosyntheticIntensity" />
+        <result column="respiration_intensity" jdbcType="VARCHAR" property="respirationIntensity" />
+        <result column="precipitation" jdbcType="VARCHAR" property="precipitation" />
     </resultMap>
 
     <sql id="BaseColumns">
-        land_id, over_elements, missing_elements, ph, testing_id, gmt_testing, testing_file, land_img
+        land_id, temperature, illumination_time, relative_humidity, wind_speed, photosynthetic_intensity, respiration_intensity, precipitation
     </sql>
 
     <sql id="BaseProperties">
         #{landId},
-        #{overElements},
-        #{missingElements},
-        #{ph},
-        #{testingId},
-        #{gmtTesting},
-        #{testingFile},
-        #{landImg}
+        #{temperature},
+        #{illuminationTime},
+        #{relativeHumidity},
+        #{windSpeed},
+        #{photosyntheticIntensity},
+        #{respirationIntensity},
+        #{precipitation}
     </sql>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
-        from land_quality
+        from meteorological_factors
         where id = #{id,jdbcType=BIGINT}
         and is_delete = 0
     </select>
 
-    <select id="queryLandQualityByLandId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryMeteorologicalFactorsByLandId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
-        from land_quality
+        from meteorological_factors
         where is_delete = 0 and land_id = #{landId,jdbcType=BIGINT}
     </select>
 
-    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.LandQuality" useGeneratedKeys="true" keyProperty="id">
-        insert into land_quality (
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.MeteorologicalFactors" useGeneratedKeys="true" keyProperty="id">
+        insert into meteorological_factors (
         <include refid="BaseColumns" /> ,
         <include refid="Common.CommonColumns" />
         ) values (
@@ -60,8 +71,8 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.LandQuality">
-        update land_quality set
+    <!--<update id="update" parameterType="com.mijiaokj.sys.domain.origin.MeteorologicalFactors">
+        update meteorological_factors set
         land_id = #{landId,jdbcType=BIGINT},
         over_elements = #{overElements,jdbcType=VARCHAR},
         missing_elements = #{missingElements,jdbcType=VARCHAR},
@@ -72,18 +83,18 @@
         land_img = #{landImg,jdbcType=VARCHAR}
         <include refid="Common.CommonUpdate" />
         where id = #{id,jdbcType=BIGINT}
-    </update>
+    </update>-->
 
     <update id="delete" parameterType="java.lang.Long">
-        update land_quality
+        update meteorological_factors
         set is_delete = 1
         where id = #{id,jdbcType=BIGINT}
     </update>
 
     <select id="selectPageByMap" resultMap="BaseResultMap">
         select t1.*
-        from land_quality t1 ,(
-        select id from land_quality
+        from meteorological_factors t1 ,(
+        select id from meteorological_factors
         WHERE is_delete=0
         order by gmt_modified desc
         limit #{startRow,jdbcType=INTEGER} ,
@@ -94,7 +105,7 @@
 
     <select id="pageCountByMap" resultType="java.lang.Integer">
         select count(1) as count
-        from land_quality WHERE is_delete=0
+        from meteorological_factors WHERE is_delete=0
     </select>
 
 </mapper>

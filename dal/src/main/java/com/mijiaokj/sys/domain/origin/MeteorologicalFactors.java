@@ -26,6 +26,7 @@ public class MeteorologicalFactors extends ReferenceObject {
     private String relativeHumidity;
     private String windSpeed;
     private String photosyntheticIntensity;
+    private String respirationIntensity;
     private String precipitation;
 
     public Long getLandId() {
@@ -74,6 +75,14 @@ public class MeteorologicalFactors extends ReferenceObject {
 
     public void setPhotosyntheticIntensity(String photosyntheticIntensity) {
         this.photosyntheticIntensity = photosyntheticIntensity;
+    }
+
+    public String getRespirationIntensity() {
+        return respirationIntensity;
+    }
+
+    public void setRespirationIntensity(String respirationIntensity) {
+        this.respirationIntensity = respirationIntensity;
     }
 
     public String getPrecipitation() {
