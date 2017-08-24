@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.PhenologicalPhaseMapper">
+    <!--  create table PHENOLOGICAL_PHASE
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   phenological_name              varchar(256) comment '物候名称',
+   crops_id     bigint(20) unsigned not null comment '作物id',
+   start_month_day         datetime not null  comment '开始时间',
+   end_month_day          datetime not null  comment '结束时间',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table PHENOLOGICAL_PHASE comment '物候期表';
+-->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.PhenologicalPhase">
+        <result column="phenological_name" jdbcType="VARCHAR" property="phenologicalName" />
+        <result column="crops_id" jdbcType="BIGINT" property="cropsId" />
+        <result column="start_month_day" jdbcType="TIMESTAMP" property="startMonthDay"/>
+        <result column="end_month_day" jdbcType="TIMESTAMP" property="endMonthDay"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        phenological_name, crops_id, start_month_day, end_month_day
+    </sql>
+
+    <sql id="BaseProperties">
+        #{phenologicalName},
+        #{cropsId},
+        #{startMonthDay},
+        #{endMonthDay}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from phenological_phase
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="queryPesticidesCategoryByCropsId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from phenological_phase
+        where is_delete = 0 and crops_id = #{cropsId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.PhenologicalPhase" useGeneratedKeys="true" keyProperty="id">
+        insert into phenological_phase (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.PhenologicalPhase">
+        update phenological_phase set
+        phenological_name = #{landId,jdbcType=VARCHAR},
+        crops_id = #{overElements,jdbcType=BIGINT},
+        start_month_day = #{missingElements,jdbcType=TIMESTAMP},
+        end_month_day  = #{ph,jdbcType=TIMESTAMP}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update phenological_phase
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from phenological_phase t1 ,(
+        select id from phenological_phase
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from phenological_phase WHERE is_delete=0
+    </select>
+
+</mapper>

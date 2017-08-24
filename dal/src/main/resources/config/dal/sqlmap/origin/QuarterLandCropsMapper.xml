@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.QuarterLandCropsMapper">
+    <!--  create table QUARTER_LAND_CROPS
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   year              varchar(8) comment '年份',
+   quarter        varchar(16)  comment '季度份',
+   land_id     bigint(20) unsigned not null comment '土地id',
+   user_id     bigint(20) unsigned not null  comment '管理者id',
+   crops_id     bigint(20) unsigned not null comment '作物id',
+   crops_no           varchar(16) comment '作物数量',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table QUARTER_LAND_CROPS comment '季度土地作物表'; -->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.QuarterLandCrops">
+        <result column="year" jdbcType="VARCHAR" property="year" />
+        <result column="quarter" jdbcType="VARCHAR" property="quarter" />
+        <result column="land_id" jdbcType="BIGINT" property="landId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="crops_id" jdbcType="BIGINT" property="cropsId"/>
+        <result column="crops_no" jdbcType="VARCHAR" property="cropsNo"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        year, quarter, land_id, user_id, crops_id, crops_no
+    </sql>
+
+    <sql id="BaseProperties">
+        #{year},
+        #{quarter},
+        #{landId},
+        #{userId},
+        #{cropsId},
+        #{cropsNo}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from quarter_land_crops
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.QuarterLandCrops" useGeneratedKeys="true" keyProperty="id">
+        insert into quarter_land_crops (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update phenological_phase
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from phenological_phase t1 ,(
+        select id from phenological_phase
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from phenological_phase WHERE is_delete=0
+    </select>
+
+</mapper>

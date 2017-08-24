@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mijiaokj.sys.dal.repository.mapper.origin.TestingInstitutionMapper">
+    <!--  create table TESTING_INSTITUTION
+(
+   id                   bigint(20) unsigned not null auto_increment,
+   institution_name            varchar(64) not null comment '检测机构名称',
+   institution_address         varchar(32) not null comment '检测机构地址',
+   institution_contacts        varchar(32) not null comment '检测机构联系人',
+   institution_phone           varchar(16) not null comment '检测机构电话',
+   gmt_create           datetime not null comment '创建时间',
+   gmt_modified         datetime not null comment '修改时间',
+   creator              varchar(32) not null comment '创建人',
+   modifier             varchar(32) not null comment '修改人',
+   is_delete            tinyint(1) not null  DEFAULT '0' comment '0-有效 1-删除',
+   primary key (id)
+);
+
+alter table TESTING_INSTITUTION comment '检测机构表'; -->
+
+    <resultMap id="BaseResultMap" type="com.mijiaokj.sys.domain.origin.TestingInstitution">
+        <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
+        <result column="institution_address" jdbcType="VARCHAR" property="institutionAddress" />
+        <result column="institution_contacts" jdbcType="VARCHAR" property="institutionContacts"/>
+        <result column="institution_phone" jdbcType="VARCHAR" property="institutionPhone"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        institution_name, institution_address, institution_contacts, institution_phone
+    </sql>
+
+    <sql id="BaseProperties">
+        #{institutionName},
+        #{institutionAddress},
+        #{institutionContacts},
+        #{institutionPhone}
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *
+        from testing_institution
+        where id = #{id,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.TestingInstitution" useGeneratedKeys="true" keyProperty="id">
+        insert into testing_institution (
+        <include refid="BaseColumns" /> ,
+        <include refid="Common.CommonColumns" />
+        ) values (
+        <include refid="BaseProperties" /> ,
+        <include refid="Common.CommonProperties" />
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mijiaokj.sys.domain.origin.TestingInstitution">
+        update testing_institution set
+        institution_name = #{institutionName,jdbcType=VARCHAR},
+        institution_address = #{institutionAddress,jdbcType=VARCHAR},
+        institution_contacts = #{institutionContacts,jdbcType=VARCHAR},
+        institution_phone  = #{ph,institutionPhone=VARCHAR}
+        <include refid="Common.CommonUpdate" />
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update testing_institution
+        set is_delete = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPageByMap" resultMap="BaseResultMap">
+        select t1.*
+        from testing_institution t1 ,(
+        select id from testing_institution
+        WHERE is_delete=0
+        order by gmt_modified desc
+        limit #{startRow,jdbcType=INTEGER} ,
+        #{pageSize,jdbcType=INTEGER}
+        )t2
+        WHERE t1.id=t2.id
+    </select>
+
+    <select id="pageCountByMap" resultType="java.lang.Integer">
+        select count(1) as count
+        from testing_institution WHERE is_delete=0
+    </select>
+
+</mapper>

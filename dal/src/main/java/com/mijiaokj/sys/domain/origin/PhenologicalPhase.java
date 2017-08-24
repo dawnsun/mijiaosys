@@ -2,20 +2,22 @@ package com.mijiaokj.sys.domain.origin;
 
 import com.mijiaokj.sys.domain.ReferenceObject;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2017/8/7.
  * 物候期表
  *  phenological_name              varchar(256) comment '物候名称',
  *   crops_id     bigint(20) unsigned not null comment '作物id',
- *  start_month_day         varchar(32)  comment '开始时间',
- *  end_month_day          varchar(32)  comment '结束时间',
+ *   start_month_day         datetime not null  comment '开始时间',
+ *   end_month_day          datetime not null  comment '结束时间',
  */
 public class PhenologicalPhase extends ReferenceObject {
 
     private String phenologicalName;
     private Long cropsId;
-    private String startMonthDay;
-    private String endMonthDay;
+    private Date startMonthDay;
+    private Date endMonthDay;
 
     public String getPhenologicalName() {
         return phenologicalName;
@@ -33,19 +35,19 @@ public class PhenologicalPhase extends ReferenceObject {
         this.cropsId = cropsId;
     }
 
-    public String getStartMonthDay() {
+    public Date getStartMonthDay() {
         return startMonthDay;
     }
 
-    public void setStartMonthDay(String startMonthDay) {
+    public void setStartMonthDay(Date startMonthDay) {
         this.startMonthDay = startMonthDay;
     }
 
-    public String getEndMonthDay() {
+    public Date getEndMonthDay() {
         return endMonthDay;
     }
 
-    public void setEndMonthDay(String endMonthDay) {
+    public void setEndMonthDay(Date endMonthDay) {
         this.endMonthDay = endMonthDay;
     }
 }
