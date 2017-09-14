@@ -7,6 +7,7 @@ import com.mijiaokj.sys.domain.origin.Crops;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wb-scg178938 on 2017/8/7.
@@ -18,5 +19,18 @@ public class CropsRepository extends BaseRepository<Crops> {
     @Override
     protected BaseMapper getMapper() {
         return cropsMapper;
+    }
+
+    /**
+     * 通过父节点查询所有的子节点作物信息
+     * @param parentId
+     * @return
+     */
+    public List<Crops> findListByParentId(Long parentId) {
+        return cropsMapper.queryCropsByParentId(parentId);
+    }
+
+    public List<Crops> findListByCropsName(String cropsName){
+        return cropsMapper.queryCropsByCropsName(cropsName);
     }
 }

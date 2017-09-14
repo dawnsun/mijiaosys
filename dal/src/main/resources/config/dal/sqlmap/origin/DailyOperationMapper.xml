@@ -58,7 +58,7 @@
         and is_delete = 0
     </select>
 
-    <select id="queryCropsOperationByCropsId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryDailyOperationByCropsId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
         from daily_operation
         where is_delete = 0 and crops_id = #{cropsId,jdbcType=BIGINT}

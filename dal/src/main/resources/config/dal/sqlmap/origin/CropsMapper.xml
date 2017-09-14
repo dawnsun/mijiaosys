@@ -45,9 +45,14 @@
     <select id="queryCropsByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
         from crops
-        where is_delete = 0 and parent_id = #{parentId,jdbcType=BIGINT}
+        where is_delete = 0 and parent_id = #{parentId,jdbcType=BIGINT} ORDER BY crops_order ASC
     </select>
 
+    <select id="queryCropsByCropsName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select *
+        from crops
+        where is_delete = 0 and crops_name like CONCAT('%',#{cropsName},'%')   ORDER BY crops_order ASC
+    </select>
 
     <insert id="insert" parameterType="com.mijiaokj.sys.domain.origin.Crops" useGeneratedKeys="true" keyProperty="id">
         insert into crops (
