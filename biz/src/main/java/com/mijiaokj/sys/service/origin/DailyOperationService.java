@@ -1,6 +1,8 @@
 package com.mijiaokj.sys.service.origin;
 
+import com.mijiaokj.sys.common.util.Page;
 import com.mijiaokj.sys.common.util.Result;
+import com.mijiaokj.sys.dal.repository.query.origin.DailyOperationCriteria;
 import com.mijiaokj.sys.domain.origin.DailyOperation;
 
 import java.util.List;
@@ -40,10 +42,10 @@ public interface DailyOperationService {
     public Result<DailyOperation> findById(Long id);
 
     /**
-     * 通过作物id查找作物操作信息
+     * 条件查询，分页查询
      *
-     * @param cropsId
+     * @param criteria
      * @return
      */
-    public Result<List<DailyOperation>> findListByCropsId(Long cropsId);
+    public Result<Page<DailyOperation>> queryDailyOperationByCriteria(DailyOperationCriteria criteria);
 }

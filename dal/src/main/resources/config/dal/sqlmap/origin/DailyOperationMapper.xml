@@ -94,11 +94,34 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectPageByMap" resultMap="BaseResultMap">
+    <select id="selectPageByMap" parameterType="com.mijiaokj.sys.dal.repository.query.origin.DailyOperationCriteria" resultMap="BaseResultMap">
         select t1.*
         from daily_operation t1 ,(
         select id from daily_operation
         WHERE is_delete=0
+
+        <if test="landId != null">
+            and land_id = #{landId,jdbcType=BIGINT}
+        </if>
+        <if test="cropsId != null">
+            and crops_id = #{cropsId,jdbcType=BIGINT}
+        </if>
+        <if test="userId != null">
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="operationId != null">
+            and operation_id = #{operationId,jdbcType=BIGINT}
+        </if>
+        <if test="isPests !=null ">
+            and is_pests = #{isPests}
+        </if>
+        <if test="pestsRemarks !=null ">
+            and pests_remarks like CONCAT('%',#{pestsRemarks},'%')
+        </if>
+        <if test="operationRemarks !=null ">
+            and operation_remarks like CONCAT('%',#{operationRemarks},'%')
+        </if>
+
         order by gmt_modified desc
         limit #{startRow,jdbcType=INTEGER} ,
         #{pageSize,jdbcType=INTEGER}
@@ -106,9 +129,31 @@
         WHERE t1.id=t2.id
     </select>
 
-    <select id="pageCountByMap" resultType="java.lang.Integer">
+    <select id="pageCountByMap" parameterType="com.mijiaokj.sys.dal.repository.query.origin.DailyOperationCriteria" resultType="java.lang.Integer">
         select count(1) as count
         from daily_operation WHERE is_delete=0
+
+        <if test="landId != null">
+            and land_id = #{landId,jdbcType=BIGINT}
+        </if>
+        <if test="cropsId != null">
+            and crops_id = #{cropsId,jdbcType=BIGINT}
+        </if>
+        <if test="userId != null">
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="operationId != null">
+            and operation_id = #{operationId,jdbcType=BIGINT}
+        </if>
+        <if test="isPests !=null ">
+            and is_pests = #{isPests}
+        </if>
+        <if test="pestsRemarks !=null ">
+            and pests_remarks like CONCAT('%',#{pestsRemarks},'%')
+        </if>
+        <if test="operationRemarks !=null ">
+            and operation_remarks like CONCAT('%',#{operationRemarks},'%')
+        </if>
     </select>
 
 </mapper>
