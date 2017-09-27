@@ -7,6 +7,7 @@ import com.mijiaokj.sys.domain.origin.LandRes;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wb-scg178938 on 2017/8/7.
@@ -20,5 +21,9 @@ public class LandResRepository extends BaseRepository<LandRes> {
     @Override
     protected BaseMapper getMapper() {
         return landResMapper;
+    }
+
+    public List<LandRes> queryLandResByCreator(String creator) {
+        return landResMapper.queryLandResByCreator(creator);
     }
 }

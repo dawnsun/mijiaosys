@@ -83,6 +83,12 @@ public class LandResServiceImpl implements LandResService {
 
     @Override
     public Result<List<LandRes>> queryLandResByCreator(String creator) {
-        return null;
+        try {
+            Preconditions.checkNotNull(creator, "creator is null");
+            return Result.ofSuccess(landResRepository.queryLandResByCreator(creator));
+        } catch (Exception e) {
+            logger.error("LandResService findById " + e);
+            return Result.ofFail("findById landQuality fail:" + e.getMessage());
+        }
     }
 }
