@@ -47,7 +47,7 @@ create table CROPS
 alter table CROPS comment '农作物表';
 
 /*==============================================================*/
-/* Table: TESTING_INSTITUTION                                              */
+/* Table: TESTING_INSTITUTION  数据字典表后台维护检测机构数据       */
 /*==============================================================*/
 create table TESTING_INSTITUTION
 (
@@ -114,7 +114,7 @@ create table QUARTER_LAND_CROPS
 alter table QUARTER_LAND_CROPS comment '季度土地作物表';
 
 /*==============================================================*/
-/* Table: PHENOLOGICAL_PHASE                                    */
+/* Table: PHENOLOGICAL_PHASE  数据字典后台维护物候期               */
 /*==============================================================*/
 create table PHENOLOGICAL_PHASE
 (
@@ -135,7 +135,7 @@ alter table PHENOLOGICAL_PHASE comment '物候期表';
 
 
 /*==============================================================*/
-/* Table: CROPS_OPERATION                                    */
+/* Table: CROPS_OPERATION 数据字典表后台维护作物操作信息                                   */
 /*==============================================================*/
 create table CROPS_OPERATION
 (
