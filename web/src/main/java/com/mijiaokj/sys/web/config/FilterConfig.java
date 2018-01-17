@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by wb-scg178938 on 2018/1/17.
  */
+
 @Configuration
 public class FilterConfig {
     @Bean
