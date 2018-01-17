@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by wb-scg178938 on 2018/1/17.
@@ -21,9 +22,9 @@ public class XssFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
         throws IOException, ServletException {
-       /* XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(
-            (HttpServletRequest) request);
-        chain.doFilter(xssRequest, response);*/
+        XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(
+            (HttpServletRequest) servletRequest);
+        filterChain.doFilter(xssRequest, servletResponse);
     }
 
     @Override
