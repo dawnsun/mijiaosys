@@ -2,7 +2,7 @@ package com.mijiaokj.sys.web.config;
 
 import javax.servlet.DispatcherType;
 
-import com.mijiaokj.sys.web.common.xss.XssFilter;
+import com.mijiaokj.sys.web.xss.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

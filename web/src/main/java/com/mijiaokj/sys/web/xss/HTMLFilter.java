@@ -1,4 +1,4 @@
-package com.mijiaokj.sys.web.common.xss;
+package com.mijiaokj.sys.web.xss;
 
 import java.util.ArrayList;
 import java.util.Collections;
